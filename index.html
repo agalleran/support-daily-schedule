@@ -373,10 +373,49 @@
   }
   .online-chip-tier { font-size: 10px; font-weight: 400; opacity: 0.7; }
   .online-none { font-size: 13px; color: var(--green-text); opacity: 0.75; font-style: italic; }
+
+  /* Auth gate */
+  #auth-gate {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 100vh; gap: 20px;
+  }
+  .auth-card {
+    background: var(--bg); border-radius: var(--radius-lg); border: 0.5px solid var(--border);
+    padding: 40px 48px; text-align: center; max-width: 380px; width: 100%;
+  }
+  .auth-title { font-size: 18px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .auth-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 28px; }
+  .auth-error { font-size: 12px; color: var(--red-text); margin-top: 14px; display: none; }
+  #app { display: none; }
 </style>
+<script src="https://accounts.google.com/gsi/client" async></script>
 </head>
 <body>
-<div class="page">
+
+<!-- Auth gate -->
+<div id="auth-gate">
+  <div class="auth-card">
+    <div class="auth-title">Support Team Schedule</div>
+    <div class="auth-sub">Sign in with your Front Google account to continue.</div>
+    <div id="g_id_onload"
+      data-client_id="241019110034-gql9js44rsnq77g4nm7e8fq9crhmdpsg.apps.googleusercontent.com"
+      data-callback="handleCredentialResponse"
+      data-auto_prompt="true">
+    </div>
+    <div class="g_id_signin"
+      data-type="standard"
+      data-shape="rectangular"
+      data-theme="outline"
+      data-text="sign_in_with"
+      data-size="large"
+      data-logo_alignment="left">
+    </div>
+    <div class="auth-error" id="authError">Access restricted to @front.com accounts.</div>
+  </div>
+</div>
+
+<!-- Main app (hidden until authenticated) -->
+<div id="app">
 
   <div class="page-header">
     <h1>Support team schedule</h1>
@@ -937,8 +976,28 @@ function renderOnlineNow() {
   }
 }
 
-// Boot: load data then initialise
-(async () => {
+const GOOGLE_CLIENT_ID = '241019110034-gql9js44rsnq77g4nm7e8fq9crhmdpsg.apps.googleusercontent.com';
+const ALLOWED_DOMAIN = 'front.com';
+
+function parseJwt(token) {
+  try {
+    return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
+  } catch { return null; }
+}
+
+function handleCredentialResponse(response) {
+  const payload = parseJwt(response.credential);
+  if (!payload || !payload.email || !payload.email.endsWith('@' + ALLOWED_DOMAIN)) {
+    document.getElementById('authError').style.display = 'block';
+    return;
+  }
+  // Authenticated — show app, hide gate
+  document.getElementById('auth-gate').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  boot();
+}
+
+async function boot() {
   document.getElementById('out').innerHTML = '<p style="padding:16px;color:var(--text-secondary);font-size:13px">Loading schedule data…</p>';
   await loadData();
   syncPicker();
@@ -946,8 +1005,9 @@ function renderOnlineNow() {
   document.getElementById('covDatePick').value = dateStr(new Date());
   renderOnlineNow();
   setInterval(renderOnlineNow, 60000);
-})();
+}
 </script>
+</div>
 </div>
 </body>
 </html>
