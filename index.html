@@ -980,11 +980,33 @@ function renderOnlineNow() {
 
 const GOOGLE_CLIENT_ID = '241019110034-gql9js44rsnq77g4nm7e8fq9crhmdpsg.apps.googleusercontent.com';
 const ALLOWED_DOMAIN = 'front.com';
+const SESSION_KEY = 'support_schedule_auth';
+const SESSION_TTL = 24 * 60 * 60 * 1000; // 24 hours in ms
 
 function parseJwt(token) {
   try {
     return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
   } catch { return null; }
+}
+
+function saveSession(email) {
+  localStorage.setItem(SESSION_KEY, JSON.stringify({
+    email, expires: Date.now() + SESSION_TTL
+  }));
+}
+
+function getValidSession() {
+  try {
+    const s = JSON.parse(localStorage.getItem(SESSION_KEY));
+    if (s && s.email && s.email.endsWith('@' + ALLOWED_DOMAIN) && s.expires > Date.now()) return s;
+  } catch {}
+  return null;
+}
+
+function showApp() {
+  document.getElementById('auth-gate').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  boot();
 }
 
 function handleCredentialResponse(response) {
@@ -993,10 +1015,13 @@ function handleCredentialResponse(response) {
     document.getElementById('authError').style.display = 'block';
     return;
   }
-  // Authenticated — show app, hide gate
-  document.getElementById('auth-gate').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  boot();
+  saveSession(payload.email);
+  showApp();
+}
+
+// Check for an existing valid session on load
+if (getValidSession()) {
+  showApp();
 }
 
 async function boot() {
