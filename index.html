@@ -55,6 +55,7 @@
     background: var(--bg-tertiary);
     color: var(--text);
     min-height: 100vh;
+    padding: 24px 16px;
   }
 
   .page {
@@ -64,8 +65,6 @@
     border-radius: var(--radius-lg);
     border: 0.5px solid var(--border);
     padding: 24px 28px 32px;
-    margin-top: 24px;
-    margin-bottom: 24px;
   }
 
   .page-header {
@@ -388,7 +387,7 @@
   .auth-title { font-size: 18px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
   .auth-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 28px; }
   .auth-error { font-size: 12px; color: var(--red-text); margin-top: 14px; display: none; }
-  #app { display: none; min-height: 100vh; }
+  #app { display: none; }
 </style>
 <script src="https://accounts.google.com/gsi/client" async></script>
 </head>
@@ -418,8 +417,7 @@
 
 <!-- Main app (hidden until authenticated) -->
 <div id="app">
-
-  <div class="page-header">
+<div class="page">
     <h1>Support team schedule</h1>
     <span class="header-sub">Schedule data from Notion · OOO data from Support Team Calendar</span>
   </div>
