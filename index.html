@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support Team Schedule</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg-secondary: #f5f5f3;
+    --bg-tertiary: #eeede8;
+    --text: #1a1a18;
+    --text-secondary: #6b6b67;
+    --border: rgba(0,0,0,0.12);
+    --border-secondary: rgba(0,0,0,0.22);
+    --radius: 8px;
+    --radius-lg: 12px;
+    --green: #1D9E75;
+    --green-bg: #E1F5EE;
+    --green-text: #085041;
+    --blue-bg: #E6F1FB;
+    --blue-text: #0C447C;
+    --purple-bg: #EEEDFE;
+    --purple-text: #3C3489;
+    --red: #E24B4A;
+    --red-bg: #FCEBEB;
+    --red-text: #A32D2D;
+    --gray: #888780;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a;
+      --bg-secondary: #262624;
+      --bg-tertiary: #2e2e2b;
+      --text: #f0efe8;
+      --text-secondary: #9a9990;
+      --border: rgba(255,255,255,0.1);
+      --border-secondary: rgba(255,255,255,0.2);
+      --green-bg: #04342C;
+      --green-text: #9FE1CB;
+      --blue-bg: #042C53;
+      --blue-text: #B5D4F4;
+      --purple-bg: #26215C;
+      --purple-text: #CECBF6;
+      --red-bg: #501313;
+      --red-text: #F7C1C1;
+    }
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg-tertiary);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    border: 0.5px solid var(--border);
+    padding: 24px 28px 32px;
+  }
+
+  .page-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 0.5px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: .5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .bar-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  button {
+    padding: 5px 12px;
+    border-radius: var(--radius);
+    border: 0.5px solid var(--border-secondary);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.1s;
+  }
+
+  button:hover { background: var(--bg-secondary); }
+  button.active { background: var(--bg-secondary); font-weight: 500; border-color: var(--text-secondary); }
+
+  select, input[type=date] {
+    font-size: 13px;
+    padding: 5px 9px;
+    border-radius: var(--radius);
+    border: 0.5px solid var(--border-secondary);
+    background: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .sep { width: 0.5px; height: 18px; background: var(--border-secondary); margin: 0 3px; flex-shrink: 0; }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: .6rem 0 .5rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-btn { padding: 5px 11px; }
+
+  .date-label {
+    font-size: 16px;
+    font-weight: 500;
+    min-width: 180px;
+  }
+
+  .today-chip {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 0.5px solid var(--border);
+    cursor: pointer;
+  }
+
+  .summary-bar {
+    display: flex;
+    gap: 10px;
+    padding: .75rem 0 .5rem;
+    flex-wrap: wrap;
+  }
+
+  .scard {
+    background: var(--bg-secondary);
+    border-radius: var(--radius);
+    padding: 8px 16px;
+    min-width: 80px;
+  }
+
+  .scard-n { font-size: 22px; font-weight: 500; }
+  .scard-l { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+  .legend {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: .4rem 0 .75rem;
+    flex-wrap: wrap;
+  }
+
+  .leg { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-secondary); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  .cal-note {
+    font-size: 11px;
+    color: var(--text-secondary);
+    padding: .2rem 0 .6rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    table-layout: fixed;
+  }
+
+  col.cn { width: 26%; }
+  col.ct { width: 7%; }
+  col.cs { width: 9%; }
+  col.ch { width: 29%; }
+  col.cno { width: 29%; }
+
+  thead th {
+    text-align: left;
+    padding: 7px 10px;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--text-secondary);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  tbody tr { border-bottom: 0.5px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody td {
+    padding: 9px 10px;
+    vertical-align: top;
+    word-break: break-word;
+  }
+
+  .grp-hdr td {
+    padding: 14px 10px 3px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    border-bottom: none;
+  }
+
+  .off-row td { opacity: .4; }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: var(--radius);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .b1 { background: var(--green-bg); color: var(--green-text); }
+  .b2 { background: var(--blue-bg); color: var(--blue-text); }
+  .bm { background: var(--purple-bg); color: var(--purple-text); }
+  .bo { background: #FAEEDA; color: #633806; }
+
+  .subrole { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+  .note-cell { font-size: 11px; color: var(--text-secondary); }
+
+  .ooo-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: var(--radius);
+    background: var(--red-bg);
+    color: var(--red-text);
+    white-space: nowrap;
+  }
+
+  .status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 0.5px solid var(--border);
+    margin: 28px 0 0;
+  }
+
+  .section-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 0 0;
+    cursor: pointer;
+    user-select: none;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    font-family: inherit;
+  }
+
+  .section-toggle:hover { background: none; }
+
+  .section-toggle h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .toggle-arrow {
+    font-size: 12px;
+    color: var(--text-secondary);
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+
+  .toggle-arrow.open { transform: rotate(90deg); }
+
+  .section-body { display: none; padding-top: 12px; }
+  .section-body.open { display: block; }
+
+  table.heatmap { border-collapse: collapse; font-size: 12px; width: 100%; }
+  table.heatmap th { font-weight: 500; font-size: 11px; color: var(--text-secondary); padding: 4px 6px; text-align: center; white-space: nowrap; }
+  table.heatmap th.row-hdr { text-align: right; padding-right: 10px; font-size: 11px; min-width: 48px; }
+  table.heatmap td { height: 24px; text-align: center; font-size: 11px; font-weight: 500; border: 1px solid var(--bg); border-radius: 2px; cursor: default; }
+  table.heatmap td:hover { outline: 2px solid var(--border-secondary); }
+
+  .gap-banner { margin: .6rem 0 .25rem; padding: 9px 14px; border-radius: var(--radius); background: var(--red-bg); color: var(--red-text); font-size: 13px; border: 0.5px solid #F09595; }
+  .no-gap-banner { margin: .6rem 0 .25rem; padding: 9px 14px; border-radius: var(--radius); background: var(--green-bg); color: var(--green-text); font-size: 13px; border: 0.5px solid #5DCAA5; }
+
+  .cov-legend { display: flex; gap: 10px; align-items: center; padding: .4rem 0 .6rem; flex-wrap: wrap; }
+  .cov-leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-secondary); }
+  .lswatch { width: 13px; height: 13px; border-radius: 2px; flex-shrink: 0; }
+
+  .cov-bar { display: flex; align-items: center; gap: 6px; padding: .4rem 0; flex-wrap: wrap; }
+  .cov-scard { background: var(--bg-secondary); border-radius: var(--radius); padding: 6px 14px; min-width: 72px; }
+  .cov-scard-n { font-size: 18px; font-weight: 500; }
+  .cov-scard-l { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+
+  .page-footer {
+    margin-top: 24px;
+    padding-top: 14px;
+    border-top: 0.5px solid var(--border);
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+
+  /* Who's online now banner */
+  .online-banner {
+    background: var(--green-bg);
+    border: 0.5px solid #5DCAA5;
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-bottom: 20px;
+  }
+  .online-banner-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .online-pulse {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #1D9E75; flex-shrink: 0;
+    box-shadow: 0 0 0 0 rgba(29,158,117,0.6);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(29,158,117,0.6); }
+    70%  { box-shadow: 0 0 0 7px rgba(29,158,117,0); }
+    100% { box-shadow: 0 0 0 0 rgba(29,158,117,0); }
+  }
+  .online-banner-title { font-size: 13px; font-weight: 500; color: var(--green-text); flex: 1; }
+  .online-banner-time  { font-size: 11px; color: var(--green-text); opacity: 0.75; }
+  .online-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .online-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 10px 3px 8px; border-radius: 20px;
+    background: var(--bg); border: 0.5px solid #5DCAA5;
+    font-size: 12px; color: var(--green-text); font-weight: 500;
+  }
+  .online-chip-tier { font-size: 10px; font-weight: 400; opacity: 0.7; }
+  .online-none { font-size: 13px; color: var(--green-text); opacity: 0.75; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-header">
+    <h1>Support team schedule</h1>
+    <span class="header-sub">Schedule data from Notion · OOO data from Support Team Calendar</span>
+  </div>
+
+  <div class="online-banner">
+    <div class="online-banner-header">
+      <div class="online-pulse"></div>
+      <span class="online-banner-title">Who's online now</span>
+      <span class="online-banner-time" id="onlineTime"></span>
+    </div>
+    <div class="online-chips" id="onlineChips"></div>
+  </div>
+
+  <div class="bar">
+    <span class="bar-label">Timezone:</span>
+    <button class="tz-btn active" onclick="setTz('PT')">PT</button>
+    <button class="tz-btn" onclick="setTz('CT')">CT</button>
+    <button class="tz-btn" onclick="setTz('ET')">ET</button>
+    <button class="tz-btn" onclick="setTz('UTC')">UTC</button>
+    <button class="tz-btn" onclick="setTz('CET')">CET</button>
+    <button class="tz-btn" onclick="setTz('AEDT')">AEDT</button>
+    <div class="sep"></div>
+    <select id="shiftSel" onchange="render()">
+      <option value="">All shifts</option>
+      <option value="EMEA">EMEA</option>
+      <option value="US">US</option>
+      <option value="Chile">Chile</option>
+      <option value="APAC">APAC</option>
+      <option value="Operations">Operations</option>
+      <option value="Managers">Managers</option>
+    </select>
+    <div class="sep"></div>
+    <select id="statusSel" onchange="render()">
+      <option value="">All statuses</option>
+      <option value="online">Online only</option>
+      <option value="ooo">OOO only</option>
+      <option value="off">Not scheduled</option>
+    </select>
+    <div class="sep"></div>
+    <select id="tierSel" onchange="render()">
+      <option value="">All tiers</option>
+      <option value="T1">T1</option>
+      <option value="T2">T2</option>
+      <option value="OPS">Ops</option>
+      <option value="MGR">Mgr</option>
+    </select>
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" onclick="shiftDay(-1)">&#8592;</button>
+    <input type="date" id="datePick" onchange="setFromPicker()">
+    <button class="nav-btn" onclick="shiftDay(1)">&#8594;</button>
+    <button class="today-chip" onclick="goToday()">Today</button>
+    <span id="dayLabel" class="date-label"></span>
+  </div>
+
+  <div id="calNote" class="cal-note"></div>
+  <div id="summary" class="summary-bar"></div>
+
+  <div class="legend">
+    <div class="leg"><div class="dot" style="background:#1D9E75"></div>Online — scheduled &amp; no OOO</div>
+    <div class="leg"><div class="dot" style="background:#E24B4A"></div>OOO — calendar</div>
+    <div class="leg"><div class="dot" style="background:#BA7517"></div>OOO — public holiday</div>
+    <div class="leg"><div class="dot" style="background:#888780"></div>Not scheduled</div>
+  </div>
+
+  <div id="out"></div>
+
+  <hr class="section-divider">
+
+  <button class="section-toggle" onclick="toggleCoverage()">
+    <span class="toggle-arrow" id="covArrow">&#9654;</span>
+    <h2>Coverage gap analysis</h2>
+    <span style="font-size:12px;color:var(--text-secondary);font-weight:400">24-hour M–F coverage · PT</span>
+  </button>
+
+  <div class="section-body" id="covBody">
+    <div class="bar" style="padding:.4rem 0">
+      <span class="bar-label">Include tiers:</span>
+      <select id="covTierSel" onchange="renderCoverage()">
+        <option value="t1t2">T1 + T2 only</option>
+        <option value="all">All (incl. Ops &amp; Mgr)</option>
+        <option value="t1">T1 only</option>
+        <option value="t2">T2 only</option>
+      </select>
+      <div class="sep"></div>
+      <span class="bar-label">Min. threshold:</span>
+      <select id="covThreshSel" onchange="renderCoverage()">
+        <option value="1">1 person</option>
+        <option value="2">2 people</option>
+        <option value="3">3 people</option>
+      </select>
+      <div class="sep"></div>
+      <span class="bar-label">Week of:</span>
+      <input type="date" id="covDatePick" onchange="renderCoverage()">
+      <button class="today-chip" onclick="covGoToday()">This week</button>
+    </div>
+
+    <div id="covWeekLabel" style="font-size:13px;font-weight:500;padding:.2rem 0 .4rem;color:var(--text)"></div>
+    <div id="covGapBanner"></div>
+    <div id="covSummary" class="cov-bar"></div>
+
+    <div class="cov-legend">
+      <div class="cov-leg"><div class="lswatch" style="background:#E24B4A"></div>Gap</div>
+      <div class="cov-leg"><div class="lswatch" style="background:#F0997B"></div>1 person</div>
+      <div class="cov-leg"><div class="lswatch" style="background:#EF9F27"></div>2 people</div>
+      <div class="cov-leg"><div class="lswatch" style="background:#97C459"></div>3 people</div>
+      <div class="cov-leg"><div class="lswatch" style="background:#1D9E75"></div>4+ people</div>
+      <div class="cov-leg"><div class="lswatch" style="background:var(--bg-secondary);border:0.5px solid var(--border)"></div>Not scheduled</div>
+    </div>
+
+    <div style="overflow-x:auto">
+      <div id="covHeatmap"></div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    Last updated: May 17, 2026 &nbsp;·&nbsp; OOO data covers May 15 – Jun 30, 2026 &nbsp;·&nbsp; Schedule hours reflect Notion as of last update
+  </div>
+
+</div>
+
+<script>
+const TZ_OFF = { PT:0, ET:3, CT:2, UTC:7, CET:8, AEDT:17 };
+const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+let curTz = 'PT';
+let curDate = new Date();
+
+const OOO = {
+  'sadie.jones@front.com': [
+    { start:'2026-05-18', end:'2026-05-19' },
+    { start:'2026-06-22', end:'2026-10-05' }  // maternity leave
+  ],
+  'patrick.valenciano@front.com': [{ start:'2026-05-15', end:'2026-05-21' }],
+  'luke.atkins@front.com':        [{ start:'2026-05-15', end:'2026-05-27' }],
+  'maxime.haudebert@front.com':   [{ start:'2026-05-17', end:'2026-05-22' }],
+  'suzy.falvey@front.com':        [
+    { start:'2026-05-18', end:'2026-05-26' },
+    { start:'2026-06-04', end:'2026-06-06' },
+    { start:'2026-06-08', end:'2026-06-09' }
+  ],
+  'adriana.abarzua@front.com':    [
+    { start:'2026-05-20', end:'2026-05-21' },
+    { start:'2026-05-26', end:'2026-06-02' }
+  ],
+  'evan.ostroski@front.com':      [{ start:'2026-05-18', end:'2026-05-19' }],
+  'consuelo.reyes@front.com':     [{ start:'2026-05-22', end:'2026-05-23' }],
+  'raymond.ching@front.com':      [{ start:'2026-05-22', end:'2026-05-23' }],
+  'justin.payne@front.com':       [{ start:'2026-05-22', end:'2026-05-30' }],
+  'cat.burston@front.com':        [{ start:'2026-05-25', end:'2026-06-06' }],
+  'tiamarie.dennington@front.com':[
+    { start:'2026-05-26', end:'2026-05-27' },
+    { start:'2026-06-01', end:'2026-06-02' }
+  ],
+  'christopher.nunag@front.com':  [{ start:'2026-05-29', end:'2026-05-30' }],
+  'kenji.hayward@front.com':      [{ start:'2026-06-05', end:'2026-06-06' }],
+  'camille.tolentino@front.com':  [{ start:'2026-06-08', end:'2026-06-10' }],
+  'cori@front.com':               [{ start:'2026-06-18', end:'2026-06-19' }],
+  'jason.dugdale@front.com':      [{ start:'2026-06-22', end:'2026-06-23' }],
+  'isaiah.wilkerson@front.com':   [{ start:'2026-06-24', end:'2026-06-27' }],
+  'karen.nguyen@front.com':       [{ start:'2026-06-26', end:'2026-06-27' }],
+};
+
+const CAL_START = '2026-05-15';
+const CAL_END   = '2026-06-30';
+
+// Global holiday schedule by country. Recharge week (Dec 25 – Jan 1) applies to all.
+const HOLIDAYS = {
+  US: [
+    '2026-01-01','2026-01-19','2026-02-16','2026-03-16','2026-04-06','2026-05-25',
+    '2026-06-19','2026-07-03','2026-08-14','2026-09-07','2026-10-12','2026-11-11',
+    '2026-11-26','2026-11-27',
+    '2026-12-25','2026-12-26','2026-12-27','2026-12-28','2026-12-29','2026-12-30','2026-12-31','2027-01-01'
+  ],
+  France: [
+    '2026-01-01','2026-04-06','2026-05-01','2026-05-08','2026-05-14','2026-05-25',
+    '2026-07-14','2026-11-11',
+    '2026-12-25','2026-12-26','2026-12-27','2026-12-28','2026-12-29','2026-12-30','2026-12-31','2027-01-01'
+  ],
+  Ireland: [
+    '2026-01-01','2026-02-02','2026-03-17','2026-04-06','2026-05-04','2026-06-01',
+    '2026-08-03','2026-10-26','2026-12-28',
+    '2026-12-25','2026-12-26','2026-12-27','2026-12-28','2026-12-29','2026-12-30','2026-12-31','2027-01-01'
+  ],
+  Chile: [
+    '2026-01-01','2026-02-16','2026-03-16','2026-04-03','2026-05-01','2026-05-21',
+    '2026-06-22','2026-06-29','2026-07-16','2026-08-17','2026-09-17','2026-09-18',
+    '2026-10-12','2026-10-30','2026-11-23','2026-12-08',
+    '2026-12-25','2026-12-26','2026-12-27','2026-12-28','2026-12-29','2026-12-30','2026-12-31','2027-01-01'
+  ],
+  Philippines: [
+    '2026-01-01','2026-02-17','2026-02-25','2026-03-20','2026-04-02','2026-04-03',
+    '2026-04-09','2026-05-01','2026-05-28','2026-06-12','2026-08-21','2026-08-31',
+    '2026-11-02','2026-11-30','2026-12-08','2026-12-24',
+    '2026-12-25','2026-12-26','2026-12-27','2026-12-28','2026-12-29','2026-12-30','2026-12-31','2027-01-01'
+  ],
+  Australia: [
+    '2026-01-01','2026-01-26','2026-03-09','2026-04-03','2026-04-06','2026-06-08',
+    '2026-09-25','2026-11-03','2026-12-25','2026-12-28',
+    '2026-12-25','2026-12-26','2026-12-27','2026-12-28','2026-12-29','2026-12-30','2026-12-31','2027-01-01'
+  ]
+};
+
+// Deduplicate holiday arrays
+Object.keys(HOLIDAYS).forEach(k => { HOLIDAYS[k] = [...new Set(HOLIDAYS[k])].sort(); });
+
+const SHIFT_ORDER = ['EMEA','US','Chile','APAC','Operations','Managers'];
+
+const TEAM = [
+  // EMEA (Ireland)
+  { name:'Camille Tolentino',role:'', email:'camille.tolentino@front.com',   tier:'T1', shift:'EMEA', country:'Ireland',     days:{0:null,1:[-60,480],2:[-60,600],3:[-60,480],4:[-60,480],5:[-60,360],6:null}, note:'Ireland · Local SOD 7am' },
+  { name:'Suzy Falvey',      role:'', email:'suzy.falvey@front.com',         tier:'T1', shift:'EMEA', country:'Ireland',     days:{0:null,1:[-60,480],2:[-60,600],3:[-60,480],4:[-60,480],5:[-60,360],6:null}, note:'Ireland · Local SOD 7am' },
+  { name:'Alan Guidon',      role:'', email:'alan.guidon@front.com',         tier:'T1', shift:'EMEA', country:'Ireland',     days:{0:null,1:[0,540],2:[0,600],3:[0,540],4:[0,540],5:[0,480],6:null}, note:'Ireland · Local SOD 8am' },
+  { name:'Seán O\'Connor',   role:'', email:'sean.oconnor@front.com',        tier:'T2', shift:'EMEA', country:'Ireland',     days:{0:null,1:[0,540],2:[0,600],3:[0,540],4:[0,540],5:[0,480],6:null}, note:'Ireland · Local SOD 8am' },
+  // EMEA (France)
+  { name:'Maxime Haudebert', role:'', email:'maxime.haudebert@front.com',    tier:'T2', shift:'EMEA', country:'France',      days:{0:null,1:[0,540],2:[0,600],3:[0,540],4:[0,540],5:[0,360],6:null}, note:'France · Fri ends 6am PT. DST ±1hr.' },
+
+  // US
+  { name:'Tia Dennington',   role:'', email:'tiamarie.dennington@front.com', tier:'T2', shift:'US',   country:'US',          days:{0:null,1:[240,780],2:[240,780],3:[240,780],4:[240,780],5:[240,780],6:null}, note:'US East' },
+  { name:'Raymond Ching',    role:'', email:'raymond.ching@front.com',       tier:'T2', shift:'US',   country:'US',          days:{0:null,1:[330,870],2:[330,870],3:[330,870],4:[330,870],5:[330,870],6:null}, note:'US West' },
+  { name:'Justin Payne',     role:'', email:'justin.payne@front.com',        tier:'T2', shift:'US',   country:'US',          days:{0:null,1:[360,900],2:[360,900],3:[360,900],4:[360,900],5:[360,900],6:null}, note:'US Central' },
+  { name:'Isaiah Wilkerson', role:'', email:'isaiah.wilkerson@front.com',    tier:'T1', shift:'US',   country:'US',          days:{0:null,1:[420,960],2:[420,960],3:[420,960],4:[420,960],5:[420,960],6:null}, note:'1hr lunch' },
+  { name:'Sadie McDaniel',   role:'', email:'sadie.jones@front.com',         tier:'T1', shift:'US',   country:'US',          days:{0:null,1:[420,960],2:[420,960],3:[420,960],4:[420,960],5:[420,960],6:null}, note:'1hr lunch' },
+  { name:'Evan Ostroski',    role:'', email:'evan.ostroski@front.com',       tier:'T2', shift:'US',   country:'US',          days:{0:null,1:[420,960],2:[420,960],3:[420,960],4:[420,960],5:[420,960],6:null}, note:'US East' },
+  { name:'Patrick Valenciano',role:'',email:'patrick.valenciano@front.com',  tier:'T1', shift:'US',   country:'US',          days:{0:null,1:[450,990],2:[450,990],3:[450,990],4:[450,990],5:[450,990],6:null}, note:'1hr lunch' },
+  { name:'Haley McGill',     role:'', email:'haley@front.com',               tier:'T1', shift:'US',   country:'US',          days:{0:null,1:[540,1050],2:[540,1050],3:[540,1050],4:[540,1050],5:[540,1050],6:null}, note:'30min lunch' },
+
+  // Chile
+  { name:'Carmen Mendez',    role:'', email:'carmen.mendez@front.com',       tier:'T1', shift:'Chile',country:'Chile',       days:{0:null,1:[300,840],2:[300,840],3:[300,840],4:[300,840],5:[300,840],6:null}, note:'DST ±1hr' },
+  { name:'Consuelo Reyes',   role:'', email:'consuelo.reyes@front.com',      tier:'T1', shift:'Chile',country:'Chile',       days:{0:null,1:[360,900],2:[360,900],3:[360,900],4:[360,900],5:[360,900],6:null}, note:'DST ±1hr' },
+  { name:'Annie Abarzua',    role:'', email:'adriana.abarzua@front.com',     tier:'T1', shift:'Chile',country:'Chile',       days:{0:null,1:[360,900],2:[360,900],3:[360,900],4:[360,900],5:[360,900],6:null}, note:'DST ±1hr' },
+
+  // APAC
+  { name:'Cat Burston',      role:'', email:'cat.burston@front.com',         tier:'T1', shift:'APAC', country:'Australia',   days:{0:[870,1380],1:[900,1380],2:[900,1380],3:[900,1380],4:[900,1380],5:null,6:null}, note:'Sun–Thu PT = Mon–Fri AEDT. Varies with AUS DST.' },
+  { name:'Christopher Nunag',role:'', email:'christopher.nunag@front.com',   tier:'T1', shift:'APAC', country:'Philippines', days:{0:[840,1380],1:[840,1380],2:[840,1380],3:[840,1380],4:[840,1380],5:null,6:null}, note:'Sun–Thu PT = Mon–Fri Manila. No DST.' },
+  { name:'Nikolai Dominic',  role:'', email:'nikolai.dominic@front.com',     tier:'T1', shift:'APAC', country:'Philippines', days:{0:null,1:[900,1440],2:[900,1440],3:[900,1440],4:[900,1440],5:[900,1440],6:null}, note:'Mon–Fri PT = Tue–Sat Manila. No DST.' },
+  { name:'Edjay Rustria',    role:'', email:'edjay.rustria@front.com',       tier:'T1', shift:'APAC', country:'Philippines', days:{0:[1080,1620],1:[1080,1620],2:[1080,1620],3:[1080,1620],4:[1080,1620],5:null,6:null}, note:'Sun–Thu PT = Mon–Fri Manila. No DST.' },
+  { name:'Chae Rallos',      role:'', email:'chae.rallos@front.com',         tier:'T1', shift:'APAC', country:'Philippines', days:{0:null,1:[300,840],2:[300,840],3:[300,840],4:[300,840],5:[960,1500],6:null}, note:'Mon–Thu: 5am–2pm, Fri: 4pm–1am PT. No DST.' },
+
+  // Operations
+  { name:'Karen Nguyen',     role:'Senior Support Program Specialist',  email:'karen.nguyen@front.com',     tier:'OPS', shift:'Operations', country:'US',     days:{0:null,1:[420,960],2:[420,960],3:[420,960],4:[420,960],5:[420,960],6:null} },
+  { name:'Jason Dugdale',    role:'Support Operations Developer',       email:'jason.dugdale@front.com',    tier:'OPS', shift:'Operations', country:'US',     days:{0:null,1:[480,1020],2:[480,1020],3:[480,1020],4:[480,1020],5:[480,1020],6:null} },
+  { name:'Luke Atkins',      role:'AI Support Programs Specialist',     email:'luke.atkins@front.com',      tier:'OPS', shift:'Operations', country:'France', days:{0:null,1:[720,1230],2:[720,1320],3:[720,1230],4:[720,1230],5:[720,1140],6:null}, note:'Based in France (CEST). Tue is long day.' },
+
+  // Managers
+  { name:'Kenji Hayward',    role:'Senior Director, Customer Support',  email:'kenji.hayward@front.com',    tier:'MGR', shift:'Managers',   country:'US',     days:{0:null,1:[300,840],2:[300,840],3:[300,840],4:[300,840],5:[300,840],6:null}, note:'Jun/Jul Japan: 3pm–12am PT Sun–Thu' },
+  { name:'Cori Morris',      role:'Senior Manager, CSR',                email:'cori@front.com',             tier:'MGR', shift:'Managers',   country:'US',     days:{0:null,1:[360,900],2:[360,900],3:[360,900],4:[360,900],5:[360,900],6:null} },
+  { name:'Anthony Galleran', role:'Senior Manager, TSE',                email:'anthony.galleran@front.com', tier:'MGR', shift:'Managers',   country:'US',     days:{0:null,1:[390,930],2:[390,930],3:[390,930],4:[390,930],5:[390,930],6:null} },
+];
+
+function dateStr(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
+function isHoliday(country, ds) {
+  const list = HOLIDAYS[country];
+  if (!list) return false;
+  return list.includes(ds);
+}
+
+function getHolidayName(country, ds) {
+  // Return a friendly label for known holidays
+  const names = {
+    '2026-01-01':'New Year\'s Day','2026-01-19':'MLK Day','2026-02-02':'St. Brigid\'s Day',
+    '2026-02-16':'Presidents\' Day / Wellness Day','2026-02-17':'Chinese New Year',
+    '2026-02-25':'People Power Revolution Anniversary','2026-03-09':'Labour Day (AUS)',
+    '2026-03-16':'Wellness Day','2026-03-17':'St. Patrick\'s Day','2026-03-20':'Eid al-Fitr',
+    '2026-04-02':'Maundy Thursday','2026-04-03':'Good Friday','2026-04-06':'Easter Monday',
+    '2026-04-09':'Day of Valor','2026-05-01':'Labour Day','2026-05-04':'May Day (Ireland)',
+    '2026-05-08':'Victory Day','2026-05-14':'Ascension Day','2026-05-21':'Día de las Glorias Navales',
+    '2026-05-25':'Memorial Day / Whit Monday','2026-05-28':'Eid al-Adha',
+    '2026-06-01':'June Bank Holiday','2026-06-08':'King\'s Birthday (AUS)','2026-06-12':'Independence Day (PH)',
+    '2026-06-19':'Juneteenth','2026-06-22':'Día Nacional de los Pueblos Indígenas',
+    '2026-06-29':'San Pedro y San Pablo','2026-07-03':'Independence Day (observed)',
+    '2026-07-14':'Bastille Day','2026-07-16':'Nuestra Señora del Monte Carmelo',
+    '2026-08-03':'August Bank Holiday','2026-08-14':'Wellness Day','2026-08-17':'Wellness Day (Chile)',
+    '2026-08-21':'Ninoy Aquino Day','2026-08-31':'National Heroes Day',
+    '2026-09-07':'Labor Day (US)','2026-09-17':'Army Day (Chile)','2026-09-18':'National Day (Chile)',
+    '2026-09-25':'Friday before AFL Grand Final','2026-10-12':'Indigenous Peoples\' Day / Encuentro de Dos Mundos',
+    '2026-10-26':'October Bank Holiday','2026-10-30':'Día de la Reforma',
+    '2026-11-02':'All Souls\' Day','2026-11-03':'Melbourne Cup','2026-11-11':'Veterans Day / Armistice Day',
+    '2026-11-23':'Wellness Day (Chile)','2026-11-26':'Thanksgiving','2026-11-27':'Day after Thanksgiving',
+    '2026-11-30':'Bonifacio Day','2026-12-08':'Immaculate Conception','2026-12-24':'Christmas Eve',
+    '2026-12-25':'Recharge Week','2026-12-26':'Recharge Week','2026-12-27':'Recharge Week',
+    '2026-12-28':'Recharge Week / St. Stephen\'s Day','2026-12-29':'Recharge Week',
+    '2026-12-30':'Recharge Week','2026-12-31':'Recharge Week','2027-01-01':'New Year\'s Day'
+  };
+  return names[ds] || 'Public holiday';
+}
+
+function isOoo(email, ds, inRange) {
+  // Always check holidays
+  const person = TEAM.find(p => p.email === email);
+  if (person && isHoliday(person.country, ds)) return true;
+  // Only check calendar OOO within the known data window
+  if (!inRange) return false;
+  const list = OOO[email];
+  return list ? list.some(r => ds >= r.start && ds < r.end) : false;
+}
+
+function getOooReason(email, ds, inRange) {
+  const person = TEAM.find(p => p.email === email);
+  if (person && isHoliday(person.country, ds)) {
+    return { type: 'holiday', label: getHolidayName(person.country, ds) };
+  }
+  if (!inRange) return null;
+  const list = OOO[email];
+  if (!list) return null;
+  const match = list.find(r => ds >= r.start && ds < r.end);
+  if (!match) return null;
+  const s = new Date(match.start + 'T12:00:00Z');
+  const e = new Date(match.end + 'T12:00:00Z');
+  e.setDate(e.getDate() - 1);
+  const fmt = x => MONTHS[x.getUTCMonth()] + ' ' + x.getUTCDate();
+  const range = match.start === match.end || s.toDateString() === e.toDateString() ? fmt(s) : fmt(s) + ' – ' + fmt(e);
+  return { type: 'calendar', label: range };
+}
+
+function minsToStr(m) {
+  m = ((m % 1440) + 1440) % 1440;
+  const h = Math.floor(m / 60), mn = m % 60, ap = h < 12 ? 'am' : 'pm', h12 = h % 12 || 12;
+  return h12 + (mn ? ':' + String(mn).padStart(2,'0') : '') + ap;
+}
+
+function conv(s, e, tz) {
+  const off = TZ_OFF[tz] * 60;
+  return minsToStr(s + off) + ' – ' + minsToStr(e + off);
+}
+
+function setTz(tz) {
+  curTz = tz;
+  document.querySelectorAll('.tz-btn').forEach(b => b.classList.toggle('active', b.textContent === tz));
+  render();
+}
+
+function shiftDay(n) {
+  curDate = new Date(curDate);
+  curDate.setDate(curDate.getDate() + n);
+  syncPicker();
+  render();
+}
+
+function goToday() {
+  curDate = new Date();
+  syncPicker();
+  render();
+}
+
+function setFromPicker() {
+  const val = document.getElementById('datePick').value;
+  if (!val) return;
+  const [y, m, d] = val.split('-').map(Number);
+  curDate = new Date(y, m - 1, d);
+  render();
+}
+
+function syncPicker() {
+  document.getElementById('datePick').value = dateStr(curDate);
+}
+
+function render() {
+  const ds = dateStr(curDate);
+  const dow = curDate.getDay();
+  const dayName = DAYS[dow];
+  const monthName = MONTHS[curDate.getMonth()];
+  const dayNum = curDate.getDate();
+  const today = dateStr(new Date());
+  const isToday = ds === today;
+
+  document.getElementById('dayLabel').textContent = dayName + ', ' + monthName + ' ' + dayNum + (isToday ? ' (today)' : '');
+
+  const inRange = ds >= CAL_START && ds <= CAL_END;
+  document.getElementById('calNote').textContent = inRange
+    ? 'OOO data from Support Team Calendar · Public holidays applied by country.'
+    : 'Note: calendar OOO data covers May 15–30, 2026. Public holidays are applied for all dates.';
+
+  const fShift = document.getElementById('shiftSel').value;
+  const fStatus = document.getElementById('statusSel').value;
+
+  let data = TEAM.map(p => {
+    const scheduled = p.days[dow] !== null && p.days[dow] !== undefined;
+    const out = isOoo(p.email, ds, inRange);
+    const status = out ? 'ooo' : scheduled ? 'online' : 'off';
+    return { ...p, status, scheduled };
+  });
+
+  if (fShift) data = data.filter(p => p.shift === fShift);
+  if (fStatus) data = data.filter(p => p.status === fStatus);
+  const fTier = document.getElementById('tierSel').value;
+  if (fTier) data = data.filter(p => p.tier === fTier);
+
+  data.sort((a, b) => SHIFT_ORDER.indexOf(a.shift) - SHIFT_ORDER.indexOf(b.shift));
+
+  const onlineN = data.filter(p => p.status === 'online').length;
+  const oooN    = data.filter(p => p.status === 'ooo').length;
+  const offN    = data.filter(p => p.status === 'off').length;
+
+  document.getElementById('summary').innerHTML = `
+    <div class="scard"><div class="scard-n" style="color:#1D9E75">${onlineN}</div><div class="scard-l">Online</div></div>
+    <div class="scard"><div class="scard-n" style="color:#E24B4A">${oooN}</div><div class="scard-l">OOO</div></div>
+    <div class="scard"><div class="scard-n" style="color:#888780">${offN}</div><div class="scard-l">Not scheduled</div></div>
+    <div class="scard"><div class="scard-n">${data.length}</div><div class="scard-l">Total shown</div></div>
+  `;
+
+  let html = `<table>
+    <col class="cn"><col class="ct"><col class="cs"><col class="ch"><col class="cno">
+    <thead><tr>
+      <th>Name</th><th>Tier</th><th>Status</th>
+      <th>Hours (${dayName} · ${curTz})</th>
+      <th>Notes</th>
+    </tr></thead><tbody>`;
+
+  if (!data.length) {
+    html += '<tr><td colspan="5" style="padding:16px 10px;color:var(--text-secondary)">No teammates match this filter.</td></tr>';
+  }
+
+  let lastShift = '';
+  data.forEach(p => {
+    if (p.shift !== lastShift) {
+      lastShift = p.shift;
+      html += `<tr class="grp-hdr"><td colspan="5">${p.shift}</td></tr>`;
+    }
+    const bc = p.tier === 'T1' ? 'b1' : p.tier === 'T2' ? 'b2' : p.tier === 'OPS' ? 'bo' : 'bm';
+    const bl = p.tier === 'MGR' ? 'Mgr' : p.tier === 'OPS' ? 'Ops' : p.tier;
+    const isOooP = p.status === 'ooo';
+    const isOffP = p.status === 'off';
+    const reason = isOooP ? getOooReason(p.email, ds, inRange) : null;
+    const isHolidayOoo = reason && reason.type === 'holiday';
+    const dotCol = isOooP ? (isHolidayOoo ? '#BA7517' : '#E24B4A') : isOffP ? '#888780' : '#1D9E75';
+    const statusLabel = isOooP ? (isHolidayOoo ? 'Holiday' : 'OOO') : isOffP ? 'Off sched.' : 'Online';
+    const trClass = (isOffP || isOooP) ? 'off-row' : '';
+
+    let hoursCell = '—';
+    if (p.days[dow]) {
+      const [s, e] = p.days[dow];
+      hoursCell = conv(s, e, curTz);
+    }
+    if (isOooP) {
+      const tagBg   = isHolidayOoo ? '#FAEEDA' : 'var(--red-bg)';
+      const tagCol  = isHolidayOoo ? '#633806' : 'var(--red-text)';
+      const tagText = reason ? reason.label : (isHolidayOoo ? 'Public holiday' : 'OOO');
+      hoursCell = `<span class="ooo-tag" style="background:${tagBg};color:${tagCol}">${isHolidayOoo ? '&#127974; ' : ''}${tagText}</span>`;
+    }
+
+    html += `<tr class="${trClass}">
+      <td><span style="font-weight:500">${p.name}</span>${p.role ? `<div class="subrole">${p.role}</div>` : ''}</td>
+      <td><span class="badge ${bc}">${bl}</span></td>
+      <td><span class="status-dot" style="background:${dotCol}"></span><span style="font-size:12px">${statusLabel}</span></td>
+      <td>${hoursCell}</td>
+      <td class="note-cell">${p.note || ''}</td>
+    </tr>`;
+  });
+
+  html += '</tbody></table>';
+  document.getElementById('out').innerHTML = html;
+}
+
+// ── Coverage gap analysis ─────────────────────────────────────
+const DAYS_MW  = ['Mon','Tue','Wed','Thu','Fri'];
+const DOW_MW   = [1,2,3,4,5];
+
+function toggleCoverage() {
+  const body  = document.getElementById('covBody');
+  const arrow = document.getElementById('covArrow');
+  const open  = body.classList.toggle('open');
+  arrow.classList.toggle('open', open);
+  if (open) renderCoverage();
+}
+
+function covGoToday() {
+  document.getElementById('covDatePick').value = dateStr(new Date());
+  renderCoverage();
+}
+
+function getWeekDates(ds) {
+  const d = new Date(ds + 'T12:00:00Z');
+  const dow = d.getUTCDay();
+  const monday = new Date(d);
+  monday.setUTCDate(d.getUTCDate() - (dow === 0 ? 6 : dow - 1));
+  return DOW_MW.map((_, i) => {
+    const x = new Date(monday);
+    x.setUTCDate(monday.getUTCDate() + i);
+    return dateStr(x);
+  });
+}
+
+function colorForCount(n, thresh) {
+  if (n < thresh) return '#E24B4A';
+  if (n === 1)    return '#F0997B';
+  if (n === 2)    return '#EF9F27';
+  if (n === 3)    return '#97C459';
+  return '#1D9E75';
+}
+
+function textColorForCount(n, thresh) {
+  if (n < thresh) return '#ffffff';
+  if (n === 1)    return '#712B13';
+  if (n === 2)    return '#412402';
+  return '#173404';
+}
+
+function renderCoverage() {
+  const ds      = document.getElementById('covDatePick').value || dateStr(new Date());
+  const tierMode= document.getElementById('covTierSel').value;
+  const thresh  = parseInt(document.getElementById('covThreshSel').value);
+  const inRange = ds >= CAL_START && ds <= CAL_END;
+  const weekDates = getWeekDates(ds);
+
+  const monday = new Date(weekDates[0] + 'T12:00:00Z');
+  const friday = new Date(weekDates[4] + 'T12:00:00Z');
+  const fmt = x => MONTHS[x.getUTCMonth()] + ' ' + x.getUTCDate();
+  document.getElementById('covWeekLabel').textContent =
+    'Week of ' + fmt(monday) + ' – ' + fmt(friday) + ', ' + friday.getUTCFullYear() +
+    (inRange ? '' : ' · OOO data not available for this week');
+
+  function tierMatch(t) {
+    if (tierMode === 't1t2') return t === 'T1' || t === 'T2';
+    if (tierMode === 't1')   return t === 'T1';
+    if (tierMode === 't2')   return t === 'T2';
+    return true;
+  }
+
+  const coverage = Array.from({length:5}, () => new Array(24).fill(0));
+  const names    = Array.from({length:5}, () => Array.from({length:24}, () => []));
+
+  DOW_MW.forEach((dow, di) => {
+    const dayDate = weekDates[di];
+    TEAM.forEach(p => {
+      if (!tierMatch(p.tier)) return;
+      if (isOoo(p.email, dayDate, inRange)) return;
+      const sched = p.days[dow];
+      if (!sched) return;
+      const [s, e] = sched;
+      const startH = Math.max(0, Math.ceil(s / 60));
+      const endH   = Math.min(24, Math.ceil(e / 60));
+      for (let h = startH; h < endH; h++) {
+        coverage[di][h]++;
+        names[di][h].push(p.name.split(' ')[0]);
+      }
+      if (e > 1440 && di < 4) {
+        const nextEnd = Math.min(24, Math.ceil((e - 1440) / 60));
+        for (let h = 0; h < nextEnd; h++) {
+          coverage[di+1][h]++;
+          names[di+1][h].push(p.name.split(' ')[0] + '*');
+        }
+      }
+    });
+  });
+
+  const gapHours = [];
+  for (let di = 0; di < 5; di++)
+    for (let h = 0; h < 24; h++)
+      if (coverage[di][h] < thresh) gapHours.push({day: DAYS_MW[di], di, h});
+
+  const totalHours = 120;
+  const gapCount   = gapHours.length;
+  document.getElementById('covSummary').innerHTML = `
+    <div class="cov-scard"><div class="cov-scard-n" style="color:#1D9E75">${totalHours - gapCount}</div><div class="cov-scard-l">Hours covered</div></div>
+    <div class="cov-scard"><div class="cov-scard-n" style="color:#E24B4A">${gapCount}</div><div class="cov-scard-l">Gap hours</div></div>
+    <div class="cov-scard"><div class="cov-scard-n">${Math.round((totalHours - gapCount) / totalHours * 100)}%</div><div class="cov-scard-l">Coverage rate</div></div>
+  `;
+
+  if (gapCount === 0) {
+    document.getElementById('covGapBanner').innerHTML = '<div class="no-gap-banner">Full 24/5 coverage — no gaps detected for this week.</div>';
+  } else {
+    const byDay = {};
+    gapHours.forEach(({day, h}) => { if (!byDay[day]) byDay[day] = []; byDay[day].push(h); });
+    const fmtH = h => { const ap = h < 12 ? 'am' : 'pm'; const h12 = h % 12 || 12; return h12 + ap; };
+    const parts = Object.entries(byDay).map(([day, hrs]) => {
+      hrs.sort((a,b) => a - b);
+      const ranges = []; let rs = hrs[0], re = hrs[0];
+      for (let i = 1; i < hrs.length; i++) {
+        if (hrs[i] === re + 1) { re = hrs[i]; } else { ranges.push([rs, re]); rs = re = hrs[i]; }
+      }
+      ranges.push([rs, re]);
+      return '<strong>' + day + '</strong>: ' + ranges.map(([a,b]) => fmtH(a) + '–' + fmtH(b+1)).join(', ');
+    });
+    document.getElementById('covGapBanner').innerHTML =
+      '<div class="gap-banner">Coverage gaps: ' + parts.join(' &nbsp;·&nbsp; ') + '</div>';
+  }
+
+  const fmtH = h => { const ap = h < 12 ? 'am' : 'pm'; const h12 = h % 12 || 12; return h12 + ap; };
+  let html = '<table class="heatmap"><thead><tr><th class="row-hdr">Hour (PT)</th>';
+  DAYS_MW.forEach(d => html += `<th>${d}</th>`);
+  html += '</tr></thead><tbody>';
+
+  for (let h = 0; h < 24; h++) {
+    html += `<tr><th class="row-hdr">${fmtH(h)}</th>`;
+    for (let di = 0; di < 5; di++) {
+      const n  = coverage[di][h];
+      const bg = n === 0 ? 'var(--bg-secondary)' : colorForCount(n, thresh);
+      const tc = n === 0 ? 'var(--text-secondary)' : textColorForCount(n, thresh);
+      const tip = names[di][h].length ? names[di][h].join(', ') : 'No coverage';
+      html += `<td style="background:${bg};color:${tc}" title="${tip}">${n > 0 ? n : ''}</td>`;
+    }
+    html += '</tr>';
+  }
+  html += '</tbody></table>';
+  document.getElementById('covHeatmap').innerHTML = html;
+}
+
+document.getElementById('covDatePick').value = dateStr(new Date());
+
+// ── Who's online now ──────────────────────────────────────────
+function renderOnlineNow() {
+  const now = new Date();
+  // PT = UTC-7 (PDT). Adjust if your team follows PST (UTC-8) in winter.
+  const PT_OFFSET_MINS = -7 * 60;
+  const utcMins = now.getUTCHours() * 60 + now.getUTCMinutes();
+  const ptMinsRaw = utcMins + PT_OFFSET_MINS;
+  const ptMinsMod = ((ptMinsRaw % 1440) + 1440) % 1440;
+
+  // PT day of week, accounting for midnight crossings
+  const utcDow = now.getUTCDay();
+  const ptDow = ptMinsRaw < 0 ? (utcDow + 6) % 7 : ptMinsRaw >= 1440 ? (utcDow + 1) % 7 : utcDow;
+
+  // PT date string
+  const ptDate = new Date(now.getTime() + PT_OFFSET_MINS * 60000);
+  const todayDs = ptDate.getUTCFullYear() + '-' +
+    String(ptDate.getUTCMonth()+1).padStart(2,'0') + '-' +
+    String(ptDate.getUTCDate()).padStart(2,'0');
+
+  const inRange = todayDs >= CAL_START && todayDs <= CAL_END;
+
+  const online = TEAM.filter(p => {
+    if (isOoo(p.email, todayDs, inRange)) return false;
+    const sched = p.days[ptDow];
+    if (!sched) return false;
+    const [s, e] = sched;
+    const startM = ((s % 1440) + 1440) % 1440;
+    const endM   = ((e % 1440) + 1440) % 1440;
+    if (startM <= endM) {
+      return ptMinsMod >= startM && ptMinsMod < endM;
+    } else {
+      // Shift crosses midnight
+      return ptMinsMod >= startM || ptMinsMod < endM;
+    }
+  });
+
+  // Display current PT time
+  const dispH = Math.floor(ptMinsMod / 60), dispM = ptMinsMod % 60;
+  const ap = dispH < 12 ? 'am' : 'pm', h12 = dispH % 12 || 12;
+  document.getElementById('onlineTime').textContent =
+    h12 + ':' + String(dispM).padStart(2,'0') + ap + ' PT · ' + DAYS[ptDow];
+
+  const chipsEl = document.getElementById('onlineChips');
+  if (online.length === 0) {
+    chipsEl.innerHTML = '<span class="online-none">No teammates currently scheduled</span>';
+  } else {
+    chipsEl.innerHTML = online.map(p => {
+      const tierLabel = p.tier === 'MGR' ? 'Mgr' : p.tier === 'OPS' ? 'Ops' : p.tier;
+      return `<span class="online-chip">
+        <span style="width:6px;height:6px;border-radius:50%;background:#1D9E75;flex-shrink:0;display:inline-block"></span>
+        ${p.name}
+        <span class="online-chip-tier">${tierLabel}</span>
+      </span>`;
+    }).join('');
+  }
+}
+
+renderOnlineNow();
+setInterval(renderOnlineNow, 60000); // refresh every minute
+
+syncPicker();
+render();
+</script>
+</div>
+</body>
+</html>
