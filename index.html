@@ -937,13 +937,6 @@ function renderOnlineNow() {
   }
 }
 
-renderOnlineNow();
-setInterval(renderOnlineNow, 60000); // refresh every minute
-
-syncPicker();
-render();
-}
-
 // Boot: load data then initialise
 (async () => {
   document.getElementById('out').innerHTML = '<p style="padding:16px;color:var(--text-secondary);font-size:13px">Loading schedule data…</p>';
