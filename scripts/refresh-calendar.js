@@ -116,11 +116,22 @@ async function main() {
   const oooByEmail = {};
 
   allEvents.forEach(e => {
-    const title = e.summary || '';
-    if (!isOooEvent(title)) return;
-
+    const title = e.summary || '(no title)';
     const start = toDateString(e.start);
     const end   = toDateString(e.end);
+    const t = title.toLowerCase();
+
+    // Debug: log every event so we can see what's on the calendar
+    const excludeHit = EXCLUDE_KEYWORDS.find(k => t.includes(k));
+    const oooHit     = OOO_KEYWORDS.find(k => t.includes(k));
+    if (excludeHit) {
+      console.log(`  ⏭  EXCLUDED by "${excludeHit}": "${title}" (${start})`);
+      return;
+    }
+    if (!oooHit) {
+      console.log(`  ➖ NOT OOO: "${title}" (${start})`);
+      return;
+    }
 
     // First try creator/organiser email match
     const creatorEmail = (e.creator?.email || e.organizer?.email || '').toLowerCase();
