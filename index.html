@@ -508,127 +508,49 @@ const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov
 let curTz = 'PT';
 let curDate = new Date();
 
-const OOO = {
-  'sadie.jones@front.com': [
-    { start:'2026-05-18', end:'2026-05-19' },
-    { start:'2026-06-22', end:'2026-10-05' }  // maternity leave
-  ],
-  'patrick.valenciano@front.com': [{ start:'2026-05-15', end:'2026-05-21' }],
-  'luke.atkins@front.com':        [{ start:'2026-05-15', end:'2026-05-27' }],
-  'maxime.haudebert@front.com':   [{ start:'2026-05-17', end:'2026-05-22' }],
-  'suzy.falvey@front.com':        [
-    { start:'2026-05-18', end:'2026-05-26' },
-    { start:'2026-06-04', end:'2026-06-06' },
-    { start:'2026-06-08', end:'2026-06-09' }
-  ],
-  'adriana.abarzua@front.com':    [
-    { start:'2026-05-20', end:'2026-05-21' },
-    { start:'2026-05-26', end:'2026-06-02' }
-  ],
-  'evan.ostroski@front.com':      [{ start:'2026-05-18', end:'2026-05-19' }],
-  'consuelo.reyes@front.com':     [{ start:'2026-05-22', end:'2026-05-23' }],
-  'raymond.ching@front.com':      [{ start:'2026-05-22', end:'2026-05-23' }],
-  'justin.payne@front.com':       [{ start:'2026-05-22', end:'2026-05-30' }],
-  'cat.burston@front.com':        [{ start:'2026-05-25', end:'2026-06-06' }],
-  'tiamarie.dennington@front.com':[
-    { start:'2026-05-26', end:'2026-05-27' },
-    { start:'2026-06-01', end:'2026-06-02' }
-  ],
-  'christopher.nunag@front.com':  [{ start:'2026-05-29', end:'2026-05-30' }],
-  'kenji.hayward@front.com':      [{ start:'2026-06-05', end:'2026-06-06' }],
-  'camille.tolentino@front.com':  [{ start:'2026-06-08', end:'2026-06-10' }],
-  'cori@front.com':               [{ start:'2026-06-18', end:'2026-06-19' }],
-  'jason.dugdale@front.com':      [{ start:'2026-06-22', end:'2026-06-23' }],
-  'isaiah.wilkerson@front.com':   [{ start:'2026-06-24', end:'2026-06-27' }],
-  'karen.nguyen@front.com':       [{ start:'2026-06-26', end:'2026-06-27' }],
-};
-
-const CAL_START = '2026-05-15';
-const CAL_END   = '2026-06-30';
-
-// Global holiday schedule by country. Recharge week (Dec 25 – Jan 1) applies to all.
-const HOLIDAYS = {
-  US: [
-    '2026-01-01','2026-01-19','2026-02-16','2026-03-16','2026-04-06','2026-05-25',
-    '2026-06-19','2026-07-03','2026-08-14','2026-09-07','2026-10-12','2026-11-11',
-    '2026-11-26','2026-11-27',
-    '2026-12-25','2026-12-26','2026-12-27','2026-12-28','2026-12-29','2026-12-30','2026-12-31','2027-01-01'
-  ],
-  France: [
-    '2026-01-01','2026-04-06','2026-05-01','2026-05-08','2026-05-14','2026-05-25',
-    '2026-07-14','2026-11-11',
-    '2026-12-25','2026-12-26','2026-12-27','2026-12-28','2026-12-29','2026-12-30','2026-12-31','2027-01-01'
-  ],
-  Ireland: [
-    '2026-01-01','2026-02-02','2026-03-17','2026-04-06','2026-05-04','2026-06-01',
-    '2026-08-03','2026-10-26','2026-12-28',
-    '2026-12-25','2026-12-26','2026-12-27','2026-12-28','2026-12-29','2026-12-30','2026-12-31','2027-01-01'
-  ],
-  Chile: [
-    '2026-01-01','2026-02-16','2026-03-16','2026-04-03','2026-05-01','2026-05-21',
-    '2026-06-22','2026-06-29','2026-07-16','2026-08-17','2026-09-17','2026-09-18',
-    '2026-10-12','2026-10-30','2026-11-23','2026-12-08',
-    '2026-12-25','2026-12-26','2026-12-27','2026-12-28','2026-12-29','2026-12-30','2026-12-31','2027-01-01'
-  ],
-  Philippines: [
-    '2026-01-01','2026-02-17','2026-02-25','2026-03-20','2026-04-02','2026-04-03',
-    '2026-04-09','2026-05-01','2026-05-28','2026-06-12','2026-08-21','2026-08-31',
-    '2026-11-02','2026-11-30','2026-12-08','2026-12-24',
-    '2026-12-25','2026-12-26','2026-12-27','2026-12-28','2026-12-29','2026-12-30','2026-12-31','2027-01-01'
-  ],
-  Australia: [
-    '2026-01-01','2026-01-26','2026-03-09','2026-04-03','2026-04-06','2026-06-08',
-    '2026-09-25','2026-11-03','2026-12-25','2026-12-28',
-    '2026-12-25','2026-12-26','2026-12-27','2026-12-28','2026-12-29','2026-12-30','2026-12-31','2027-01-01'
-  ]
-};
-
-// Deduplicate holiday arrays
-Object.keys(HOLIDAYS).forEach(k => { HOLIDAYS[k] = [...new Set(HOLIDAYS[k])].sort(); });
-
+const OOO = {};
+let HOLIDAYS = {};
+let HOLIDAY_NAMES = {};
 const SHIFT_ORDER = ['EMEA','US','Chile','APAC','Operations','Managers'];
+let TEAM = [];
+let CAL_START = '';
+let CAL_END = '';
 
-const TEAM = [
-  // EMEA (Ireland)
-  { name:'Camille Tolentino',role:'', email:'camille.tolentino@front.com',   tier:'T1', shift:'EMEA', country:'Ireland',     days:{0:null,1:[-60,480],2:[-60,600],3:[-60,480],4:[-60,480],5:[-60,360],6:null}, note:'Ireland · Local SOD 7am' },
-  { name:'Suzy Falvey',      role:'', email:'suzy.falvey@front.com',         tier:'T1', shift:'EMEA', country:'Ireland',     days:{0:null,1:[-60,480],2:[-60,600],3:[-60,480],4:[-60,480],5:[-60,360],6:null}, note:'Ireland · Local SOD 7am' },
-  { name:'Alan Guidon',      role:'', email:'alan.guidon@front.com',         tier:'T1', shift:'EMEA', country:'Ireland',     days:{0:null,1:[0,540],2:[0,600],3:[0,540],4:[0,540],5:[0,480],6:null}, note:'Ireland · Local SOD 8am' },
-  { name:'Seán O\'Connor',   role:'', email:'sean.oconnor@front.com',        tier:'T2', shift:'EMEA', country:'Ireland',     days:{0:null,1:[0,540],2:[0,600],3:[0,540],4:[0,540],5:[0,480],6:null}, note:'Ireland · Local SOD 8am' },
-  // EMEA (France)
-  { name:'Maxime Haudebert', role:'', email:'maxime.haudebert@front.com',    tier:'T2', shift:'EMEA', country:'France',      days:{0:null,1:[0,540],2:[0,600],3:[0,540],4:[0,540],5:[0,360],6:null}, note:'France · Fri ends 6am PT. DST ±1hr.' },
+async function loadData() {
+  try {
+    const res = await fetch('data.json');
+    if (!res.ok) throw new Error('Failed to fetch data.json');
+    const d = await res.json();
 
-  // US
-  { name:'Tia Dennington',   role:'', email:'tiamarie.dennington@front.com', tier:'T2', shift:'US',   country:'US',          days:{0:null,1:[240,780],2:[240,780],3:[240,780],4:[240,780],5:[240,780],6:null}, note:'US East' },
-  { name:'Raymond Ching',    role:'', email:'raymond.ching@front.com',       tier:'T2', shift:'US',   country:'US',          days:{0:null,1:[330,870],2:[330,870],3:[330,870],4:[330,870],5:[330,870],6:null}, note:'US West' },
-  { name:'Justin Payne',     role:'', email:'justin.payne@front.com',        tier:'T2', shift:'US',   country:'US',          days:{0:null,1:[360,900],2:[360,900],3:[360,900],4:[360,900],5:[360,900],6:null}, note:'US Central' },
-  { name:'Isaiah Wilkerson', role:'', email:'isaiah.wilkerson@front.com',    tier:'T1', shift:'US',   country:'US',          days:{0:null,1:[420,960],2:[420,960],3:[420,960],4:[420,960],5:[420,960],6:null}, note:'1hr lunch' },
-  { name:'Sadie McDaniel',   role:'', email:'sadie.jones@front.com',         tier:'T1', shift:'US',   country:'US',          days:{0:null,1:[420,960],2:[420,960],3:[420,960],4:[420,960],5:[420,960],6:null}, note:'1hr lunch' },
-  { name:'Evan Ostroski',    role:'', email:'evan.ostroski@front.com',       tier:'T2', shift:'US',   country:'US',          days:{0:null,1:[420,960],2:[420,960],3:[420,960],4:[420,960],5:[420,960],6:null}, note:'US East' },
-  { name:'Patrick Valenciano',role:'',email:'patrick.valenciano@front.com',  tier:'T1', shift:'US',   country:'US',          days:{0:null,1:[450,990],2:[450,990],3:[450,990],4:[450,990],5:[450,990],6:null}, note:'1hr lunch' },
-  { name:'Haley McGill',     role:'', email:'haley@front.com',               tier:'T1', shift:'US',   country:'US',          days:{0:null,1:[540,1050],2:[540,1050],3:[540,1050],4:[540,1050],5:[540,1050],6:null}, note:'30min lunch' },
+    // Populate globals from JSON
+    CAL_START = d.meta.cal_start;
+    CAL_END   = d.meta.cal_end;
 
-  // Chile
-  { name:'Carmen Mendez',    role:'', email:'carmen.mendez@front.com',       tier:'T1', shift:'Chile',country:'Chile',       days:{0:null,1:[300,840],2:[300,840],3:[300,840],4:[300,840],5:[300,840],6:null}, note:'DST ±1hr' },
-  { name:'Consuelo Reyes',   role:'', email:'consuelo.reyes@front.com',      tier:'T1', shift:'Chile',country:'Chile',       days:{0:null,1:[360,900],2:[360,900],3:[360,900],4:[360,900],5:[360,900],6:null}, note:'DST ±1hr' },
-  { name:'Annie Abarzua',    role:'', email:'adriana.abarzua@front.com',     tier:'T1', shift:'Chile',country:'Chile',       days:{0:null,1:[360,900],2:[360,900],3:[360,900],4:[360,900],5:[360,900],6:null}, note:'DST ±1hr' },
+    // OOO: convert array-of-objects to the keyed format the app expects
+    Object.entries(d.ooo).forEach(([email, ranges]) => { OOO[email] = ranges; });
 
-  // APAC
-  { name:'Cat Burston',      role:'', email:'cat.burston@front.com',         tier:'T1', shift:'APAC', country:'Australia',   days:{0:[870,1380],1:[900,1380],2:[900,1380],3:[900,1380],4:[900,1380],5:null,6:null}, note:'Sun–Thu PT = Mon–Fri AEDT. Varies with AUS DST.' },
-  { name:'Christopher Nunag',role:'', email:'christopher.nunag@front.com',   tier:'T1', shift:'APAC', country:'Philippines', days:{0:[840,1380],1:[840,1380],2:[840,1380],3:[840,1380],4:[840,1380],5:null,6:null}, note:'Sun–Thu PT = Mon–Fri Manila. No DST.' },
-  { name:'Nikolai Dominic',  role:'', email:'nikolai.dominic@front.com',     tier:'T1', shift:'APAC', country:'Philippines', days:{0:null,1:[900,1440],2:[900,1440],3:[900,1440],4:[900,1440],5:[900,1440],6:null}, note:'Mon–Fri PT = Tue–Sat Manila. No DST.' },
-  { name:'Edjay Rustria',    role:'', email:'edjay.rustria@front.com',       tier:'T1', shift:'APAC', country:'Philippines', days:{0:[1080,1620],1:[1080,1620],2:[1080,1620],3:[1080,1620],4:[1080,1620],5:null,6:null}, note:'Sun–Thu PT = Mon–Fri Manila. No DST.' },
-  { name:'Chae Rallos',      role:'', email:'chae.rallos@front.com',         tier:'T1', shift:'APAC', country:'Philippines', days:{0:null,1:[300,840],2:[300,840],3:[300,840],4:[300,840],5:[960,1500],6:null}, note:'Mon–Thu: 5am–2pm, Fri: 4pm–1am PT. No DST.' },
+    HOLIDAYS     = d.holidays;
+    HOLIDAY_NAMES = d.holiday_names;
 
-  // Operations
-  { name:'Karen Nguyen',     role:'Senior Support Program Specialist',  email:'karen.nguyen@front.com',     tier:'OPS', shift:'Operations', country:'US',     days:{0:null,1:[420,960],2:[420,960],3:[420,960],4:[420,960],5:[420,960],6:null} },
-  { name:'Jason Dugdale',    role:'Support Operations Developer',       email:'jason.dugdale@front.com',    tier:'OPS', shift:'Operations', country:'US',     days:{0:null,1:[480,1020],2:[480,1020],3:[480,1020],4:[480,1020],5:[480,1020],6:null} },
-  { name:'Luke Atkins',      role:'AI Support Programs Specialist',     email:'luke.atkins@front.com',      tier:'OPS', shift:'Operations', country:'France', days:{0:null,1:[720,1230],2:[720,1320],3:[720,1230],4:[720,1230],5:[720,1140],6:null}, note:'Based in France (CEST). Tue is long day.' },
+    // Deduplicate holiday arrays
+    Object.keys(HOLIDAYS).forEach(k => { HOLIDAYS[k] = [...new Set(HOLIDAYS[k])].sort(); });
 
-  // Managers
-  { name:'Kenji Hayward',    role:'Senior Director, Customer Support',  email:'kenji.hayward@front.com',    tier:'MGR', shift:'Managers',   country:'US',     days:{0:null,1:[300,840],2:[300,840],3:[300,840],4:[300,840],5:[300,840],6:null}, note:'Jun/Jul Japan: 3pm–12am PT Sun–Thu' },
-  { name:'Cori Morris',      role:'Senior Manager, CSR',                email:'cori@front.com',             tier:'MGR', shift:'Managers',   country:'US',     days:{0:null,1:[360,900],2:[360,900],3:[360,900],4:[360,900],5:[360,900],6:null} },
-  { name:'Anthony Galleran', role:'Senior Manager, TSE',                email:'anthony.galleran@front.com', tier:'MGR', shift:'Managers',   country:'US',     days:{0:null,1:[390,930],2:[390,930],3:[390,930],4:[390,930],5:[390,930],6:null} },
-];
+    // Team: convert JSON day keys (strings) back to numeric keys
+    TEAM = d.team.map(p => {
+      const days = {};
+      Object.entries(p.days).forEach(([k, v]) => { days[parseInt(k)] = v; });
+      return { ...p, days };
+    });
+
+    // Update footer with last_updated from data
+    const footer = document.querySelector('.page-footer');
+    if (footer) footer.innerHTML = `Last updated: ${d.meta.last_updated} &nbsp;·&nbsp; OOO data covers ${d.meta.cal_start} – ${d.meta.cal_end} &nbsp;·&nbsp; Schedule hours reflect Notion as of last update`;
+
+  } catch (err) {
+    console.error('Could not load data.json:', err);
+    document.querySelector('.page-footer').innerHTML = '⚠️ Could not load schedule data. Make sure data.json is in the same folder as this file.';
+  }
+}
 
 function dateStr(d) {
   const y = d.getFullYear();
@@ -644,33 +566,7 @@ function isHoliday(country, ds) {
 }
 
 function getHolidayName(country, ds) {
-  // Return a friendly label for known holidays
-  const names = {
-    '2026-01-01':'New Year\'s Day','2026-01-19':'MLK Day','2026-02-02':'St. Brigid\'s Day',
-    '2026-02-16':'Presidents\' Day / Wellness Day','2026-02-17':'Chinese New Year',
-    '2026-02-25':'People Power Revolution Anniversary','2026-03-09':'Labour Day (AUS)',
-    '2026-03-16':'Wellness Day','2026-03-17':'St. Patrick\'s Day','2026-03-20':'Eid al-Fitr',
-    '2026-04-02':'Maundy Thursday','2026-04-03':'Good Friday','2026-04-06':'Easter Monday',
-    '2026-04-09':'Day of Valor','2026-05-01':'Labour Day','2026-05-04':'May Day (Ireland)',
-    '2026-05-08':'Victory Day','2026-05-14':'Ascension Day','2026-05-21':'Día de las Glorias Navales',
-    '2026-05-25':'Memorial Day / Whit Monday','2026-05-28':'Eid al-Adha',
-    '2026-06-01':'June Bank Holiday','2026-06-08':'King\'s Birthday (AUS)','2026-06-12':'Independence Day (PH)',
-    '2026-06-19':'Juneteenth','2026-06-22':'Día Nacional de los Pueblos Indígenas',
-    '2026-06-29':'San Pedro y San Pablo','2026-07-03':'Independence Day (observed)',
-    '2026-07-14':'Bastille Day','2026-07-16':'Nuestra Señora del Monte Carmelo',
-    '2026-08-03':'August Bank Holiday','2026-08-14':'Wellness Day','2026-08-17':'Wellness Day (Chile)',
-    '2026-08-21':'Ninoy Aquino Day','2026-08-31':'National Heroes Day',
-    '2026-09-07':'Labor Day (US)','2026-09-17':'Army Day (Chile)','2026-09-18':'National Day (Chile)',
-    '2026-09-25':'Friday before AFL Grand Final','2026-10-12':'Indigenous Peoples\' Day / Encuentro de Dos Mundos',
-    '2026-10-26':'October Bank Holiday','2026-10-30':'Día de la Reforma',
-    '2026-11-02':'All Souls\' Day','2026-11-03':'Melbourne Cup','2026-11-11':'Veterans Day / Armistice Day',
-    '2026-11-23':'Wellness Day (Chile)','2026-11-26':'Thanksgiving','2026-11-27':'Day after Thanksgiving',
-    '2026-11-30':'Bonifacio Day','2026-12-08':'Immaculate Conception','2026-12-24':'Christmas Eve',
-    '2026-12-25':'Recharge Week','2026-12-26':'Recharge Week','2026-12-27':'Recharge Week',
-    '2026-12-28':'Recharge Week / St. Stephen\'s Day','2026-12-29':'Recharge Week',
-    '2026-12-30':'Recharge Week','2026-12-31':'Recharge Week','2027-01-01':'New Year\'s Day'
-  };
-  return names[ds] || 'Public holiday';
+  return HOLIDAY_NAMES[ds] || 'Public holiday';
 }
 
 function isOoo(email, ds, inRange) {
@@ -984,8 +880,6 @@ function renderCoverage() {
   document.getElementById('covHeatmap').innerHTML = html;
 }
 
-document.getElementById('covDatePick').value = dateStr(new Date());
-
 // ── Who's online now ──────────────────────────────────────────
 function renderOnlineNow() {
   const now = new Date();
@@ -1048,6 +942,18 @@ setInterval(renderOnlineNow, 60000); // refresh every minute
 
 syncPicker();
 render();
+}
+
+// Boot: load data then initialise
+(async () => {
+  document.getElementById('out').innerHTML = '<p style="padding:16px;color:var(--text-secondary);font-size:13px">Loading schedule data…</p>';
+  await loadData();
+  syncPicker();
+  render();
+  document.getElementById('covDatePick').value = dateStr(new Date());
+  renderOnlineNow();
+  setInterval(renderOnlineNow, 60000);
+})();
 </script>
 </div>
 </body>
