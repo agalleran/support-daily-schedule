@@ -854,12 +854,24 @@ function renderCoverage() {
       const sched = p.days[dow];
       if (!sched) return;
       const [s, e] = sched;
+
+      // If start is negative, the shift begins on the previous PT day (e.g. 11pm Sun for a Mon shift)
+      // Credit those hours to the previous day in the grid
+      if (s < 0 && di > 0) {
+        const prevStartH = Math.floor(((s % 1440) + 1440) % 1440 / 60); // e.g. -60 → 23
+        for (let h = prevStartH; h < 24; h++) {
+          coverage[di-1][h]++;
+          names[di-1][h].push(p.name.split(' ')[0]);
+        }
+      }
+
       const startH = Math.max(0, Math.ceil(s / 60));
       const endH   = Math.min(24, Math.ceil(e / 60));
       for (let h = startH; h < endH; h++) {
         coverage[di][h]++;
         names[di][h].push(p.name.split(' ')[0]);
       }
+      // If shift overflows past midnight into the next day
       if (e > 1440 && di < 4) {
         const nextEnd = Math.min(24, Math.ceil((e - 1440) / 60));
         for (let h = 0; h < nextEnd; h++) {
