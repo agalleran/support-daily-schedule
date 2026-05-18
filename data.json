@@ -1,1044 +1,248 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
+
   "meta": {
-    "last_updated": "2026-05-18",
-    "cal_start": "2026-05-18",
-    "cal_end": "2026-08-16"
+    "last_updated": "2026-05-17",
+    "cal_start": "2026-05-15",
+    "cal_end": "2026-06-30"
   },
+
   "team": [
     {
-      "name": "Camille Tolentino",
-      "role": "",
-      "email": "camille.tolentino@front.com",
-      "tier": "T1",
-      "shift": "EMEA",
-      "country": "Ireland",
+      "name": "Camille Tolentino", "role": "", "email": "camille.tolentino@front.com",
+      "tier": "T1", "shift": "EMEA", "country": "Ireland",
       "note": "Ireland · Local SOD 7am",
-      "days": {
-        "0": null,
-        "1": [
-          -60,
-          480
-        ],
-        "2": [
-          -60,
-          600
-        ],
-        "3": [
-          -60,
-          480
-        ],
-        "4": [
-          -60,
-          480
-        ],
-        "5": [
-          -60,
-          360
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [-60,480], "2": [-60,600], "3": [-60,480], "4": [-60,480], "5": [-60,360], "6": null }
     },
     {
-      "name": "Suzy Falvey",
-      "role": "",
-      "email": "suzy.falvey@front.com",
-      "tier": "T1",
-      "shift": "EMEA",
-      "country": "Ireland",
+      "name": "Suzy Falvey", "role": "", "email": "suzy.falvey@front.com",
+      "tier": "T1", "shift": "EMEA", "country": "Ireland",
       "note": "Ireland · Local SOD 7am",
-      "days": {
-        "0": null,
-        "1": [
-          -60,
-          480
-        ],
-        "2": [
-          -60,
-          600
-        ],
-        "3": [
-          -60,
-          480
-        ],
-        "4": [
-          -60,
-          480
-        ],
-        "5": [
-          -60,
-          360
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [-60,480], "2": [-60,600], "3": [-60,480], "4": [-60,480], "5": [-60,360], "6": null }
     },
     {
-      "name": "Alan Guidon",
-      "role": "",
-      "email": "alan.guidon@front.com",
-      "tier": "T1",
-      "shift": "EMEA",
-      "country": "Ireland",
+      "name": "Alan Guidon", "role": "", "email": "alan.guidon@front.com",
+      "tier": "T1", "shift": "EMEA", "country": "Ireland",
       "note": "Ireland · Local SOD 8am",
-      "days": {
-        "0": null,
-        "1": [
-          0,
-          540
-        ],
-        "2": [
-          0,
-          600
-        ],
-        "3": [
-          0,
-          540
-        ],
-        "4": [
-          0,
-          540
-        ],
-        "5": [
-          0,
-          480
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [0,540], "2": [0,600], "3": [0,540], "4": [0,540], "5": [0,480], "6": null }
     },
     {
-      "name": "Seán O'Connor",
-      "role": "",
-      "email": "sean.oconnor@front.com",
-      "tier": "T2",
-      "shift": "EMEA",
-      "country": "Ireland",
+      "name": "Seán O'Connor", "role": "", "email": "sean.oconnor@front.com",
+      "tier": "T2", "shift": "EMEA", "country": "Ireland",
       "note": "Ireland · Local SOD 8am",
-      "days": {
-        "0": null,
-        "1": [
-          0,
-          540
-        ],
-        "2": [
-          0,
-          600
-        ],
-        "3": [
-          0,
-          540
-        ],
-        "4": [
-          0,
-          540
-        ],
-        "5": [
-          0,
-          480
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [0,540], "2": [0,600], "3": [0,540], "4": [0,540], "5": [0,480], "6": null }
     },
     {
-      "name": "Maxime Haudebert",
-      "role": "",
-      "email": "maxime.haudebert@front.com",
-      "tier": "T2",
-      "shift": "EMEA",
-      "country": "France",
+      "name": "Maxime Haudebert", "role": "", "email": "maxime.haudebert@front.com",
+      "tier": "T2", "shift": "EMEA", "country": "France",
       "note": "France · Fri ends 6am PT. DST ±1hr.",
-      "days": {
-        "0": null,
-        "1": [
-          0,
-          540
-        ],
-        "2": [
-          0,
-          600
-        ],
-        "3": [
-          0,
-          540
-        ],
-        "4": [
-          0,
-          540
-        ],
-        "5": [
-          0,
-          360
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [0,540], "2": [0,600], "3": [0,540], "4": [0,540], "5": [0,360], "6": null }
     },
     {
-      "name": "Tia Dennington",
-      "role": "",
-      "email": "tiamarie.dennington@front.com",
-      "tier": "T2",
-      "shift": "US",
-      "country": "US",
+      "name": "Tia Dennington", "role": "", "email": "tiamarie.dennington@front.com",
+      "tier": "T2", "shift": "US", "country": "US",
       "note": "US East",
-      "days": {
-        "0": null,
-        "1": [
-          240,
-          780
-        ],
-        "2": [
-          240,
-          780
-        ],
-        "3": [
-          240,
-          780
-        ],
-        "4": [
-          240,
-          780
-        ],
-        "5": [
-          240,
-          780
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [240,780], "2": [240,780], "3": [240,780], "4": [240,780], "5": [240,780], "6": null }
     },
     {
-      "name": "Raymond Ching",
-      "role": "",
-      "email": "raymond.ching@front.com",
-      "tier": "T2",
-      "shift": "US",
-      "country": "US",
+      "name": "Raymond Ching", "role": "", "email": "raymond.ching@front.com",
+      "tier": "T2", "shift": "US", "country": "US",
       "note": "US West",
-      "days": {
-        "0": null,
-        "1": [
-          330,
-          870
-        ],
-        "2": [
-          330,
-          870
-        ],
-        "3": [
-          330,
-          870
-        ],
-        "4": [
-          330,
-          870
-        ],
-        "5": [
-          330,
-          870
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [330,870], "2": [330,870], "3": [330,870], "4": [330,870], "5": [330,870], "6": null }
     },
     {
-      "name": "Justin Payne",
-      "role": "",
-      "email": "justin.payne@front.com",
-      "tier": "T2",
-      "shift": "US",
-      "country": "US",
+      "name": "Justin Payne", "role": "", "email": "justin.payne@front.com",
+      "tier": "T2", "shift": "US", "country": "US",
       "note": "US Central",
-      "days": {
-        "0": null,
-        "1": [
-          360,
-          900
-        ],
-        "2": [
-          360,
-          900
-        ],
-        "3": [
-          360,
-          900
-        ],
-        "4": [
-          360,
-          900
-        ],
-        "5": [
-          360,
-          900
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [360,900], "2": [360,900], "3": [360,900], "4": [360,900], "5": [360,900], "6": null }
     },
     {
-      "name": "Isaiah Wilkerson",
-      "role": "",
-      "email": "isaiah.wilkerson@front.com",
-      "tier": "T1",
-      "shift": "US",
-      "country": "US",
+      "name": "Isaiah Wilkerson", "role": "", "email": "isaiah.wilkerson@front.com",
+      "tier": "T1", "shift": "US", "country": "US",
       "note": "1hr lunch",
-      "days": {
-        "0": null,
-        "1": [
-          420,
-          960
-        ],
-        "2": [
-          420,
-          960
-        ],
-        "3": [
-          420,
-          960
-        ],
-        "4": [
-          420,
-          960
-        ],
-        "5": [
-          420,
-          960
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [420,960], "2": [420,960], "3": [420,960], "4": [420,960], "5": [420,960], "6": null }
     },
     {
-      "name": "Sadie McDaniel",
-      "role": "",
-      "email": "sadie.jones@front.com",
-      "tier": "T1",
-      "shift": "US",
-      "country": "US",
+      "name": "Sadie McDaniel", "role": "", "email": "sadie.jones@front.com",
+      "tier": "T1", "shift": "US", "country": "US",
       "note": "1hr lunch",
-      "days": {
-        "0": null,
-        "1": [
-          420,
-          960
-        ],
-        "2": [
-          420,
-          960
-        ],
-        "3": [
-          420,
-          960
-        ],
-        "4": [
-          420,
-          960
-        ],
-        "5": [
-          420,
-          960
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [420,960], "2": [420,960], "3": [420,960], "4": [420,960], "5": [420,960], "6": null }
     },
     {
-      "name": "Evan Ostroski",
-      "role": "",
-      "email": "evan.ostroski@front.com",
-      "tier": "T2",
-      "shift": "US",
-      "country": "US",
+      "name": "Evan Ostroski", "role": "", "email": "evan.ostroski@front.com",
+      "tier": "T2", "shift": "US", "country": "US",
       "note": "US East",
-      "days": {
-        "0": null,
-        "1": [
-          420,
-          960
-        ],
-        "2": [
-          420,
-          960
-        ],
-        "3": [
-          420,
-          960
-        ],
-        "4": [
-          420,
-          960
-        ],
-        "5": [
-          420,
-          960
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [420,960], "2": [420,960], "3": [420,960], "4": [420,960], "5": [420,960], "6": null }
     },
     {
-      "name": "Patrick Valenciano",
-      "role": "",
-      "email": "patrick.valenciano@front.com",
-      "tier": "T1",
-      "shift": "US",
-      "country": "US",
+      "name": "Patrick Valenciano", "role": "", "email": "patrick.valenciano@front.com",
+      "tier": "T1", "shift": "US", "country": "US",
       "note": "1hr lunch",
-      "days": {
-        "0": null,
-        "1": [
-          450,
-          990
-        ],
-        "2": [
-          450,
-          990
-        ],
-        "3": [
-          450,
-          990
-        ],
-        "4": [
-          450,
-          990
-        ],
-        "5": [
-          450,
-          990
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [450,990], "2": [450,990], "3": [450,990], "4": [450,990], "5": [450,990], "6": null }
     },
     {
-      "name": "Haley McGill",
-      "role": "",
-      "email": "haley@front.com",
-      "tier": "T1",
-      "shift": "US",
-      "country": "US",
+      "name": "Haley McGill", "role": "", "email": "haley@front.com",
+      "tier": "T1", "shift": "US", "country": "US",
       "note": "30min lunch",
-      "days": {
-        "0": null,
-        "1": [
-          540,
-          1050
-        ],
-        "2": [
-          540,
-          1050
-        ],
-        "3": [
-          540,
-          1050
-        ],
-        "4": [
-          540,
-          1050
-        ],
-        "5": [
-          540,
-          1050
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [540,1050], "2": [540,1050], "3": [540,1050], "4": [540,1050], "5": [540,1050], "6": null }
     },
     {
-      "name": "Carmen Mendez",
-      "role": "",
-      "email": "carmen.mendez@front.com",
-      "tier": "T1",
-      "shift": "Chile",
-      "country": "Chile",
+      "name": "Carmen Mendez", "role": "", "email": "carmen.mendez@front.com",
+      "tier": "T1", "shift": "Chile", "country": "Chile",
       "note": "DST ±1hr",
-      "days": {
-        "0": null,
-        "1": [
-          300,
-          840
-        ],
-        "2": [
-          300,
-          840
-        ],
-        "3": [
-          300,
-          840
-        ],
-        "4": [
-          300,
-          840
-        ],
-        "5": [
-          300,
-          840
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [300,840], "2": [300,840], "3": [300,840], "4": [300,840], "5": [300,840], "6": null }
     },
     {
-      "name": "Consuelo Reyes",
-      "role": "",
-      "email": "consuelo.reyes@front.com",
-      "tier": "T1",
-      "shift": "Chile",
-      "country": "Chile",
+      "name": "Consuelo Reyes", "role": "", "email": "consuelo.reyes@front.com",
+      "tier": "T1", "shift": "Chile", "country": "Chile",
       "note": "DST ±1hr",
-      "days": {
-        "0": null,
-        "1": [
-          360,
-          900
-        ],
-        "2": [
-          360,
-          900
-        ],
-        "3": [
-          360,
-          900
-        ],
-        "4": [
-          360,
-          900
-        ],
-        "5": [
-          360,
-          900
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [360,900], "2": [360,900], "3": [360,900], "4": [360,900], "5": [360,900], "6": null }
     },
     {
-      "name": "Annie Abarzua",
-      "role": "",
-      "email": "adriana.abarzua@front.com",
-      "tier": "T1",
-      "shift": "Chile",
-      "country": "Chile",
+      "name": "Annie Abarzua", "role": "", "email": "adriana.abarzua@front.com",
+      "tier": "T1", "shift": "Chile", "country": "Chile",
       "note": "DST ±1hr",
-      "days": {
-        "0": null,
-        "1": [
-          360,
-          900
-        ],
-        "2": [
-          360,
-          900
-        ],
-        "3": [
-          360,
-          900
-        ],
-        "4": [
-          360,
-          900
-        ],
-        "5": [
-          360,
-          900
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [360,900], "2": [360,900], "3": [360,900], "4": [360,900], "5": [360,900], "6": null }
     },
     {
-      "name": "Cat Burston",
-      "role": "",
-      "email": "cat.burston@front.com",
-      "tier": "T1",
-      "shift": "APAC",
-      "country": "Australia",
+      "name": "Cat Burston", "role": "", "email": "cat.burston@front.com",
+      "tier": "T1", "shift": "APAC", "country": "Australia",
       "note": "Sun–Thu PT = Mon–Fri AEDT. Varies with AUS DST.",
-      "days": {
-        "0": [
-          870,
-          1380
-        ],
-        "1": [
-          900,
-          1380
-        ],
-        "2": [
-          900,
-          1380
-        ],
-        "3": [
-          900,
-          1380
-        ],
-        "4": [
-          900,
-          1380
-        ],
-        "5": null,
-        "6": null
-      }
+      "days": { "0": [870,1380], "1": [900,1380], "2": [900,1380], "3": [900,1380], "4": [900,1380], "5": null, "6": null }
     },
     {
-      "name": "Christopher Nunag",
-      "role": "",
-      "email": "christopher.nunag@front.com",
-      "tier": "T1",
-      "shift": "APAC",
-      "country": "Philippines",
+      "name": "Christopher Nunag", "role": "", "email": "christopher.nunag@front.com",
+      "tier": "T1", "shift": "APAC", "country": "Philippines",
       "note": "Sun–Thu PT = Mon–Fri Manila. No DST.",
-      "days": {
-        "0": [
-          840,
-          1380
-        ],
-        "1": [
-          840,
-          1380
-        ],
-        "2": [
-          840,
-          1380
-        ],
-        "3": [
-          840,
-          1380
-        ],
-        "4": [
-          840,
-          1380
-        ],
-        "5": null,
-        "6": null
-      }
+      "days": { "0": [840,1380], "1": [840,1380], "2": [840,1380], "3": [840,1380], "4": [840,1380], "5": null, "6": null }
     },
     {
-      "name": "Nikolai Dominic",
-      "role": "",
-      "email": "nikolai.dominic@front.com",
-      "tier": "T1",
-      "shift": "APAC",
-      "country": "Philippines",
+      "name": "Nikolai Dominic", "role": "", "email": "nikolai.dominic@front.com",
+      "tier": "T1", "shift": "APAC", "country": "Philippines",
       "note": "Mon–Fri PT = Tue–Sat Manila. No DST.",
-      "days": {
-        "0": null,
-        "1": [
-          900,
-          1440
-        ],
-        "2": [
-          900,
-          1440
-        ],
-        "3": [
-          900,
-          1440
-        ],
-        "4": [
-          900,
-          1440
-        ],
-        "5": [
-          900,
-          1440
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [900,1440], "2": [900,1440], "3": [900,1440], "4": [900,1440], "5": [900,1440], "6": null }
     },
     {
-      "name": "Edjay Rustria",
-      "role": "",
-      "email": "edjay.rustria@front.com",
-      "tier": "T1",
-      "shift": "APAC",
-      "country": "Philippines",
+      "name": "Edjay Rustria", "role": "", "email": "edjay.rustria@front.com",
+      "tier": "T1", "shift": "APAC", "country": "Philippines",
       "note": "Sun–Thu PT = Mon–Fri Manila. No DST.",
-      "days": {
-        "0": [
-          1080,
-          1620
-        ],
-        "1": [
-          1080,
-          1620
-        ],
-        "2": [
-          1080,
-          1620
-        ],
-        "3": [
-          1080,
-          1620
-        ],
-        "4": [
-          1080,
-          1620
-        ],
-        "5": null,
-        "6": null
-      }
+      "days": { "0": [1080,1620], "1": [1080,1620], "2": [1080,1620], "3": [1080,1620], "4": [1080,1620], "5": null, "6": null }
     },
     {
-      "name": "Chae Rallos",
-      "role": "",
-      "email": "chae.rallos@front.com",
-      "tier": "T1",
-      "shift": "APAC",
-      "country": "Philippines",
+      "name": "Chae Rallos", "role": "", "email": "chae.rallos@front.com",
+      "tier": "T1", "shift": "APAC", "country": "Philippines",
       "note": "Mon–Thu: 5am–2pm, Fri: 4pm–1am PT. No DST.",
-      "days": {
-        "0": null,
-        "1": [
-          300,
-          840
-        ],
-        "2": [
-          300,
-          840
-        ],
-        "3": [
-          300,
-          840
-        ],
-        "4": [
-          300,
-          840
-        ],
-        "5": [
-          960,
-          1500
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [300,840], "2": [300,840], "3": [300,840], "4": [300,840], "5": [960,1500], "6": null }
     },
     {
-      "name": "Karen Nguyen",
-      "role": "Senior Support Program Specialist",
-      "email": "karen.nguyen@front.com",
-      "tier": "OPS",
-      "shift": "Operations",
-      "country": "US",
+      "name": "Karen Nguyen", "role": "Senior Support Program Specialist", "email": "karen.nguyen@front.com",
+      "tier": "OPS", "shift": "Operations", "country": "US",
       "note": "",
-      "days": {
-        "0": null,
-        "1": [
-          420,
-          960
-        ],
-        "2": [
-          420,
-          960
-        ],
-        "3": [
-          420,
-          960
-        ],
-        "4": [
-          420,
-          960
-        ],
-        "5": [
-          420,
-          960
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [420,960], "2": [420,960], "3": [420,960], "4": [420,960], "5": [420,960], "6": null }
     },
     {
-      "name": "Jason Dugdale",
-      "role": "Support Operations Developer",
-      "email": "jason.dugdale@front.com",
-      "tier": "OPS",
-      "shift": "Operations",
-      "country": "US",
+      "name": "Jason Dugdale", "role": "Support Operations Developer", "email": "jason.dugdale@front.com",
+      "tier": "OPS", "shift": "Operations", "country": "US",
       "note": "",
-      "days": {
-        "0": null,
-        "1": [
-          480,
-          1020
-        ],
-        "2": [
-          480,
-          1020
-        ],
-        "3": [
-          480,
-          1020
-        ],
-        "4": [
-          480,
-          1020
-        ],
-        "5": [
-          480,
-          1020
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [480,1020], "2": [480,1020], "3": [480,1020], "4": [480,1020], "5": [480,1020], "6": null }
     },
     {
-      "name": "Luke Atkins",
-      "role": "AI Support Programs Specialist",
-      "email": "luke.atkins@front.com",
-      "tier": "OPS",
-      "shift": "Operations",
-      "country": "France",
+      "name": "Luke Atkins", "role": "AI Support Programs Specialist", "email": "luke.atkins@front.com",
+      "tier": "OPS", "shift": "Operations", "country": "France",
       "note": "Based in France (CEST). Tue is long day.",
-      "days": {
-        "0": null,
-        "1": [
-          720,
-          1230
-        ],
-        "2": [
-          720,
-          1320
-        ],
-        "3": [
-          720,
-          1230
-        ],
-        "4": [
-          720,
-          1230
-        ],
-        "5": [
-          720,
-          1140
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [720,1230], "2": [720,1320], "3": [720,1230], "4": [720,1230], "5": [720,1140], "6": null }
     },
     {
-      "name": "Kenji Hayward",
-      "role": "Senior Director, Customer Support",
-      "email": "kenji.hayward@front.com",
-      "tier": "MGR",
-      "shift": "Managers",
-      "country": "US",
+      "name": "Kenji Hayward", "role": "Senior Director, Customer Support", "email": "kenji.hayward@front.com",
+      "tier": "MGR", "shift": "Managers", "country": "US",
       "note": "Jun/Jul Japan: 3pm–12am PT Sun–Thu",
-      "days": {
-        "0": null,
-        "1": [
-          300,
-          840
-        ],
-        "2": [
-          300,
-          840
-        ],
-        "3": [
-          300,
-          840
-        ],
-        "4": [
-          300,
-          840
-        ],
-        "5": [
-          300,
-          840
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [300,840], "2": [300,840], "3": [300,840], "4": [300,840], "5": [300,840], "6": null }
     },
     {
-      "name": "Cori Morris",
-      "role": "Senior Manager, CSR",
-      "email": "cori@front.com",
-      "tier": "MGR",
-      "shift": "Managers",
-      "country": "US",
+      "name": "Cori Morris", "role": "Senior Manager, CSR", "email": "cori@front.com",
+      "tier": "MGR", "shift": "Managers", "country": "US",
       "note": "",
-      "days": {
-        "0": null,
-        "1": [
-          360,
-          900
-        ],
-        "2": [
-          360,
-          900
-        ],
-        "3": [
-          360,
-          900
-        ],
-        "4": [
-          360,
-          900
-        ],
-        "5": [
-          360,
-          900
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [360,900], "2": [360,900], "3": [360,900], "4": [360,900], "5": [360,900], "6": null }
     },
     {
-      "name": "Anthony Galleran",
-      "role": "Senior Manager, TSE",
-      "email": "anthony.galleran@front.com",
-      "tier": "MGR",
-      "shift": "Managers",
-      "country": "US",
+      "name": "Anthony Galleran", "role": "Senior Manager, TSE", "email": "anthony.galleran@front.com",
+      "tier": "MGR", "shift": "Managers", "country": "US",
       "note": "",
-      "days": {
-        "0": null,
-        "1": [
-          390,
-          930
-        ],
-        "2": [
-          390,
-          930
-        ],
-        "3": [
-          390,
-          930
-        ],
-        "4": [
-          390,
-          930
-        ],
-        "5": [
-          390,
-          930
-        ],
-        "6": null
-      }
+      "days": { "0": null, "1": [390,930], "2": [390,930], "3": [390,930], "4": [390,930], "5": [390,930], "6": null }
     }
   ],
+
   "ooo": {
     "sadie.jones@front.com": [
-      {
-        "start": "2026-06-22",
-        "end": "2026-10-05",
-        "label": "Maternity leave"
-      }
-    ]
+      { "start": "2026-05-18", "end": "2026-05-19" },
+      { "start": "2026-06-22", "end": "2026-10-05", "label": "Maternity leave" }
+    ],
+    "patrick.valenciano@front.com": [{ "start": "2026-05-15", "end": "2026-05-21" }],
+    "luke.atkins@front.com":        [{ "start": "2026-05-15", "end": "2026-05-27" }],
+    "maxime.haudebert@front.com":   [{ "start": "2026-05-17", "end": "2026-05-22" }],
+    "suzy.falvey@front.com": [
+      { "start": "2026-05-18", "end": "2026-05-26" },
+      { "start": "2026-06-04", "end": "2026-06-06" },
+      { "start": "2026-06-08", "end": "2026-06-09" }
+    ],
+    "adriana.abarzua@front.com": [
+      { "start": "2026-05-20", "end": "2026-05-21" },
+      { "start": "2026-05-26", "end": "2026-06-02" }
+    ],
+    "evan.ostroski@front.com":      [{ "start": "2026-05-18", "end": "2026-05-19" }],
+    "consuelo.reyes@front.com":     [{ "start": "2026-05-22", "end": "2026-05-23" }],
+    "raymond.ching@front.com":      [{ "start": "2026-05-22", "end": "2026-05-23" }],
+    "justin.payne@front.com":       [{ "start": "2026-05-22", "end": "2026-05-30" }],
+    "cat.burston@front.com":        [{ "start": "2026-05-25", "end": "2026-06-06" }],
+    "tiamarie.dennington@front.com": [
+      { "start": "2026-05-26", "end": "2026-05-27" },
+      { "start": "2026-06-01", "end": "2026-06-02" }
+    ],
+    "christopher.nunag@front.com":  [{ "start": "2026-05-29", "end": "2026-05-30" }],
+    "kenji.hayward@front.com":      [{ "start": "2026-06-05", "end": "2026-06-06" }],
+    "camille.tolentino@front.com":  [{ "start": "2026-06-08", "end": "2026-06-10" }],
+    "cori@front.com":               [{ "start": "2026-06-18", "end": "2026-06-19" }],
+    "jason.dugdale@front.com":      [{ "start": "2026-06-22", "end": "2026-06-23" }],
+    "isaiah.wilkerson@front.com":   [{ "start": "2026-06-24", "end": "2026-06-27" }],
+    "karen.nguyen@front.com":       [{ "start": "2026-06-26", "end": "2026-06-27" }]
   },
+
   "holidays": {
     "US": [
-      "2026-01-01",
-      "2026-01-19",
-      "2026-02-16",
-      "2026-03-16",
-      "2026-04-06",
-      "2026-05-25",
-      "2026-06-19",
-      "2026-07-03",
-      "2026-08-14",
-      "2026-09-07",
-      "2026-10-12",
-      "2026-11-11",
-      "2026-11-26",
-      "2026-11-27",
-      "2026-12-25",
-      "2026-12-26",
-      "2026-12-27",
-      "2026-12-28",
-      "2026-12-29",
-      "2026-12-30",
-      "2026-12-31",
-      "2027-01-01"
+      "2026-01-01","2026-01-19","2026-02-16","2026-03-16","2026-04-06","2026-05-25",
+      "2026-06-19","2026-07-03","2026-08-14","2026-09-07","2026-10-12","2026-11-11",
+      "2026-11-26","2026-11-27",
+      "2026-12-25","2026-12-26","2026-12-27","2026-12-28","2026-12-29","2026-12-30","2026-12-31","2027-01-01"
     ],
     "France": [
-      "2026-01-01",
-      "2026-04-06",
-      "2026-05-01",
-      "2026-05-08",
-      "2026-05-14",
-      "2026-05-25",
-      "2026-07-14",
-      "2026-11-11",
-      "2026-12-25",
-      "2026-12-26",
-      "2026-12-27",
-      "2026-12-28",
-      "2026-12-29",
-      "2026-12-30",
-      "2026-12-31",
-      "2027-01-01"
+      "2026-01-01","2026-04-06","2026-05-01","2026-05-08","2026-05-14","2026-05-25",
+      "2026-07-14","2026-11-11",
+      "2026-12-25","2026-12-26","2026-12-27","2026-12-28","2026-12-29","2026-12-30","2026-12-31","2027-01-01"
     ],
     "Ireland": [
-      "2026-01-01",
-      "2026-02-02",
-      "2026-03-17",
-      "2026-04-06",
-      "2026-05-04",
-      "2026-06-01",
-      "2026-08-03",
-      "2026-10-26",
-      "2026-12-28",
-      "2026-12-25",
-      "2026-12-26",
-      "2026-12-27",
-      "2026-12-29",
-      "2026-12-30",
-      "2026-12-31",
-      "2027-01-01"
+      "2026-01-01","2026-02-02","2026-03-17","2026-04-06","2026-05-04","2026-06-01",
+      "2026-08-03","2026-10-26","2026-12-28",
+      "2026-12-25","2026-12-26","2026-12-27","2026-12-29","2026-12-30","2026-12-31","2027-01-01"
     ],
     "Chile": [
-      "2026-01-01",
-      "2026-02-16",
-      "2026-03-16",
-      "2026-04-03",
-      "2026-05-01",
-      "2026-05-21",
-      "2026-06-22",
-      "2026-06-29",
-      "2026-07-16",
-      "2026-08-17",
-      "2026-09-17",
-      "2026-09-18",
-      "2026-10-12",
-      "2026-10-30",
-      "2026-11-23",
-      "2026-12-08",
-      "2026-12-25",
-      "2026-12-26",
-      "2026-12-27",
-      "2026-12-28",
-      "2026-12-29",
-      "2026-12-30",
-      "2026-12-31",
-      "2027-01-01"
+      "2026-01-01","2026-02-16","2026-03-16","2026-04-03","2026-05-01","2026-05-21",
+      "2026-06-22","2026-06-29","2026-07-16","2026-08-17","2026-09-17","2026-09-18",
+      "2026-10-12","2026-10-30","2026-11-23","2026-12-08",
+      "2026-12-25","2026-12-26","2026-12-27","2026-12-28","2026-12-29","2026-12-30","2026-12-31","2027-01-01"
     ],
     "Philippines": [
-      "2026-01-01",
-      "2026-02-17",
-      "2026-02-25",
-      "2026-03-20",
-      "2026-04-02",
-      "2026-04-03",
-      "2026-04-09",
-      "2026-05-01",
-      "2026-05-28",
-      "2026-06-12",
-      "2026-08-21",
-      "2026-08-31",
-      "2026-11-02",
-      "2026-11-30",
-      "2026-12-08",
-      "2026-12-24",
-      "2026-12-25",
-      "2026-12-26",
-      "2026-12-27",
-      "2026-12-28",
-      "2026-12-29",
-      "2026-12-30",
-      "2026-12-31",
-      "2027-01-01"
+      "2026-01-01","2026-02-17","2026-02-25","2026-03-20","2026-04-02","2026-04-03",
+      "2026-04-09","2026-05-01","2026-05-28","2026-06-12","2026-08-21","2026-08-31",
+      "2026-11-02","2026-11-30","2026-12-08","2026-12-24",
+      "2026-12-25","2026-12-26","2026-12-27","2026-12-28","2026-12-29","2026-12-30","2026-12-31","2027-01-01"
     ],
     "Australia": [
-      "2026-01-01",
-      "2026-01-26",
-      "2026-03-09",
-      "2026-04-03",
-      "2026-04-06",
-      "2026-06-08",
-      "2026-09-25",
-      "2026-11-03",
-      "2026-12-25",
-      "2026-12-28",
-      "2026-12-26",
-      "2026-12-27",
-      "2026-12-29",
-      "2026-12-30",
-      "2026-12-31",
-      "2027-01-01"
+      "2026-01-01","2026-01-26","2026-03-09","2026-04-03","2026-04-06","2026-06-08",
+      "2026-09-25","2026-11-03","2026-12-25","2026-12-28",
+      "2026-12-26","2026-12-27","2026-12-29","2026-12-30","2026-12-31","2027-01-01"
     ]
   },
+
   "holiday_names": {
     "2026-01-01": "New Year's Day",
     "2026-01-19": "MLK Day",
