@@ -440,6 +440,7 @@
     <button class="tz-btn" onclick="setTz('ET')">ET</button>
     <button class="tz-btn" onclick="setTz('UTC')">UTC</button>
     <button class="tz-btn" onclick="setTz('CET')">CET</button>
+    <button class="tz-btn" onclick="setTz('PHT')">PHT</button>
     <button class="tz-btn" onclick="setTz('AEDT')">AEDT</button>
     <div class="sep"></div>
     <select id="shiftSel" onchange="render()">
@@ -543,7 +544,7 @@
 </div>
 
 <script>
-const TZ_OFF = { PT:0, ET:3, CT:2, UTC:7, CET:8, AEDT:17 };
+const TZ_OFF = { PT:0, CT:2, ET:3, UTC:7, CET:8, PHT:15, AEDT:17 };
 const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 let curTz = 'PT';
