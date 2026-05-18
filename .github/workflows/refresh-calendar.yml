@@ -5,9 +5,14 @@ on:
     - cron: '0 6 * * *'  # Runs daily at 6am UTC (11pm PT)
   workflow_dispatch:       # Also allows manual trigger from GitHub Actions tab
 
+permissions:
+  contents: write
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout repo
@@ -16,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Install dependencies
         run: npm install googleapis
