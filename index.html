@@ -55,7 +55,6 @@
     background: var(--bg-tertiary);
     color: var(--text);
     min-height: 100vh;
-    padding: 24px 16px;
   }
 
   .page {
@@ -65,6 +64,8 @@
     border-radius: var(--radius-lg);
     border: 0.5px solid var(--border);
     padding: 24px 28px 32px;
+    margin-top: 24px;
+    margin-bottom: 24px;
   }
 
   .page-header {
@@ -378,6 +379,7 @@
   #auth-gate {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     min-height: 100vh; gap: 20px;
+    background: var(--bg-tertiary);
   }
   .auth-card {
     background: var(--bg); border-radius: var(--radius-lg); border: 0.5px solid var(--border);
@@ -386,7 +388,7 @@
   .auth-title { font-size: 18px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
   .auth-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 28px; }
   .auth-error { font-size: 12px; color: var(--red-text); margin-top: 14px; display: none; }
-  #app { display: none; }
+  #app { display: none; min-height: 100vh; }
 </style>
 <script src="https://accounts.google.com/gsi/client" async></script>
 </head>
