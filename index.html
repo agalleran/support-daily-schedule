@@ -456,6 +456,7 @@
     <select id="statusSel" onchange="render()">
       <option value="">All statuses</option>
       <option value="online">Online only</option>
+      <option value="partial">Partial day</option>
       <option value="ooo">OOO only</option>
       <option value="off">Not scheduled</option>
     </select>
@@ -482,8 +483,9 @@
 
   <div class="legend">
     <div class="leg"><div class="dot" style="background:#1D9E75"></div>Online — scheduled &amp; no OOO</div>
+    <div class="leg"><div class="dot" style="background:#BA7517"></div>Partial day</div>
     <div class="leg"><div class="dot" style="background:#E24B4A"></div>OOO — calendar</div>
-    <div class="leg"><div class="dot" style="background:#BA7517"></div>OOO — public holiday</div>
+    <div class="leg"><div class="dot" style="background:#BA7517;opacity:0.5"></div>OOO — public holiday</div>
     <div class="leg"><div class="dot" style="background:#888780"></div>Not scheduled</div>
   </div>
 
@@ -618,7 +620,23 @@ function isOoo(email, ds, inRange) {
   // Only check calendar OOO within the known data window
   if (!inRange) return false;
   const list = OOO[email];
-  return list ? list.some(r => ds >= r.start && ds < r.end) : false;
+  if (!list) return false;
+  // Partial days don't count as full OOO
+  return list.some(r => ds >= r.start && ds <= r.end && !r.partial);
+}
+
+function isPartialDay(email, ds, inRange) {
+  if (!inRange) return false;
+  const list = OOO[email];
+  if (!list) return false;
+  return list.some(r => ds >= r.start && ds <= r.end && r.partial);
+}
+
+function getPartialLabel(email, ds) {
+  const list = OOO[email];
+  if (!list) return null;
+  const match = list.find(r => ds >= r.start && ds <= r.end && r.partial);
+  return match ? (match.label || 'Partial day') : null;
 }
 
 function getOooReason(email, ds, inRange) {
@@ -629,8 +647,11 @@ function getOooReason(email, ds, inRange) {
   if (!inRange) return null;
   const list = OOO[email];
   if (!list) return null;
-  const match = list.find(r => ds >= r.start && ds < r.end);
+  const match = list.find(r => ds >= r.start && ds <= r.end);
   if (!match) return null;
+  if (match.partial) {
+    return { type: 'partial', label: match.label || 'Partial day' };
+  }
   const s = new Date(match.start + 'T12:00:00Z');
   const e = new Date(match.end + 'T12:00:00Z');
   e.setDate(e.getDate() - 1);
@@ -703,7 +724,8 @@ function render() {
   let data = TEAM.map(p => {
     const scheduled = p.days[dow] !== null && p.days[dow] !== undefined;
     const out = isOoo(p.email, ds, inRange);
-    const status = out ? 'ooo' : scheduled ? 'online' : 'off';
+    const partial = !out && isPartialDay(p.email, ds, inRange);
+    const status = out ? 'ooo' : partial ? 'partial' : scheduled ? 'online' : 'off';
     return { ...p, status, scheduled };
   });
 
@@ -714,12 +736,14 @@ function render() {
 
   data.sort((a, b) => SHIFT_ORDER.indexOf(a.shift) - SHIFT_ORDER.indexOf(b.shift));
 
-  const onlineN = data.filter(p => p.status === 'online').length;
-  const oooN    = data.filter(p => p.status === 'ooo').length;
-  const offN    = data.filter(p => p.status === 'off').length;
+  const onlineN  = data.filter(p => p.status === 'online').length;
+  const oooN     = data.filter(p => p.status === 'ooo').length;
+  const partialN = data.filter(p => p.status === 'partial').length;
+  const offN     = data.filter(p => p.status === 'off').length;
 
   document.getElementById('summary').innerHTML = `
     <div class="scard"><div class="scard-n" style="color:#1D9E75">${onlineN}</div><div class="scard-l">Online</div></div>
+    ${partialN > 0 ? `<div class="scard"><div class="scard-n" style="color:#BA7517">${partialN}</div><div class="scard-l">Partial day</div></div>` : ''}
     <div class="scard"><div class="scard-n" style="color:#E24B4A">${oooN}</div><div class="scard-l">OOO</div></div>
     <div class="scard"><div class="scard-n" style="color:#888780">${offN}</div><div class="scard-l">Not scheduled</div></div>
     <div class="scard"><div class="scard-n">${data.length}</div><div class="scard-l">Total shown</div></div>
@@ -745,12 +769,13 @@ function render() {
     }
     const bc = p.tier === 'T1' ? 'b1' : p.tier === 'T2' ? 'b2' : p.tier === 'OPS' ? 'bo' : 'bm';
     const bl = p.tier === 'MGR' ? 'Mgr' : p.tier === 'OPS' ? 'Ops' : p.tier;
-    const isOooP = p.status === 'ooo';
-    const isOffP = p.status === 'off';
-    const reason = isOooP ? getOooReason(p.email, ds, inRange) : null;
+    const isOooP     = p.status === 'ooo';
+    const isPartialP = p.status === 'partial';
+    const isOffP     = p.status === 'off';
+    const reason = (isOooP || isPartialP) ? getOooReason(p.email, ds, inRange) : null;
     const isHolidayOoo = reason && reason.type === 'holiday';
-    const dotCol = isOooP ? (isHolidayOoo ? '#BA7517' : '#E24B4A') : isOffP ? '#888780' : '#1D9E75';
-    const statusLabel = isOooP ? (isHolidayOoo ? 'Holiday' : 'OOO') : isOffP ? 'Off sched.' : 'Online';
+    const dotCol = isOooP ? (isHolidayOoo ? '#BA7517' : '#E24B4A') : isPartialP ? '#BA7517' : isOffP ? '#888780' : '#1D9E75';
+    const statusLabel = isOooP ? (isHolidayOoo ? 'Holiday' : 'OOO') : isPartialP ? 'Partial' : isOffP ? 'Off sched.' : 'Online';
     const trClass = (isOffP || isOooP) ? 'off-row' : '';
 
     let hoursCell = '—';
@@ -759,10 +784,16 @@ function render() {
       hoursCell = conv(s, e, curTz);
     }
     if (isOooP) {
-      const tagBg   = isHolidayOoo ? '#FAEEDA' : 'var(--red-bg)';
-      const tagCol  = isHolidayOoo ? '#633806' : 'var(--red-text)';
+      const tagBg  = isHolidayOoo ? '#FAEEDA' : 'var(--red-bg)';
+      const tagCol = isHolidayOoo ? '#633806' : 'var(--red-text)';
       const tagText = reason ? reason.label : (isHolidayOoo ? 'Public holiday' : 'OOO');
       hoursCell = `<span class="ooo-tag" style="background:${tagBg};color:${tagCol}">${isHolidayOoo ? '&#127974; ' : ''}${tagText}</span>`;
+    } else if (isPartialP && reason) {
+      // Show normal hours + partial tag
+      if (p.days[dow]) {
+        const [s, e] = p.days[dow];
+        hoursCell = conv(s, e, curTz) + ` <span class="ooo-tag" style="background:#FAEEDA;color:#633806">&#9680; ${reason.label}</span>`;
+      }
     }
 
     html += `<tr class="${trClass}">
@@ -957,6 +988,7 @@ function renderOnlineNow() {
 
   const online = TEAM.filter(p => {
     if (isOoo(p.email, todayDs, inRange)) return false;
+    // Partial days still show as online in the banner
     const sched = p.days[ptDow];
     if (!sched) return false;
     const [s, e] = sched;
