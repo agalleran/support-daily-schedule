@@ -622,7 +622,7 @@ function isOoo(email, ds, inRange) {
   const list = OOO[email];
   if (!list) return false;
   // Partial days don't count as full OOO
-  return list.some(r => ds >= r.start && ds <= r.end && !r.partial);
+  return list.some(r => ds >= r.start && ds < r.end && !r.partial);
 }
 
 function isPartialDay(email, ds, inRange) {
@@ -647,7 +647,7 @@ function getOooReason(email, ds, inRange) {
   if (!inRange) return null;
   const list = OOO[email];
   if (!list) return null;
-  const match = list.find(r => ds >= r.start && ds <= r.end);
+  const match = list.find(r => ds >= r.start && (r.partial ? ds <= r.end : ds < r.end));
   if (!match) return null;
   if (match.partial) {
     return { type: 'partial', label: match.label || 'Partial day' };
