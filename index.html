@@ -546,7 +546,109 @@
 </div>
 
 <script>
-const TZ_OFF = { PT:0, CT:2, ET:3, UTC:7, CET:9, PHT:15, AEDT:17 };
+// DST-aware timezone offset calculation (offset = hours AHEAD of PT)
+// All transitions are relative to PT (Pacific Time)
+// US DST: second Sunday March → first Sunday November
+// EU DST: last Sunday March → last Sunday October
+// Australia (AEDT/AEST): first Sunday April → first Sunday October (Southern Hemisphere)
+
+function getUsDstTransitions(year) {
+  // Spring forward: second Sunday in March
+  const mar1 = new Date(year, 2, 1).getDay(); // day of week of Mar 1
+  const springForward = new Date(year, 2, 1 + (14 - mar1) % 7 + 7);
+  if (springForward.getDate() <= 7) springForward.setDate(springForward.getDate() + 7);
+  // Actually simpler: find second Sunday
+  let d = new Date(year, 2, 1);
+  let sundays = 0;
+  while (sundays < 2) { if (d.getDay() === 0) sundays++; if (sundays < 2) d.setDate(d.getDate() + 1); }
+  const spring = new Date(d);
+  // Fall back: first Sunday in November
+  d = new Date(year, 10, 1);
+  while (d.getDay() !== 0) d.setDate(d.getDate() + 1);
+  const fall = new Date(d);
+  return { spring, fall };
+}
+
+function getEuDstTransitions(year) {
+  // Spring forward: last Sunday in March
+  let d = new Date(year, 2, 31);
+  while (d.getDay() !== 0) d.setDate(d.getDate() - 1);
+  const spring = new Date(d);
+  // Fall back: last Sunday in October
+  d = new Date(year, 9, 31);
+  while (d.getDay() !== 0) d.setDate(d.getDate() - 1);
+  const fall = new Date(d);
+  return { spring, fall };
+}
+
+function getAusDstTransitions(year) {
+  // AEDT (summer) runs from first Sunday in October to first Sunday in April
+  // So AEDT is active: Jan 1 → first Sun April, and first Sun Oct → Dec 31
+  let d = new Date(year, 3, 1); // April 1
+  while (d.getDay() !== 0) d.setDate(d.getDate() + 1);
+  const endAEDT = new Date(d); // first Sunday April = switch to AEST
+
+  d = new Date(year, 9, 1); // Oct 1
+  while (d.getDay() !== 0) d.setDate(d.getDate() + 1);
+  const startAEDT = new Date(d); // first Sunday Oct = switch to AEDT
+
+  return { endAEDT, startAEDT };
+}
+
+function getTzOffset(tz, dateStr) {
+  // Returns offset in hours ahead of PT for a given date string
+  const date = new Date(dateStr + 'T12:00:00');
+  const year = date.getFullYear();
+  const usDst = getUsDstTransitions(year);
+  const euDst = getEuDstTransitions(year);
+  const ausDst = getAusDstTransitions(year);
+
+  // Is PT on PDT (UTC-7) or PST (UTC-8)?
+  const ptIsDst = date >= usDst.spring && date < usDst.fall;
+  // PT UTC offset: PDT = -7, PST = -8
+  const ptUtc = ptIsDst ? -7 : -8;
+
+  switch (tz) {
+    case 'PT': return 0;
+
+    case 'CT': {
+      // CT is 1 hour ahead of PT always (both observe US DST together)
+      return 1;
+    }
+
+    case 'ET': {
+      // ET is 2 hours ahead of PT always (both observe US DST together)
+      return 2;
+    }
+
+    case 'UTC': {
+      // UTC offset from PT: PDT = 7, PST = 8
+      return ptIsDst ? 7 : 8;
+    }
+
+    case 'CET': {
+      // CET = UTC+1 (winter), CEST = UTC+2 (summer, Mar last Sun → Oct last Sun)
+      const euIsDst = date >= euDst.spring && date < euDst.fall;
+      const cetUtc = euIsDst ? 2 : 1;
+      return cetUtc - ptUtc;
+    }
+
+    case 'PHT': {
+      // Philippines = UTC+8 year-round (no DST)
+      return 8 - ptUtc;
+    }
+
+    case 'AEDT': {
+      // Australia/Melbourne: AEDT = UTC+11 (summer Oct→Apr), AEST = UTC+10 (winter Apr→Oct)
+      const ausIsDst = date >= ausDst.startAEDT || date < ausDst.endAEDT;
+      const ausUtc = ausIsDst ? 11 : 10;
+      return ausUtc - ptUtc;
+    }
+
+    default: return 0;
+  }
+}
+
 const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 let curTz = 'PT';
@@ -666,9 +768,13 @@ function minsToStr(m) {
   return h12 + (mn ? ':' + String(mn).padStart(2,'0') : '') + ap;
 }
 
-function conv(s, e, tz) {
-  const off = TZ_OFF[tz] * 60;
+function conv(s, e, tz, dateStr) {
+  const off = getTzOffset(tz, dateStr || dateStr_(new Date())) * 60;
   return minsToStr(s + off) + ' – ' + minsToStr(e + off);
+}
+
+function dateStr_(d) {
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
 
 function setTz(tz) {
@@ -781,7 +887,7 @@ function render() {
     let hoursCell = '—';
     if (p.days[dow]) {
       const [s, e] = p.days[dow];
-      hoursCell = conv(s, e, curTz);
+      hoursCell = conv(s, e, curTz, ds);
     }
     if (isOooP) {
       const tagBg  = isHolidayOoo ? '#FAEEDA' : 'var(--red-bg)';
@@ -792,7 +898,7 @@ function render() {
       // Show normal hours + partial tag
       if (p.days[dow]) {
         const [s, e] = p.days[dow];
-        hoursCell = conv(s, e, curTz) + ` <span class="ooo-tag" style="background:#FAEEDA;color:#633806">&#9680; ${reason.label}</span>`;
+        hoursCell = conv(s, e, curTz, ds) + ` <span class="ooo-tag" style="background:#FAEEDA;color:#633806">&#9680; ${reason.label}</span>`;
       }
     }
 
@@ -968,8 +1074,11 @@ function renderCoverage() {
 // ── Who's online now ──────────────────────────────────────────
 function renderOnlineNow() {
   const now = new Date();
-  // PT = UTC-7 (PDT). Adjust if your team follows PST (UTC-8) in winter.
-  const PT_OFFSET_MINS = -7 * 60;
+  // Dynamically determine PT offset (PDT = UTC-7, PST = UTC-8)
+  const todayForDst = now.getUTCFullYear() + '-' + String(now.getUTCMonth()+1).padStart(2,'0') + '-' + String(now.getUTCDate()).padStart(2,'0');
+  const usDst = getUsDstTransitions(now.getUTCFullYear());
+  const ptIsDst = now >= usDst.spring && now < usDst.fall;
+  const PT_OFFSET_MINS = ptIsDst ? -7 * 60 : -8 * 60;
   const utcMins = now.getUTCHours() * 60 + now.getUTCMinutes();
   const ptMinsRaw = utcMins + PT_OFFSET_MINS;
   const ptMinsMod = ((ptMinsRaw % 1440) + 1440) % 1440;
