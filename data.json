@@ -204,8 +204,16 @@
       { "start": "2026-05-26", "end": "2026-05-27" },
       { "start": "2026-06-01", "end": "2026-06-02" }
     ],
-    "christopher.nunag@front.com":  [{ "start": "2026-05-29", "end": "2026-05-30" }],
-    "chae.rallos@front.com":        [{ "start": "2026-06-01", "end": "2026-06-02" }],
+    "christopher.nunag@front.com":  [
+      { "start": "2026-05-27", "end": "2026-05-28", "label": "Feast of the Sacrifice (working holiday)" },
+      { "start": "2026-05-29", "end": "2026-05-30" }
+    ],
+    "nikolai.dominic@front.com":    [{ "start": "2026-05-27", "end": "2026-05-28", "label": "Feast of the Sacrifice (working holiday)" }],
+    "edjay.rustria@front.com":      [{ "start": "2026-05-27", "end": "2026-05-28", "label": "Feast of the Sacrifice (working holiday)" }],
+    "chae.rallos@front.com": [
+      { "start": "2026-05-27", "end": "2026-05-28", "label": "Feast of the Sacrifice (working holiday)" },
+      { "start": "2026-06-01", "end": "2026-06-02" }
+    ],
     "camille.tolentino@front.com": [
       { "start": "2026-06-02", "end": "2026-06-03" },
       { "start": "2026-06-08", "end": "2026-06-11" }
