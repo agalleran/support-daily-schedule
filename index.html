@@ -595,9 +595,9 @@ function getAusDstTransitions(year) {
   return { endAEDT, startAEDT };
 }
 
-function getTzOffset(tz, dateStr) {
+function getTzOffset(tz, ds) {
   // Returns offset in hours ahead of PT for a given date string
-  const date = new Date(dateStr + 'T12:00:00');
+  const date = new Date(ds + 'T12:00:00');
   const year = date.getFullYear();
   const usDst = getUsDstTransitions(year);
   const euDst = getEuDstTransitions(year);
@@ -650,7 +650,9 @@ function getTzOffset(tz, dateStr) {
 }
 
 function updateTzLabels(ds) {
+  if (!ds) return;
   const date = new Date(ds + 'T12:00:00');
+  if (isNaN(date)) return;
   const year = date.getFullYear();
   const usDst  = getUsDstTransitions(year);
   const euDst  = getEuDstTransitions(year);
@@ -660,12 +662,12 @@ function updateTzLabels(ds) {
   const euDst_ = date >= euDst.spring  && date < euDst.fall;
   const ausDst_= date >= ausDst.startAEDT || date < ausDst.endAEDT;
 
-  document.getElementById('tz-btn-PT').textContent   = ptDst  ? 'PDT' : 'PST';
-  document.getElementById('tz-btn-CT').textContent   = ptDst  ? 'CDT' : 'CST';
-  document.getElementById('tz-btn-ET').textContent   = ptDst  ? 'EDT' : 'EST';
-  document.getElementById('tz-btn-CET').textContent  = euDst_ ? 'CEST': 'CET';
-  document.getElementById('tz-btn-AEDT').textContent = ausDst_? 'AEDT': 'AEST';
-  // UTC and PHT never change
+  const set = (id, label) => { const el = document.getElementById(id); if (el) el.textContent = label; };
+  set('tz-btn-PT',   ptDst  ? 'PDT' : 'PST');
+  set('tz-btn-CT',   ptDst  ? 'CDT' : 'CST');
+  set('tz-btn-ET',   ptDst  ? 'EDT' : 'EST');
+  set('tz-btn-CET',  euDst_ ? 'CEST': 'CET');
+  set('tz-btn-AEDT', ausDst_? 'AEDT': 'AEST');
 }
 let curTz = 'PT';
 let curDate = new Date();
@@ -784,8 +786,8 @@ function minsToStr(m) {
   return h12 + (mn ? ':' + String(mn).padStart(2,'0') : '') + ap;
 }
 
-function conv(s, e, tz, dateStr) {
-  const off = getTzOffset(tz, dateStr || dateStr_(new Date())) * 60;
+function conv(s, e, tz, ds) {
+  const off = getTzOffset(tz, ds || dateStr_(new Date())) * 60;
   return minsToStr(s + off) + ' – ' + minsToStr(e + off);
 }
 
