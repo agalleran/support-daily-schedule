@@ -435,13 +435,13 @@
 
   <div class="bar">
     <span class="bar-label">Timezone:</span>
-    <button class="tz-btn active" onclick="setTz('PT')">PT</button>
-    <button class="tz-btn" onclick="setTz('CT')">CT</button>
-    <button class="tz-btn" onclick="setTz('ET')">ET</button>
-    <button class="tz-btn" onclick="setTz('UTC')">UTC</button>
-    <button class="tz-btn" onclick="setTz('CET')">CET</button>
-    <button class="tz-btn" onclick="setTz('PHT')">PHT</button>
-    <button class="tz-btn" onclick="setTz('AEDT')">AEDT</button>
+    <button id="tz-btn-PT"   class="tz-btn active" onclick="setTz('PT')">PT</button>
+    <button id="tz-btn-CT"   class="tz-btn" onclick="setTz('CT')">CT</button>
+    <button id="tz-btn-ET"   class="tz-btn" onclick="setTz('ET')">ET</button>
+    <button id="tz-btn-UTC"  class="tz-btn" onclick="setTz('UTC')">UTC</button>
+    <button id="tz-btn-CET"  class="tz-btn" onclick="setTz('CET')">CET</button>
+    <button id="tz-btn-PHT"  class="tz-btn" onclick="setTz('PHT')">PHT</button>
+    <button id="tz-btn-AEDT" class="tz-btn" onclick="setTz('AEDT')">AEDT</button>
     <div class="sep"></div>
     <select id="shiftSel" onchange="render()">
       <option value="">All shifts</option>
@@ -649,8 +649,24 @@ function getTzOffset(tz, dateStr) {
   }
 }
 
-const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function updateTzLabels(ds) {
+  const date = new Date(ds + 'T12:00:00');
+  const year = date.getFullYear();
+  const usDst  = getUsDstTransitions(year);
+  const euDst  = getEuDstTransitions(year);
+  const ausDst = getAusDstTransitions(year);
+
+  const ptDst  = date >= usDst.spring  && date < usDst.fall;
+  const euDst_ = date >= euDst.spring  && date < euDst.fall;
+  const ausDst_= date >= ausDst.startAEDT || date < ausDst.endAEDT;
+
+  document.getElementById('tz-btn-PT').textContent   = ptDst  ? 'PDT' : 'PST';
+  document.getElementById('tz-btn-CT').textContent   = ptDst  ? 'CDT' : 'CST';
+  document.getElementById('tz-btn-ET').textContent   = ptDst  ? 'EDT' : 'EST';
+  document.getElementById('tz-btn-CET').textContent  = euDst_ ? 'CEST': 'CET';
+  document.getElementById('tz-btn-AEDT').textContent = ausDst_? 'AEDT': 'AEST';
+  // UTC and PHT never change
+}
 let curTz = 'PT';
 let curDate = new Date();
 
@@ -779,7 +795,9 @@ function dateStr_(d) {
 
 function setTz(tz) {
   curTz = tz;
-  document.querySelectorAll('.tz-btn').forEach(b => b.classList.toggle('active', b.textContent === tz));
+  document.querySelectorAll('.tz-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('tz-btn-' + tz);
+  if (btn) btn.classList.add('active');
   render();
 }
 
@@ -810,6 +828,7 @@ function syncPicker() {
 
 function render() {
   const ds = dateStr(curDate);
+  updateTzLabels(ds);
   const dow = curDate.getDay();
   const dayName = DAYS[dow];
   const monthName = MONTHS[curDate.getMonth()];
@@ -855,11 +874,13 @@ function render() {
     <div class="scard"><div class="scard-n">${data.length}</div><div class="scard-l">Total shown</div></div>
   `;
 
+  const tzLabel = document.getElementById('tz-btn-' + curTz)?.textContent || curTz;
+
   let html = `<table>
     <col class="cn"><col class="ct"><col class="cs"><col class="ch"><col class="cno">
     <thead><tr>
       <th>Name</th><th>Tier</th><th>Status</th>
-      <th>Hours (${dayName} · ${curTz})</th>
+      <th>Hours (${dayName} · ${tzLabel})</th>
       <th>Notes</th>
     </tr></thead><tbody>`;
 
