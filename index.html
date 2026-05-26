@@ -672,6 +672,9 @@ function updateTzLabels(ds) {
 let curTz = 'PT';
 let curDate = new Date();
 
+const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
 const OOO = {};
 let HOLIDAYS = {};
 let HOLIDAY_NAMES = {};
