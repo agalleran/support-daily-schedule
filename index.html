@@ -439,6 +439,7 @@
     <button id="tz-btn-CT"   class="tz-btn" onclick="setTz('CT')">CT</button>
     <button id="tz-btn-ET"   class="tz-btn" onclick="setTz('ET')">ET</button>
     <button id="tz-btn-UTC"  class="tz-btn" onclick="setTz('UTC')">UTC</button>
+    <button id="tz-btn-IST"  class="tz-btn" onclick="setTz('IST')">GMT</button>
     <button id="tz-btn-CET"  class="tz-btn" onclick="setTz('CET')">CET</button>
     <button id="tz-btn-PHT"  class="tz-btn" onclick="setTz('PHT')">PHT</button>
     <button id="tz-btn-AEDT" class="tz-btn" onclick="setTz('AEDT')">AEDT</button>
@@ -626,6 +627,13 @@ function getTzOffset(tz, ds) {
       return ptIsDst ? 7 : 8;
     }
 
+    case 'IST': {
+      // Ireland: GMT (UTC+0) in winter, IST (UTC+1) in summer — same dates as EU DST
+      const euIsDst = date >= euDst.spring && date < euDst.fall;
+      const istUtc = euIsDst ? 1 : 0;
+      return istUtc - ptUtc;
+    }
+
     case 'CET': {
       // CET = UTC+1 (winter), CEST = UTC+2 (summer, Mar last Sun → Oct last Sun)
       const euIsDst = date >= euDst.spring && date < euDst.fall;
@@ -666,6 +674,7 @@ function updateTzLabels(ds) {
   set('tz-btn-PT',   ptDst  ? 'PDT' : 'PST');
   set('tz-btn-CT',   ptDst  ? 'CDT' : 'CST');
   set('tz-btn-ET',   ptDst  ? 'EDT' : 'EST');
+  set('tz-btn-IST',  euDst_ ? 'IST' : 'GMT');
   set('tz-btn-CET',  euDst_ ? 'CEST': 'CET');
   set('tz-btn-AEDT', ausDst_? 'AEDT': 'AEST');
 }
