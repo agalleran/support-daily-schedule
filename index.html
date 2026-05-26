@@ -1095,21 +1095,18 @@ function renderOnlineNow() {
 
   const inRange = todayDs >= CAL_START && todayDs <= CAL_END;
 
-  const online = TEAM.filter(p => {
-    if (isOoo(p.email, todayDs, inRange)) return false;
-    // Partial days still show as online in the banner
+  function isScheduledNow(p) {
     const sched = p.days[ptDow];
     if (!sched) return false;
     const [s, e] = sched;
     const startM = ((s % 1440) + 1440) % 1440;
     const endM   = ((e % 1440) + 1440) % 1440;
-    if (startM <= endM) {
-      return ptMinsMod >= startM && ptMinsMod < endM;
-    } else {
-      // Shift crosses midnight
-      return ptMinsMod >= startM || ptMinsMod < endM;
-    }
-  });
+    if (startM <= endM) return ptMinsMod >= startM && ptMinsMod < endM;
+    return ptMinsMod >= startM || ptMinsMod < endM;
+  }
+
+  const online  = TEAM.filter(p => !isOoo(p.email, todayDs, inRange) && !isPartialDay(p.email, todayDs, inRange) && isScheduledNow(p));
+  const partial = TEAM.filter(p => !isOoo(p.email, todayDs, inRange) &&  isPartialDay(p.email, todayDs, inRange) && isScheduledNow(p));
 
   // Display current PT time
   const dispH = Math.floor(ptMinsMod / 60), dispM = ptMinsMod % 60;
@@ -1118,17 +1115,27 @@ function renderOnlineNow() {
     h12 + ':' + String(dispM).padStart(2,'0') + ap + ' PT · ' + DAYS[ptDow];
 
   const chipsEl = document.getElementById('onlineChips');
-  if (online.length === 0) {
+  if (online.length === 0 && partial.length === 0) {
     chipsEl.innerHTML = '<span class="online-none">No teammates currently scheduled</span>';
   } else {
-    chipsEl.innerHTML = online.map(p => {
+    const onlineChips = online.map(p => {
       const tierLabel = p.tier === 'MGR' ? 'Mgr' : p.tier === 'OPS' ? 'Ops' : p.tier;
       return `<span class="online-chip">
         <span style="width:6px;height:6px;border-radius:50%;background:#1D9E75;flex-shrink:0;display:inline-block"></span>
         ${p.name}
         <span class="online-chip-tier">${tierLabel}</span>
       </span>`;
-    }).join('');
+    });
+    const partialChips = partial.map(p => {
+      const tierLabel = p.tier === 'MGR' ? 'Mgr' : p.tier === 'OPS' ? 'Ops' : p.tier;
+      const label = getPartialLabel(p.email, todayDs) || 'Partial day';
+      return `<span class="online-chip" style="border-color:#C8870A;color:#633806">
+        <span style="width:6px;height:6px;border-radius:50%;background:#BA7517;flex-shrink:0;display:inline-block"></span>
+        ${p.name}
+        <span class="online-chip-tier">${tierLabel} · ${label}</span>
+      </span>`;
+    });
+    chipsEl.innerHTML = [...onlineChips, ...partialChips].join('');
   }
 }
 
