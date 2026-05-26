@@ -208,8 +208,8 @@
       { "start": "2026-05-27", "end": "2026-05-28", "label": "Feast of the Sacrifice (working holiday)" },
       { "start": "2026-05-29", "end": "2026-05-30" }
     ],
-    "nikolai.dominic@front.com":    [{ "start": "2026-05-27", "end": "2026-05-28", "label": "Feast of the Sacrifice (working holiday)" }],
-    "edjay.rustria@front.com":      [{ "start": "2026-05-27", "end": "2026-05-28", "label": "Feast of the Sacrifice (working holiday)" }],
+    "nikolai.dominic@front.com":    [{ "start": "2026-05-26", "end": "2026-05-27", "label": "Feast of the Sacrifice (working holiday)" }],
+    "edjay.rustria@front.com":      [{ "start": "2026-05-26", "end": "2026-05-27", "label": "Feast of the Sacrifice (working holiday)" }],
     "chae.rallos@front.com": [
       { "start": "2026-05-27", "end": "2026-05-28", "label": "Feast of the Sacrifice (working holiday)" },
       { "start": "2026-06-01", "end": "2026-06-02" }
