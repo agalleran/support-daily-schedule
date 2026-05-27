@@ -76,10 +76,10 @@ async function main() {
   // Build message blocks
   const blocks = [];
 
-  // Header
+  // Header as section to avoid Slack's automatic divider under header blocks
   blocks.push({
-    type: 'header',
-    text: { type: 'plain_text', text: `📅 Support Team Schedule — ${dayName}, ${monthName} ${dayNum}`, emoji: true }
+    type: 'section',
+    text: { type: 'mrkdwn', text: `📅 *Support Team Schedule — ${dayName}, ${monthName} ${dayNum}*` }
   });
 
   // All shifts in one block to avoid Slack auto-inserting dividers
