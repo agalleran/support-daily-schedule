@@ -87,16 +87,27 @@ async function main() {
     const members = data.team.filter(p => p.shift === shift);
     if (!members.length) continue;
 
-    const lines = members.map(p => {
+    const online  = [];
+    const partial = [];
+    const oooList = [];
+    const off     = [];
+
+    members.forEach(p => {
       const status = getStatus(p, ds, dow, data.ooo, data.holidays, inRange);
       switch (status.type) {
-        case 'online':  return `🟢 ${p.name}`;
-        case 'partial': return `🟡 ${p.name}`;
-        case 'ooo':     return `🔴 ${p.name}${status.label ? ` _(${status.label})_` : ''}`;
-        case 'holiday': return `🔴 ${p.name} _(Public holiday)_`;
-        case 'off':     return `⚫ ${p.name}`;
+        case 'online':  online.push(p.name); break;
+        case 'partial': partial.push(p.name); break;
+        case 'ooo':
+        case 'holiday': oooList.push(p.name); break;
+        case 'off':     off.push(p.name); break;
       }
     });
+
+    const lines = [];
+    if (online.length)  lines.push(`🟢 ${online.join(', ')}`);
+    if (partial.length) lines.push(`🟡 ${partial.join(', ')}`);
+    if (oooList.length) lines.push(`🔴 ${oooList.join(', ')}`);
+    if (off.length)     lines.push(`⚫ ${off.join(', ')}`);
 
     blocks.push({ type: 'divider' });
     blocks.push({
@@ -109,7 +120,7 @@ async function main() {
   blocks.push({ type: 'divider' });
   blocks.push({
     type: 'section',
-    text: { type: 'mrkdwn', text: `🔗 <${SCHEDULE_URL}|View full schedule>` }
+    text: { type: 'mrkdwn', text: `🔗 <${SCHEDULE_URL}|Click here for more details including hours and who's online now>` }
   });
 
   await postToSlack({ blocks });
