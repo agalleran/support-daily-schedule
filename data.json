@@ -1,8 +1,8 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-05-26",
-    "cal_start": "2026-05-26",
+    "last_updated": "2026-05-27",
+    "cal_start": "2026-05-27",
     "cal_end": "2026-08-31"
   },
   "team": [
@@ -735,7 +735,7 @@
     {
       "name": "Jason Dugdale",
       "role": "Support Operations Developer",
-      "email": "jason.dugdale@front.com",
+      "email": "jason@front.com",
       "tier": "OPS",
       "shift": "Operations",
       "country": "US",
@@ -1097,16 +1097,6 @@
         "end": "2026-06-19"
       }
     ],
-    "jason.dugdale@front.com": [
-      {
-        "start": "2026-06-22",
-        "end": "2026-06-23"
-      },
-      {
-        "start": "2026-07-31",
-        "end": "2026-08-04"
-      }
-    ],
     "isaiah.wilkerson@front.com": [
       {
         "start": "2026-06-24",
@@ -1141,6 +1131,16 @@
       {
         "start": "2026-07-16",
         "end": "2026-07-21"
+      }
+    ],
+    "jason@front.com": [
+      {
+        "start": "2026-06-22",
+        "end": "2026-06-23"
+      },
+      {
+        "start": "2026-07-31",
+        "end": "2026-08-04"
       }
     ]
   },
