@@ -76,14 +76,10 @@ async function main() {
   // Build message blocks
   const blocks = [];
 
-  // Header as section to avoid Slack's automatic divider under header blocks
-  blocks.push({
-    type: 'section',
-    text: { type: 'mrkdwn', text: `📅 *Support Team Schedule — ${dayName}, ${monthName} ${dayNum}*` }
-  });
-
-  // All shifts in one block to avoid Slack auto-inserting dividers
+  // All content in one block — no dividers
   const allLines = [];
+  allLines.push(`📅 *Support Team Schedule — ${dayName}, ${monthName} ${dayNum}*\n`);
+
   for (const shift of SHIFT_ORDER) {
     const members = data.team.filter(p => p.shift === shift);
     if (!members.length) continue;
