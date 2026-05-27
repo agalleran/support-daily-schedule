@@ -109,7 +109,6 @@ async function main() {
     if (oooList.length) lines.push(`🔴 ${oooList.join(', ')}`);
     if (off.length)     lines.push(`⚫ ${off.join(', ')}`);
 
-    blocks.push({ type: 'divider' });
     blocks.push({
       type: 'section',
       text: { type: 'mrkdwn', text: `*${shift}*\n${lines.join('\n')}` }
@@ -117,7 +116,6 @@ async function main() {
   }
 
   // Footer with link
-  blocks.push({ type: 'divider' });
   blocks.push({
     type: 'section',
     text: { type: 'mrkdwn', text: `🔗 <${SCHEDULE_URL}|Click here for more details including hours and who's online now>` }
