@@ -1054,6 +1054,25 @@ function renderCoverage() {
     });
   });
 
+  // Process Sunday (dow=0) to capture overnight overflow into Monday (di=0)
+  const sundayDateObj = new Date(weekDates[0] + 'T12:00:00Z');
+  sundayDateObj.setUTCDate(sundayDateObj.getUTCDate() - 1);
+  const sundayDs = sundayDateObj.toISOString().slice(0, 10);
+  TEAM.forEach(p => {
+    if (!tierMatch(p.tier)) return;
+    if (isOoo(p.email, sundayDs, inRange)) return;
+    const sched = p.days[0];
+    if (!sched) return;
+    const [s, e] = sched;
+    if (e > 1440) {
+      const nextEnd = Math.min(24, Math.ceil((e - 1440) / 60));
+      for (let h = 0; h < nextEnd; h++) {
+        coverage[0][h]++;
+        names[0][h].push(p.name.split(' ')[0] + ' (Sun)');
+      }
+    }
+  });
+
   const gapHours = [];
   for (let di = 0; di < 5; di++)
     for (let h = 0; h < 24; h++)
