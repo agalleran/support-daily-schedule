@@ -82,7 +82,8 @@ async function main() {
     text: { type: 'plain_text', text: `📅 Support Team Schedule — ${dayName}, ${monthName} ${dayNum}`, emoji: true }
   });
 
-  // One section per shift
+  // All shifts in one block to avoid Slack auto-inserting dividers
+  const allLines = [];
   for (const shift of SHIFT_ORDER) {
     const members = data.team.filter(p => p.shift === shift);
     if (!members.length) continue;
@@ -109,16 +110,12 @@ async function main() {
     if (oooList.length) lines.push(`🔴 ${oooList.join(', ')}`);
     if (off.length)     lines.push(`⚫ ${off.join(', ')}`);
 
-    blocks.push({
-      type: 'section',
-      text: { type: 'mrkdwn', text: `*${shift}*\n${lines.join('\n')}` }
-    });
+    allLines.push(`*${shift}*\n${lines.join('\n')}`);
   }
 
-  // Footer with link
   blocks.push({
     type: 'section',
-    text: { type: 'mrkdwn', text: `🔗 <${SCHEDULE_URL}|Click here for more details including hours and who's online now>` }
+    text: { type: 'mrkdwn', text: allLines.join('\n\n') + `\n\n🔗 <${SCHEDULE_URL}|Click here for more details including hours and who's online now>` }
   });
 
   await postToSlack({ blocks });
