@@ -43,7 +43,16 @@ function getStatus(p, ds, dow, ooo, holidays, inRange) {
   return { type: 'off' };
 }
 
-function postToSlack(payload) {
+const PREFERRED_NAMES = {
+  'Consuelo Reyes':  'Consu',
+  'Edjay Rustria':   'Ejay',
+  'Nikolai Dominic': 'Nik',
+  'Raymond Ching':   'Ray'
+};
+
+function displayName(fullName) {
+  return PREFERRED_NAMES[fullName] || fullName.split(' ')[0];
+}
   return new Promise((resolve, reject) => {
     const url = new URL(WEBHOOK_URL);
     const body = JSON.stringify(payload);
@@ -91,12 +100,13 @@ async function main() {
 
     members.forEach(p => {
       const status = getStatus(p, ds, dow, data.ooo, data.holidays, inRange);
+      const name = displayName(p.name);
       switch (status.type) {
-        case 'online':  online.push(p.name); break;
-        case 'partial': partial.push(p.name); break;
+        case 'online':  online.push(name); break;
+        case 'partial': partial.push(name); break;
         case 'ooo':
-        case 'holiday': oooList.push(p.name); break;
-        case 'off':     off.push(p.name); break;
+        case 'holiday': oooList.push(name); break;
+        case 'off':     off.push(name); break;
       }
     });
 
