@@ -1147,6 +1147,13 @@
         "start": "2026-07-31",
         "end": "2026-08-04"
       }
+    ],
+    "carmen.mendez@front.com": [
+      {
+        "start": "2026-05-28",
+        "end": "2026-05-29",
+        "label": "Sick"
+      }
     ]
   },
   "holidays": {
