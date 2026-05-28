@@ -2,7 +2,7 @@ name: Post Daily Schedule to Slack
 
 on:
   schedule:
-       - cron: '50 14 * * *'  # Temporary test
+       - cron: '0 14 * * 1-5'  # 7am PT (2pm UTC) Monday–Friday
   workflow_dispatch:
 
 permissions:
