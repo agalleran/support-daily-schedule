@@ -100,23 +100,27 @@ function postToSlack(payload) {
 }
 
 // ── Fun fact: #1 movie on this day X years ago ────────────────
-function pickYear(currentYear) {
-  let usedYears = [];
-  try { usedYears = JSON.parse(fs.readFileSync(USED_YEARS_PATH, 'utf8')); } catch {}
+function pickYear(currentYear, currentMonth) {
+  let stored = { month: null, usedYears: [] };
+  try { stored = JSON.parse(fs.readFileSync(USED_YEARS_PATH, 'utf8')); } catch {}
+
+  // Reset at the start of a new month
+  if (stored.month !== currentMonth) {
+    console.log(`New month (${currentMonth}) — resetting used-years list`);
+    stored = { month: currentMonth, usedYears: [] };
+  }
 
   const allYears = [];
   for (let i = MIN_YEARS_AGO; i <= MAX_YEARS_AGO; i++) {
     allYears.push(currentYear - i);
   }
 
-  const available = allYears.filter(y => !usedYears.includes(y));
-  // If all years used, reset and start over
+  const available = allYears.filter(y => !stored.usedYears.includes(y));
   const pool = available.length > 0 ? available : allYears;
   const chosen = pool[Math.floor(Math.random() * pool.length)];
 
-  // Save updated used list (keep last 40 to allow some reset buffer)
-  const updated = [...usedYears.filter(y => allYears.includes(y)), chosen].slice(-40);
-  fs.writeFileSync(USED_YEARS_PATH, JSON.stringify(updated, null, 2));
+  stored.usedYears.push(chosen);
+  fs.writeFileSync(USED_YEARS_PATH, JSON.stringify(stored, null, 2));
 
   return chosen;
 }
@@ -194,7 +198,7 @@ async function main() {
   allLines.push(`🔗 <${SCHEDULE_URL}|Click here for more details including hours and who's online now>`);
 
   // Fun fact
-  const chosenYear = pickYear(year);
+  const chosenYear = pickYear(year, month);
   const movie = await getTopMovie(chosenYear, month, dayNum);
   if (movie) {
     const yearsAgo = year - chosenYear;
