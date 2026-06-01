@@ -202,7 +202,7 @@ async function main() {
   const movie = await getTopMovie(chosenYear, month, dayNum);
   if (movie) {
     const yearsAgo = year - chosenYear;
-    allLines.push(`\n🎬 *Fun fact:* The #1 movie ${yearsAgo} years ago today was *${movie.title}* (${chosenYear})`);
+    allLines.push(`\n🎬 *${yearsAgo} years ago in theaters: ${movie.title}*`);
   }
 
   const blocks = [{
