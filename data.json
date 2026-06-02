@@ -1065,6 +1065,10 @@
         "start": "2026-05-26",
         "end": "2026-05-27",
         "label": "Feast of the Sacrifice (working holiday)"
+      },
+      {
+        "start": "2026-06-04",
+        "end": "2026-06-05"
       }
     ],
     "chae.rallos@front.com": [
@@ -1170,7 +1174,7 @@
     "alan.guidon@front.com": [
       {
         "start": "2026-06-02",
-        "end": "2026-06-03",
+        "end": "2026-06-05",
         "label": "Sick"
       }
     ]
