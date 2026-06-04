@@ -1,0 +1,15 @@
+[
+  { "date": "2026-06-13", "type": "birthday",      "name": "Luke",      "message": "🎂 Happy birthday Luke! Hope your day is as amazing as your CEST timezone math skills! 🎉" },
+  { "date": "2026-06-16", "type": "birthday",      "name": "Beyker",    "message": "🎂 Happy birthday Beyker! 🎉" },
+  { "date": "2026-06-26", "type": "birthday",      "name": "Isaiah",    "message": "🎂 Happy birthday Isaiah! 🎉" },
+  { "date": "2026-06-28", "type": "birthday",      "name": "Shree",     "message": "🎂 Happy birthday Shree! 🎉" },
+  { "date": "2026-07-07", "type": "birthday",      "name": "Patrick V", "message": "🎂 Happy birthday Patrick V! 🎉" },
+  { "date": "2026-07-08", "type": "frontversary",  "name": "Cori",      "message": "🥂 Happy Frontversary Cori! Thanks for everything you bring to the team! 🎉" },
+  { "date": "2026-07-10", "type": "frontversary",  "name": "Isaiah",    "message": "🥂 Happy Frontversary Isaiah! 🎉" },
+  { "date": "2026-07-12", "type": "frontversary",  "name": "Luke",      "message": "🥂 Happy Frontversary Luke! 🎉" },
+  { "date": "2026-07-17", "type": "birthday",      "name": "Nikolai",   "message": "🎂 Happy birthday Nik! 🎉" },
+  { "date": "2026-07-26", "type": "birthday",      "name": "Maxime",    "message": "🎂 Happy birthday Maxime! 🎉" },
+  { "date": "2026-08-09", "type": "frontversary",  "name": "Karen",     "message": "🥂 Happy Frontversary Karen! 🎉" },
+  { "date": "2026-08-23", "type": "frontversary",  "name": "Justin",    "message": "🥂 Happy Frontversary Justin! 🎉" },
+  { "date": "2026-09-08", "type": "frontversary",  "name": "Edjay",     "message": "🥂 Happy Frontversary Ejay! 🎉" }
+]
