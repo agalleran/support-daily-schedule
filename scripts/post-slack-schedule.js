@@ -157,6 +157,31 @@ async function getTopMovie(year, month, day) {
 }
 
 // ── Main ──────────────────────────────────────────────────────
+const CELEBRATIONS_PATH = path.join(__dirname, 'celebrations.json');
+
+function getCelebration(ds, dow) {
+  let celebrations = [];
+  try { celebrations = JSON.parse(fs.readFileSync(CELEBRATIONS_PATH, 'utf8')); } catch {}
+
+  // Check today's date
+  const today = celebrations.find(c => c.date === ds);
+  if (today) return today;
+
+  // If today is Friday (dow=5), also check Saturday and Sunday
+  // so we shout out weekend birthdays on the Friday before
+  if (dow === 5) {
+    const d = new Date(ds + 'T12:00:00Z');
+    for (let i = 1; i <= 2; i++) {
+      d.setUTCDate(d.getUTCDate() + 1);
+      const nextDs = d.toISOString().slice(0, 10);
+      const found = celebrations.find(c => c.date === nextDs);
+      if (found) return { ...found, advanceNotice: true };
+    }
+  }
+
+  return null;
+}
+
 async function main() {
   const dataPath = path.join(__dirname, '..', 'data.json');
   const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
@@ -197,12 +222,20 @@ async function main() {
 
   allLines.push(`🔗 <${SCHEDULE_URL}|Click here for more details including hours and who's online now>`);
 
-  // Fun fact
-  const chosenYear = pickYear(year, month);
-  const movie = await getTopMovie(chosenYear, month, dayNum);
-  if (movie) {
-    const yearsAgo = year - chosenYear;
-    allLines.push(`\n🎬 *${yearsAgo} years ago in theaters: ${movie.title}*`);
+  // Celebration or movie fun fact
+  const celebration = getCelebration(ds, dow);
+  if (celebration) {
+    const prefix = celebration.advanceNotice ? `_(this weekend)_ ` : '';
+    allLines.push(`\n${prefix}${celebration.message}`);
+    console.log(`✓ Schedule posted to Slack for ${ds} (celebration: ${celebration.name})`);
+  } else {
+    const chosenYear = pickYear(year, month);
+    const movie = await getTopMovie(chosenYear, month, dayNum);
+    if (movie) {
+      const yearsAgo = year - chosenYear;
+      allLines.push(`\n🎬 *${yearsAgo} years ago in theaters: ${movie.title}*`);
+    }
+    console.log(`✓ Schedule posted to Slack for ${ds} (fun fact: ${movie ? movie.title : 'unavailable'})`);
   }
 
   const blocks = [{
@@ -211,7 +244,6 @@ async function main() {
   }];
 
   await postToSlack({ blocks });
-  console.log(`✓ Schedule posted to Slack for ${ds} (fun fact: ${movie ? movie.title : 'unavailable'})`);
 }
 
 main().catch(err => {
