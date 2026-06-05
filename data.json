@@ -920,6 +920,12 @@
         "start": "2026-06-22",
         "end": "2026-10-05",
         "label": "Maternity leave"
+      },
+      {
+        "start": "2026-06-05",
+        "end": "2026-06-05",
+        "partial": true,
+        "label": "Off at 11am PT"
       }
     ],
     "patrick.valenciano@front.com": [
