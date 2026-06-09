@@ -212,10 +212,10 @@ async function main() {
     });
 
     const lines = [];
-    if (online.length)  lines.push(`🟢 ${online.join(', ')}`);
-    if (partial.length) lines.push(`🟡 ${partial.join(', ')}`);
-    if (oooList.length) lines.push(`🔴 ${oooList.join(', ')}`);
-    if (off.length)     lines.push(`⚫ ${off.join(', ')}`);
+    if (online.length)  lines.push(`✅ ${online.join(', ')}`);
+    if (partial.length) lines.push(`🕐 ${partial.join(', ')}`);
+    if (oooList.length) lines.push(`❌ ${oooList.join(', ')}`);
+    if (off.length)     lines.push(`➖ ${off.join(', ')}`);
 
     allLines.push(`*${shift}*\n${lines.join('\n')}`);
   }
