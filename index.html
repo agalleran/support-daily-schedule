@@ -613,13 +613,13 @@ function getTzOffset(tz, ds) {
     case 'PT': return 0;
 
     case 'CT': {
-      // CT is 1 hour ahead of PT always (both observe US DST together)
-      return 1;
+      // CT is always 2 hours ahead of PT (both observe US DST on the same dates)
+      return 2;
     }
 
     case 'ET': {
-      // ET is 2 hours ahead of PT always (both observe US DST together)
-      return 2;
+      // ET is always 3 hours ahead of PT (both observe US DST on the same dates)
+      return 3;
     }
 
     case 'UTC': {
