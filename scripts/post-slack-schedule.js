@@ -125,15 +125,15 @@ function pickYear(currentYear, currentMonth) {
   return chosen;
 }
 
+const MIN_RATING     = 6.0;
+const MIN_VOTE_COUNT = 200;
+
 async function getTopMovie(year, month, day) {
   try {
-    // Search TMDB for movies playing around that date, sorted by popularity
-    // We use discover with primary_release_date range around the date
-    const dateStr  = `${year}-${String(month).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
     const weekBefore = new Date(year, month - 1, day - 7).toISOString().slice(0, 10);
     const weekAfter  = new Date(year, month - 1, day + 7).toISOString().slice(0, 10);
 
-    const url = `https://api.themoviedb.org/3/discover/movie?language=en-US&sort_by=revenue.desc&primary_release_date.gte=${weekBefore}&primary_release_date.lte=${weekAfter}&page=1`;
+    const url = `https://api.themoviedb.org/3/discover/movie?language=en-US&sort_by=revenue.desc&primary_release_date.gte=${weekBefore}&primary_release_date.lte=${weekAfter}&vote_average.gte=${MIN_RATING}&vote_count.gte=${MIN_VOTE_COUNT}&page=1`;
     const res = await httpGet(url, { Authorization: `Bearer ${TMDB_TOKEN}` });
 
     if (res.results && res.results.length > 0) {
@@ -141,8 +141,8 @@ async function getTopMovie(year, month, day) {
       return { title: movie.title, year };
     }
 
-    // Fallback: get most popular movie released in that month/year
-    const fallbackUrl = `https://api.themoviedb.org/3/discover/movie?language=en-US&sort_by=revenue.desc&primary_release_date.gte=${year}-${String(month).padStart(2,'0')}-01&primary_release_date.lte=${year}-${String(month).padStart(2,'0')}-28&page=1`;
+    // Fallback: get most popular movie released in that month/year with same filters
+    const fallbackUrl = `https://api.themoviedb.org/3/discover/movie?language=en-US&sort_by=revenue.desc&primary_release_date.gte=${year}-${String(month).padStart(2,'0')}-01&primary_release_date.lte=${year}-${String(month).padStart(2,'0')}-28&vote_average.gte=${MIN_RATING}&vote_count.gte=${MIN_VOTE_COUNT}&page=1`;
     const fallback = await httpGet(fallbackUrl, { Authorization: `Bearer ${TMDB_TOKEN}` });
 
     if (fallback.results && fallback.results.length > 0) {
