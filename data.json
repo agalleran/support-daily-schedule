@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-06-18",
+    "last_updated": "2026-06-21",
     "cal_start": "2026-05-15",
     "cal_end": "2026-10-31"
   },
@@ -1078,8 +1078,8 @@
         "end": "2026-05-23"
       },
       {
-        "start": "2026-06-22",
-        "end": "2026-06-23",
+        "start": "2026-06-23",
+        "end": "2026-06-24",
         "label": "Makeup holiday"
       }
     ],
@@ -1092,6 +1092,10 @@
         "start": "2026-07-02",
         "end": "2026-07-03",
         "label": "Juneteenth makeup"
+      },
+      {
+        "start": "2026-07-06",
+        "end": "2026-07-07"
       }
     ],
     "cat.burston@front.com": [
@@ -1103,6 +1107,10 @@
         "start": "2026-06-08",
         "end": "2026-06-09",
         "label": "Sick"
+      },
+      {
+        "start": "2026-06-23",
+        "end": "2026-06-24"
       }
     ],
     "adriana.abarzua@front.com": [
