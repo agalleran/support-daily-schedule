@@ -1394,6 +1394,13 @@
         "end": "2026-07-03",
         "label": "Sick"
       }
+    ],
+    "haley@front.com": [
+      {
+        "start": "2026-07-06",
+        "end": "2026-07-07",
+        "label": "Sick"
+      }
     ]
   },
   "holidays": {
