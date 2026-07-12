@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-07-08",
+    "last_updated": "2026-07-13",
     "cal_start": "2026-05-15",
     "cal_end": "2026-10-31"
   },
@@ -832,39 +832,6 @@
       }
     },
     {
-      "name": "Kenji Hayward",
-      "role": "Senior Director, Customer Support",
-      "email": "kenji.hayward@front.com",
-      "tier": "MGR",
-      "shift": "Managers",
-      "country": "US",
-      "note": "In Tokyo June 15\u2013July 24: 3pm\u201312am PT Sun\u2013Thu",
-      "days": {
-        "0": [
-          900,
-          1440
-        ],
-        "1": [
-          900,
-          1440
-        ],
-        "2": [
-          900,
-          1440
-        ],
-        "3": [
-          900,
-          1440
-        ],
-        "4": [
-          900,
-          1440
-        ],
-        "5": null,
-        "6": null
-      }
-    },
-    {
       "name": "Cori Morris",
       "role": "Senior Manager, CSR",
       "email": "cori@front.com",
@@ -1270,31 +1237,6 @@
         "start": "2026-06-29",
         "end": "2026-06-30",
         "label": "Sick"
-      },
-      {
-        "start": "2026-07-06",
-        "end": "2026-07-07"
-      }
-    ],
-    "kenji.hayward@front.com": [
-      {
-        "start": "2026-06-02",
-        "end": "2026-06-02",
-        "partial": true,
-        "label": "Half day"
-      },
-      {
-        "start": "2026-06-05",
-        "end": "2026-06-06"
-      },
-      {
-        "start": "2026-06-08",
-        "end": "2026-06-13"
-      },
-      {
-        "start": "2026-07-02",
-        "end": "2026-07-03",
-        "label": "4th of July"
       },
       {
         "start": "2026-07-06",
