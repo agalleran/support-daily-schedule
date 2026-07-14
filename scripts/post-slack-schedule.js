@@ -159,16 +159,15 @@ async function getTopMovie(year, month, day) {
 // ── Main ──────────────────────────────────────────────────────
 const CELEBRATIONS_PATH = path.join(__dirname, 'celebrations.json');
 
-function getCelebration(ds, dow) {
+function getCelebration(ds, dow, holidays, holidayNames) {
+  // Check birthdays/Frontversaries first (higher priority)
   let celebrations = [];
   try { celebrations = JSON.parse(fs.readFileSync(CELEBRATIONS_PATH, 'utf8')); } catch {}
 
-  // Check today's date
   const today = celebrations.find(c => c.date === ds);
   if (today) return today;
 
-  // If today is Friday (dow=5), also check Saturday and Sunday
-  // so we shout out weekend birthdays on the Friday before
+  // Friday advance notice for weekend birthdays/Frontversaries
   if (dow === 5) {
     const d = new Date(ds + 'T12:00:00Z');
     for (let i = 1; i <= 2; i++) {
@@ -177,6 +176,21 @@ function getCelebration(ds, dow) {
       const found = celebrations.find(c => c.date === nextDs);
       if (found) return { ...found, advanceNotice: true };
     }
+  }
+
+  // Check for public holidays across all countries
+  const holidayCountries = [];
+  for (const [country, dates] of Object.entries(holidays)) {
+    if (dates.includes(ds)) holidayCountries.push(country);
+  }
+  if (holidayCountries.length > 0) {
+    const name = holidayNames[ds] || 'Public holiday';
+    const countryList = holidayCountries.join(', ');
+    return {
+      type: 'holiday',
+      name: name,
+      message: `🌍 *${name}* — wishing a restful day to our teammates in ${countryList}! 🎉`,
+    };
   }
 
   return null;
@@ -223,7 +237,7 @@ async function main() {
   allLines.push(`🔗 <${SCHEDULE_URL}|Click here for more details including hours and who's online now>`);
 
   // Celebration or movie fun fact
-  const celebration = getCelebration(ds, dow);
+  const celebration = getCelebration(ds, dow, data.holidays, data.holiday_names);
   if (celebration) {
     const prefix = celebration.advanceNotice ? `_(this weekend)_ ` : '';
     allLines.push(`\n${prefix}${celebration.message}`);
