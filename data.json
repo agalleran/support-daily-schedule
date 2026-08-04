@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-07-29",
+    "last_updated": "2026-07-30",
     "cal_start": "2026-05-15",
     "cal_end": "2026-10-31"
   },
@@ -1041,6 +1041,10 @@
         "start": "2026-07-27",
         "end": "2026-07-29",
         "label": "Sick"
+      },
+      {
+        "start": "2026-08-14",
+        "end": "2026-08-15"
       }
     ],
     "sean.oconnor@front.com": [
@@ -1198,6 +1202,16 @@
         "end": "2026-08-03",
         "partial": true,
         "label": "Out at 8am PT"
+      },
+      {
+        "start": "2026-08-18",
+        "end": "2026-08-18",
+        "partial": true,
+        "label": "Half day"
+      },
+      {
+        "start": "2026-09-25",
+        "end": "2026-09-29"
       }
     ],
     "christopher.nunag@front.com": [
