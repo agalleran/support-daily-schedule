@@ -1299,6 +1299,11 @@
         "start": "2026-07-14",
         "end": "2026-07-15",
         "label": "Sick"
+      },
+      {
+        "start": "2026-08-05",
+        "end": "2026-08-06",
+        "label": "Sick"
       }
     ],
     "camille.tolentino@front.com": [
