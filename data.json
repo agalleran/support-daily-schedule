@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-08-06",
+    "last_updated": "2026-08-09",
     "cal_start": "2026-05-15",
     "cal_end": "2026-10-31"
   },
@@ -1012,6 +1012,10 @@
       {
         "start": "2026-08-05",
         "end": "2026-08-08"
+      },
+      {
+        "start": "2026-08-10",
+        "end": "2026-08-11"
       }
     ],
     "suzy.falvey@front.com": [
@@ -1065,6 +1069,10 @@
         "start": "2026-07-02",
         "end": "2026-07-03",
         "label": "Sick"
+      },
+      {
+        "start": "2026-08-10",
+        "end": "2026-08-12"
       }
     ],
     "consuelo.reyes@front.com": [
@@ -1086,6 +1094,10 @@
         "start": "2026-07-08",
         "end": "2026-07-11",
         "label": "Sick"
+      },
+      {
+        "start": "2026-08-18",
+        "end": "2026-08-19"
       },
       {
         "start": "2026-10-29",
@@ -1332,6 +1344,11 @@
       {
         "start": "2026-07-31",
         "end": "2026-08-01"
+      },
+      {
+        "start": "2026-08-10",
+        "end": "2026-08-11",
+        "label": "Sick"
       },
       {
         "start": "2026-08-17",
