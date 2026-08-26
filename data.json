@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-08-24",
+    "last_updated": "2026-08-25",
     "cal_start": "2026-05-15",
     "cal_end": "2026-10-31"
   },
@@ -1077,6 +1077,11 @@
         "label": "Medical leave"
       },
       {
+        "start": "2026-09-03",
+        "end": "2026-09-04",
+        "label": "CL offsite"
+      },
+      {
         "start": "2026-10-29",
         "end": "2026-10-30"
       }
@@ -1175,7 +1180,7 @@
       {
         "start": "2026-09-03",
         "end": "2026-09-04",
-        "label": "CL offsite"
+        "label": "CL offsite (Annie & Consu)"
       },
       {
         "start": "2026-09-16",
@@ -1206,6 +1211,11 @@
         "end": "2026-08-19",
         "partial": true,
         "label": "Off at 11am EDT"
+      },
+      {
+        "start": "2026-08-26",
+        "end": "2026-08-27",
+        "label": "Sick"
       },
       {
         "start": "2026-09-04",
@@ -1391,6 +1401,10 @@
         "start": "2026-08-10",
         "end": "2026-08-15",
         "label": "PTO (hold)"
+      },
+      {
+        "start": "2026-10-22",
+        "end": "2026-10-27"
       }
     ],
     "karen.nguyen@front.com": [
@@ -1406,6 +1420,10 @@
       {
         "start": "2026-08-11",
         "end": "2026-08-12"
+      },
+      {
+        "start": "2026-08-31",
+        "end": "2026-09-01"
       },
       {
         "start": "2026-09-22",
