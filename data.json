@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-08-27",
+    "last_updated": "2026-08-31",
     "cal_start": "2026-05-15",
     "cal_end": "2026-10-31"
   },
@@ -266,39 +266,6 @@
         "5": [
           330,
           870
-        ],
-        "6": null
-      }
-    },
-    {
-      "name": "Justin Payne",
-      "role": "",
-      "email": "justin.payne@front.com",
-      "tier": "T2",
-      "shift": "US",
-      "country": "US",
-      "note": "US Central",
-      "days": {
-        "0": null,
-        "1": [
-          360,
-          900
-        ],
-        "2": [
-          360,
-          900
-        ],
-        "3": [
-          360,
-          900
-        ],
-        "4": [
-          360,
-          900
-        ],
-        "5": [
-          360,
-          900
         ],
         "6": null
       }
@@ -1118,25 +1085,6 @@
         "start": "2026-08-31",
         "end": "2026-09-01",
         "label": "Sick"
-      }
-    ],
-    "justin.payne@front.com": [
-      {
-        "start": "2026-05-22",
-        "end": "2026-05-30"
-      },
-      {
-        "start": "2026-07-02",
-        "end": "2026-07-03",
-        "label": "Juneteenth makeup"
-      },
-      {
-        "start": "2026-07-06",
-        "end": "2026-07-07"
-      },
-      {
-        "start": "2026-08-06",
-        "end": "2026-08-08"
       }
     ],
     "cat.burston@front.com": [
