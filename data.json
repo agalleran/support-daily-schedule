@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-09-04",
+    "last_updated": "2026-09-07",
     "cal_start": "2026-05-15",
     "cal_end": "2026-10-31"
   },
@@ -937,6 +937,10 @@
       {
         "start": "2026-08-18",
         "end": "2026-08-25"
+      },
+      {
+        "start": "2026-09-21",
+        "end": "2026-09-26"
       }
     ],
     "evan.ostroski@front.com": [
@@ -1085,6 +1089,10 @@
         "start": "2026-08-31",
         "end": "2026-09-01",
         "label": "Sick"
+      },
+      {
+        "start": "2026-10-13",
+        "end": "2026-10-29"
       }
     ],
     "cat.burston@front.com": [
@@ -1134,6 +1142,12 @@
         "start": "2026-09-03",
         "end": "2026-09-04",
         "label": "CL offsite (Annie & Consu)"
+      },
+      {
+        "start": "2026-09-10",
+        "end": "2026-09-10",
+        "partial": true,
+        "label": "Half day"
       },
       {
         "start": "2026-09-16",
@@ -1377,7 +1391,7 @@
       },
       {
         "start": "2026-09-11",
-        "end": "2026-09-11",
+        "end": "2026-09-12",
         "partial": true,
         "label": "OOO at 10am (SF Family Picnic)"
       },
@@ -1513,6 +1527,14 @@
       {
         "start": "2026-08-04",
         "end": "2026-08-06"
+      },
+      {
+        "start": "2026-09-11",
+        "end": "2026-09-12"
+      },
+      {
+        "start": "2026-09-17",
+        "end": "2026-09-18"
       }
     ],
     "eddie.maguire@front.com": [
