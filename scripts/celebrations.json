@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-06-09",
+    "type": "first_day",
+    "name": "Eddie",
+    "message": "\ud83d\udc4b Welcome, Eddie! Happy first day, we're so glad you're here! \ud83c\udf89"
+  },
+  {
     "date": "2026-06-13",
     "type": "birthday",
     "name": "Luke",
@@ -30,16 +36,16 @@
     "message": "\ud83c\udf82 Happy birthday Patrick V! \ud83c\udf89"
   },
   {
-    "date": "2026-07-18",
-    "type": "frontversary",
-    "name": "Cori",
-    "message": "\ud83e\udd42 Happy Frontversary Cori! Thanks for everything you bring to the team! \ud83c\udf89"
-  },
-  {
     "date": "2026-07-10",
     "type": "frontversary",
     "name": "Isaiah",
     "message": "\ud83e\udd42 Happy Frontversary Isaiah! \ud83c\udf89"
+  },
+  {
+    "date": "2026-07-10",
+    "type": "birthday",
+    "name": "Eddie",
+    "message": "\ud83c\udf82 Happy birthday Eddie! \ud83c\udf89"
   },
   {
     "date": "2026-07-12",
@@ -52,6 +58,12 @@
     "type": "birthday",
     "name": "Nikolai",
     "message": "\ud83c\udf82 Happy birthday Nik! \ud83c\udf89"
+  },
+  {
+    "date": "2026-07-18",
+    "type": "frontversary",
+    "name": "Cori",
+    "message": "\ud83e\udd42 Happy Frontversary Cori! Thanks for everything you bring to the team! \ud83c\udf89"
   },
   {
     "date": "2026-07-26",
@@ -78,9 +90,81 @@
     "message": "\ud83e\udd42 Happy Frontversary Ejay! \ud83c\udf89"
   },
   {
-    "date": "2026-06-09",
-    "type": "first_day",
-    "name": "Eddie",
-    "message": "\ud83d\udc4b Welcome, Eddie! Happy first day, we're so glad you're here! \ud83c\udf89"
+    "date": "2026-09-09",
+    "type": "frontversary",
+    "name": "Camille",
+    "message": "\ud83e\udd42 Happy Frontversary Camille! \ud83c\udf89"
+  },
+  {
+    "date": "2026-09-09",
+    "type": "frontversary",
+    "name": "Consu",
+    "message": "\ud83e\udd42 Happy Frontversary Consu! \ud83c\udf89"
+  },
+  {
+    "date": "2026-09-13",
+    "type": "birthday",
+    "name": "Sadie",
+    "message": "\ud83c\udf82 Happy birthday Sadie! \ud83c\udf89"
+  },
+  {
+    "date": "2026-10-03",
+    "type": "birthday",
+    "name": "Se\u00e1n",
+    "message": "\ud83c\udf82 Happy birthday Se\u00e1n! \ud83c\udf89"
+  },
+  {
+    "date": "2026-10-04",
+    "type": "birthday",
+    "name": "Ejay",
+    "message": "\ud83c\udf82 Happy birthday Ejay! \ud83c\udf89"
+  },
+  {
+    "date": "2026-10-20",
+    "type": "frontversary",
+    "name": "Chae",
+    "message": "\ud83e\udd42 Happy Frontversary Chae! \ud83c\udf89"
+  },
+  {
+    "date": "2026-11-07",
+    "type": "birthday",
+    "name": "Cat",
+    "message": "\ud83c\udf82 Happy birthday Cat! \ud83c\udf89"
+  },
+  {
+    "date": "2026-11-26",
+    "type": "birthday",
+    "name": "Ray",
+    "message": "\ud83c\udf82 Happy birthday Ray! \ud83c\udf89"
+  },
+  {
+    "date": "2026-12-02",
+    "type": "frontversary",
+    "name": "Annie",
+    "message": "\ud83e\udd42 Happy Frontversary Annie! \ud83c\udf89"
+  },
+  {
+    "date": "2026-12-03",
+    "type": "birthday",
+    "name": "Anthony",
+    "message": "\ud83c\udf82 Happy birthday Anthony! \ud83c\udf89"
+  },
+  {
+    "date": "2026-12-09",
+    "type": "birthday",
+    "name": "Annie",
+    "message": "\ud83c\udf82 Happy birthday Annie! \ud83c\udf89"
+  },
+  {
+    "date": "2026-12-09",
+    "type": "birthday",
+    "name": "Chae",
+    "message": "\ud83c\udf82 Happy birthday Chae! \ud83c\udf89"
+  },
+  {
+    "date": "2026-12-24",
+    "type": "birthday",
+    "name": "Karen",
+    "message": "\ud83c\udf82 Happy birthday Karen! \ud83c\udf89"
   }
 ]
