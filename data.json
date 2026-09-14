@@ -805,28 +805,28 @@
       "tier": "MGR",
       "shift": "Managers",
       "country": "US",
-      "note": "In Dublin Sep 27\u2013Oct 2: working IST hours (12am\u20139am PT). Revert to normal on Oct 3.",
+      "note": "Switching to Dublin hours (12am-9am PT) Sep 27-Oct 2. Revert Oct 3.",
       "days": {
         "0": null,
         "1": [
-          0,
-          540
+          390,
+          930
         ],
         "2": [
-          0,
-          600
+          390,
+          930
         ],
         "3": [
-          0,
-          540
+          390,
+          930
         ],
         "4": [
-          0,
-          540
+          390,
+          930
         ],
         "5": [
-          0,
-          480
+          390,
+          930
         ],
         "6": null
       }
