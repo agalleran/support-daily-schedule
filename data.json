@@ -805,28 +805,28 @@
       "tier": "MGR",
       "shift": "Managers",
       "country": "US",
-      "note": "",
+      "note": "In Dublin Sep 27\u2013Oct 2: working IST hours (12am\u20139am PT). Revert to normal on Oct 3.",
       "days": {
         "0": null,
         "1": [
-          390,
-          930
+          0,
+          540
         ],
         "2": [
-          390,
-          930
+          0,
+          600
         ],
         "3": [
-          390,
-          930
+          0,
+          540
         ],
         "4": [
-          390,
-          930
+          0,
+          540
         ],
         "5": [
-          390,
-          930
+          0,
+          480
         ],
         "6": null
       }
@@ -1472,7 +1472,7 @@
       {
         "start": "2026-09-27",
         "end": "2026-10-03",
-        "label": "In Dublin"
+        "label": "In Dublin (working IST hours)"
       }
     ],
     "jason@front.com": [
