@@ -798,9 +798,13 @@ function minsToStr(m) {
   return h12 + (mn ? ':' + String(mn).padStart(2,'0') : '') + ap;
 }
 
-function conv(s, e, tz, ds) {
-  const off = getTzOffset(tz, ds || dateStr_(new Date())) * 60;
-  return minsToStr(s + off) + ' – ' + minsToStr(e + off);
+function conv(s, e, tz, ds, localTz) {
+  const dateStr = ds || dateStr_(new Date());
+  // Convert from local time → PT, then PT → display tz
+  const localOff = localTz && localTz !== 'PT' ? getTzOffset(localTz, dateStr) * 60 : 0;
+  const displayOff = getTzOffset(tz, dateStr) * 60;
+  const netOff = displayOff - localOff;
+  return minsToStr(s + netOff) + ' – ' + minsToStr(e + netOff);
 }
 
 function dateStr_(d) {
@@ -922,7 +926,7 @@ function render() {
     let hoursCell = '—';
     if (p.days[dow]) {
       const [s, e] = p.days[dow];
-      hoursCell = conv(s, e, curTz, ds);
+      hoursCell = conv(s, e, curTz, ds, p.localTz);
     }
     if (isOooP) {
       const tagBg  = isHolidayOoo ? '#FAEEDA' : 'var(--red-bg)';
@@ -933,7 +937,7 @@ function render() {
       // Show normal hours + partial tag
       if (p.days[dow]) {
         const [s, e] = p.days[dow];
-        hoursCell = conv(s, e, curTz, ds) + ` <span class="ooo-tag" style="background:#FAEEDA;color:#633806">&#9680; ${reason.label}</span>`;
+        hoursCell = conv(s, e, curTz, ds, p.localTz) + ` <span class="ooo-tag" style="background:#FAEEDA;color:#633806">&#9680; ${reason.label}</span>`;
       }
     }
 
@@ -1018,6 +1022,13 @@ function renderCoverage() {
   const coverage = Array.from({length:5}, () => new Array(24).fill(0));
   const names    = Array.from({length:5}, () => Array.from({length:24}, () => []));
 
+  // Helper: convert local-stored minutes to PT minutes for a given date
+  function localToPt(mins, localTz, ds) {
+    if (!localTz || localTz === 'PT') return mins;
+    const offsetMins = getTzOffset(localTz, ds) * 60;
+    return mins - offsetMins;
+  }
+
   DOW_MW.forEach((dow, di) => {
     const dayDate = weekDates[di];
     TEAM.forEach(p => {
@@ -1025,7 +1036,9 @@ function renderCoverage() {
       if (isOoo(p.email, dayDate, inRange)) return;
       const sched = p.days[dow];
       if (!sched) return;
-      const [s, e] = sched;
+      const [sLocal, eLocal] = sched;
+      const s = localToPt(sLocal, p.localTz, dayDate);
+      const e = localToPt(eLocal, p.localTz, dayDate);
 
       // If start is negative, the shift begins on the previous PT day (e.g. 11pm Sun for a Mon shift)
       // Credit those hours to the previous day in the grid
@@ -1063,7 +1076,8 @@ function renderCoverage() {
     if (isOoo(p.email, sundayDs, inRange)) return;
     const sched = p.days[0];
     if (!sched) return;
-    const [s, e] = sched;
+    const [sLocal, eLocal] = sched;
+    const e = localToPt(eLocal, p.localTz, sundayDs);
     if (e > 1440) {
       const nextEnd = Math.min(24, Math.ceil((e - 1440) / 60));
       for (let h = 0; h < nextEnd; h++) {
@@ -1152,7 +1166,11 @@ function renderOnlineNow() {
   function isScheduledNow(p) {
     const sched = p.days[ptDow];
     if (!sched) return false;
-    const [s, e] = sched;
+    const [sLocal, eLocal] = sched;
+    // Convert local stored time to PT
+    const localOff = (p.localTz && p.localTz !== 'PT') ? getTzOffset(p.localTz, todayDs) * 60 : 0;
+    const s = sLocal - localOff;
+    const e = eLocal - localOff;
     const startM = ((s % 1440) + 1440) % 1440;
     const endM   = ((e % 1440) + 1440) % 1440;
     if (startM <= endM) return ptMinsMod >= startM && ptMinsMod < endM;
