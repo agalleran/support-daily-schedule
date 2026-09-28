@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-09-25",
+    "last_updated": "2026-09-28",
     "cal_start": "2026-05-15",
     "cal_end": "2026-10-31"
   },
@@ -13,27 +13,27 @@
       "tier": "T1",
       "shift": "EMEA",
       "country": "Ireland",
-      "note": "Ireland \u00b7 Local SOD 7am",
+      "note": "Starting 1hr later this week (Sep 28-Oct 2). Revert to 7am IST start on Oct 3.",
       "days": {
         "0": null,
         "1": [
-          420,
+          480,
           960
         ],
         "2": [
-          420,
+          480,
           1080
         ],
         "3": [
-          420,
+          480,
           960
         ],
         "4": [
-          420,
+          480,
           960
         ],
         "5": [
-          420,
+          480,
           840
         ],
         "6": null
@@ -47,27 +47,27 @@
       "tier": "T1",
       "shift": "EMEA",
       "country": "Ireland",
-      "note": "Ireland \u00b7 Local SOD 7am",
+      "note": "Starting 1hr later this week (Sep 28-Oct 2). Revert to 7am IST start on Oct 3.",
       "days": {
         "0": null,
         "1": [
-          420,
+          480,
           960
         ],
         "2": [
-          420,
+          480,
           1080
         ],
         "3": [
-          420,
+          480,
           960
         ],
         "4": [
-          420,
+          480,
           960
         ],
         "5": [
-          420,
+          480,
           840
         ],
         "6": null
@@ -829,32 +829,32 @@
       "tier": "MGR",
       "shift": "Managers",
       "country": "US",
-      "note": "Switching to Dublin hours (12am-9am PT) Sep 27-Oct 2. Revert Oct 3.",
+      "note": "In Dublin Sep 27-Oct 2: working IST hours. Revert to PT on Oct 3.",
       "days": {
         "0": null,
         "1": [
-          390,
-          930
+          480,
+          1020
         ],
         "2": [
-          390,
-          930
+          480,
+          1080
         ],
         "3": [
-          390,
-          930
+          480,
+          1020
         ],
         "4": [
-          390,
-          930
+          480,
+          1020
         ],
         "5": [
-          390,
-          930
+          480,
+          960
         ],
         "6": null
       },
-      "localTz": "PT"
+      "localTz": "IST"
     }
   ],
   "ooo": {
@@ -1629,6 +1629,10 @@
         "start": "2026-08-24",
         "end": "2026-08-25",
         "label": "Sick"
+      },
+      {
+        "start": "2026-10-02",
+        "end": "2026-10-03"
       }
     ]
   },
