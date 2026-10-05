@@ -159,41 +159,64 @@ async function getTopMovie(year, month, day) {
 // ── Main ──────────────────────────────────────────────────────
 const CELEBRATIONS_PATH = path.join(__dirname, 'celebrations.json');
 
-function getCelebration(ds, dow, holidays, holidayNames) {
-  // Check birthdays/Frontversaries first (higher priority)
+function getCelebrations(ds, dow, holidays, holidayNames) {
+  // Returns an ARRAY of celebration objects to support multiple on the same day
   let celebrations = [];
   try { celebrations = JSON.parse(fs.readFileSync(CELEBRATIONS_PATH, 'utf8')); } catch {}
 
-  const today = celebrations.find(c => c.date === ds);
-  if (today) return today;
+  const results = [];
 
-  // Friday advance notice for weekend birthdays/Frontversaries
+  // 1. Today's celebrations (all of them, not just first)
+  const todayEntries = celebrations.filter(c => c.date === ds);
+  results.push(...todayEntries);
+
+  // 2. Friday advance notice for weekend birthdays/Frontversaries
   if (dow === 5) {
     const d = new Date(ds + 'T12:00:00Z');
     for (let i = 1; i <= 2; i++) {
       d.setUTCDate(d.getUTCDate() + 1);
       const nextDs = d.toISOString().slice(0, 10);
-      const found = celebrations.find(c => c.date === nextDs);
-      if (found) return { ...found, advanceNotice: true };
+      const weekend = celebrations.filter(c => c.date === nextDs);
+      weekend.forEach(c => results.push({ ...c, advanceNotice: true }));
     }
   }
 
-  // Check for public holidays across all countries
-  const holidayCountries = [];
-  for (const [country, dates] of Object.entries(holidays)) {
-    if (dates.includes(ds)) holidayCountries.push(country);
-  }
-  if (holidayCountries.length > 0) {
-    const name = holidayNames[ds] || 'Public holiday';
-    const countryList = holidayCountries.join(', ');
-    return {
-      type: 'holiday',
-      name: name,
-      message: `🌍 *${name}* — wishing a restful day to our teammates in ${countryList}! 🎉`,
-    };
+  // 3. Monday catch-up for missed weekend birthdays/Frontversaries
+  // (handles case where Saturday or Sunday had a celebration but today has its own entry too)
+  if (dow === 1) {
+    const d = new Date(ds + 'T12:00:00Z');
+    for (let i = 1; i <= 2; i++) {
+      d.setUTCDate(d.getUTCDate() - i);
+      const prevDs = d.toISOString().slice(0, 10);
+      const weekend = celebrations.filter(c => c.date === prevDs && c.type !== 'holiday');
+      weekend.forEach(c => {
+        // Only add if not already in results
+        if (!results.find(r => r.date === c.date && r.name === c.name)) {
+          results.push({ ...c, missedWeekend: true });
+        }
+      });
+    }
   }
 
-  return null;
+  // 4. Public holidays (only if no birthday/frontversary/return celebrations today)
+  const hasBirthdayToday = results.some(c => !c.advanceNotice && !c.missedWeekend);
+  if (!hasBirthdayToday) {
+    const holidayCountries = [];
+    for (const [country, dates] of Object.entries(holidays)) {
+      if (dates.includes(ds)) holidayCountries.push(country);
+    }
+    if (holidayCountries.length > 0) {
+      const name = holidayNames[ds] || 'Public holiday';
+      const countryList = holidayCountries.join(', ');
+      results.push({
+        type: 'holiday',
+        name: name,
+        message: `🌍 *${name}* — wishing a restful day to our teammates in ${countryList}! 🎉`,
+      });
+    }
+  }
+
+  return results;
 }
 
 async function main() {
@@ -236,12 +259,16 @@ async function main() {
 
   allLines.push(`🔗 <${SCHEDULE_URL}|Click here for more details including hours and who's online now>`);
 
-  // Celebration or movie fun fact
-  const celebration = getCelebration(ds, dow, data.holidays, data.holiday_names);
-  if (celebration) {
-    const prefix = celebration.advanceNotice ? `_(this weekend)_ ` : '';
-    allLines.push(`\n${prefix}${celebration.message}`);
-    console.log(`✓ Schedule posted to Slack for ${ds} (celebration: ${celebration.name})`);
+  // Celebrations or movie fun fact
+  const celebrationList = getCelebrations(ds, dow, data.holidays, data.holiday_names);
+  if (celebrationList.length > 0) {
+    celebrationList.forEach(c => {
+      let prefix = '';
+      if (c.advanceNotice) prefix = `_(this weekend)_ `;
+      else if (c.missedWeekend) prefix = `_(belated from the weekend)_ `;
+      allLines.push(`\n${prefix}${c.message}`);
+    });
+    console.log(`✓ Schedule posted to Slack for ${ds} (celebrations: ${celebrationList.map(c => c.name).join(', ')})`);
   } else {
     const chosenYear = pickYear(year, month);
     const movie = await getTopMovie(chosenYear, month, dayNum);
