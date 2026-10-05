@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-10-02",
+    "last_updated": "2026-10-03",
     "cal_start": "2026-05-15",
     "cal_end": "2026-10-31"
   },
@@ -13,28 +13,28 @@
       "tier": "T1",
       "shift": "EMEA",
       "country": "Ireland",
-      "note": "Starting 1hr later this week (Sep 28-Oct 2). Revert to 7am IST start on Oct 3.",
+      "note": "",
       "days": {
         "0": null,
         "1": [
-          480,
-          1020
+          420,
+          960
         ],
         "2": [
-          480,
+          420,
           1080
         ],
         "3": [
-          480,
-          1020
+          420,
+          960
         ],
         "4": [
-          480,
-          1020
+          420,
+          960
         ],
         "5": [
-          480,
-          1020
+          420,
+          840
         ],
         "6": null
       },
@@ -47,28 +47,28 @@
       "tier": "T1",
       "shift": "EMEA",
       "country": "Ireland",
-      "note": "Starting 1hr later this week (Sep 28-Oct 2). Revert to 7am IST start on Oct 3.",
+      "note": "",
       "days": {
         "0": null,
         "1": [
-          480,
-          1020
+          420,
+          960
         ],
         "2": [
-          480,
+          420,
           1080
         ],
         "3": [
-          480,
-          1020
+          420,
+          960
         ],
         "4": [
-          480,
-          1020
+          420,
+          960
         ],
         "5": [
-          480,
-          1020
+          420,
+          840
         ],
         "6": null
       },
@@ -829,32 +829,32 @@
       "tier": "MGR",
       "shift": "Managers",
       "country": "US",
-      "note": "In Dublin Sep 27-Oct 2: working IST hours. Revert to PT on Oct 3.",
+      "note": "",
       "days": {
         "0": null,
         "1": [
-          480,
-          1020
+          390,
+          930
         ],
         "2": [
-          480,
-          1080
+          390,
+          930
         ],
         "3": [
-          480,
-          1020
+          390,
+          930
         ],
         "4": [
-          480,
-          1020
+          390,
+          930
         ],
         "5": [
-          480,
-          960
+          390,
+          930
         ],
         "6": null
       },
-      "localTz": "IST"
+      "localTz": "PT"
     }
   ],
   "ooo": {
@@ -971,6 +971,10 @@
       {
         "start": "2026-09-21",
         "end": "2026-09-26"
+      },
+      {
+        "start": "2026-10-05",
+        "end": "2026-10-06"
       }
     ],
     "evan.ostroski@front.com": [
@@ -1054,6 +1058,10 @@
       {
         "start": "2026-08-20",
         "end": "2026-08-21"
+      },
+      {
+        "start": "2026-10-06",
+        "end": "2026-10-08"
       }
     ],
     "consuelo.reyes@front.com": [
