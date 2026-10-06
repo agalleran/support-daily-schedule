@@ -641,6 +641,11 @@ function getTzOffset(tz, ds) {
       return cetUtc - ptUtc;
     }
 
+    case 'CLT': {
+      // Chile = UTC-3 year-round (no DST)
+      return -3 - ptUtc;
+    }
+
     case 'PHT': {
       // Philippines = UTC+8 year-round (no DST)
       return 8 - ptUtc;
