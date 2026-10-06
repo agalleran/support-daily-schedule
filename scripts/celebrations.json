@@ -126,6 +126,12 @@
     "message": "\ud83d\udc76 Welcome back Sadie! We're so glad to have you back after maternity leave! \ud83c\udf89"
   },
   {
+    "date": "2026-10-06",
+    "type": "welcome",
+    "name": "Fer & Berny",
+    "message": "\ud83c\udf89 Please join us in welcoming two new teammates to the Support team today \u2014 *Fernanda Vergara* and *Bernardita Amador*, both joining our Chile T1 team! Welcome Fer and Berny! \ud83c\udde8\ud83c\uddf1"
+  },
+  {
     "date": "2026-10-20",
     "type": "frontversary",
     "name": "Chae",
