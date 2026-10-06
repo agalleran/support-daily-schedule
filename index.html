@@ -642,8 +642,20 @@ function getTzOffset(tz, ds) {
     }
 
     case 'CLT': {
-      // Chile = UTC-3 year-round (no DST)
-      return -3 - ptUtc;
+      // Chile: CLST (UTC-4) in summer (second Sat Aug → second Sat May)
+      // CLT (UTC-3) in winter (second Sat May → second Sat Aug)
+      const getChileDst = (yr) => {
+        const nthSat = (y, m, n) => {
+          let d = new Date(y, m - 1, 1), count = 0;
+          while (true) { if (d.getDay() === 6 && ++count === n) return d; d.setDate(d.getDate() + 1); }
+        };
+        return { start: nthSat(yr, 8, 2), end: nthSat(yr, 5, 2), startNext: nthSat(yr + 1, 8, 2) };
+      };
+      const ch = getChileDst(year);
+      // Summer (CLST, UTC-4): Aug 2nd Sat → May 2nd Sat next year
+      const chileIsSummer = date >= ch.start || date < ch.end;
+      const cltUtc = chileIsSummer ? -4 : -3;
+      return cltUtc - ptUtc;
     }
 
     case 'PHT': {
