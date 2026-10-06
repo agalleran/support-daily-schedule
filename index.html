@@ -441,6 +441,7 @@
     <button id="tz-btn-UTC"  class="tz-btn" onclick="setTz('UTC')">UTC</button>
     <button id="tz-btn-IST"  class="tz-btn" onclick="setTz('IST')">GMT</button>
     <button id="tz-btn-CET"  class="tz-btn" onclick="setTz('CET')">CET</button>
+    <button id="tz-btn-CLT"  class="tz-btn" onclick="setTz('CLT')">CLT</button>
     <button id="tz-btn-PHT"  class="tz-btn" onclick="setTz('PHT')">PHT</button>
     <button id="tz-btn-AEDT" class="tz-btn" onclick="setTz('AEDT')">AEDT</button>
     <div class="sep"></div>
@@ -642,19 +643,19 @@ function getTzOffset(tz, ds) {
     }
 
     case 'CLT': {
-      // Chile: CLST (UTC-4) in summer (second Sat Aug → second Sat May)
-      // CLT (UTC-3) in winter (second Sat May → second Sat Aug)
+      // Chile: CLT (UTC-4) standard/winter (May 2nd Sat → Aug 2nd Sat)
+      //        CLST (UTC-3) summer/daylight (Aug 2nd Sat → May 2nd Sat next year)
       const getChileDst = (yr) => {
         const nthSat = (y, m, n) => {
           let d = new Date(y, m - 1, 1), count = 0;
           while (true) { if (d.getDay() === 6 && ++count === n) return d; d.setDate(d.getDate() + 1); }
         };
-        return { start: nthSat(yr, 8, 2), end: nthSat(yr, 5, 2), startNext: nthSat(yr + 1, 8, 2) };
+        return { start: nthSat(yr, 8, 2), end: nthSat(yr, 5, 2) };
       };
       const ch = getChileDst(year);
-      // Summer (CLST, UTC-4): Aug 2nd Sat → May 2nd Sat next year
+      // CLST (UTC-3) summer: Aug 2nd Sat → May 2nd Sat
       const chileIsSummer = date >= ch.start || date < ch.end;
-      const cltUtc = chileIsSummer ? -4 : -3;
+      const cltUtc = chileIsSummer ? -3 : -4;
       return cltUtc - ptUtc;
     }
 
@@ -688,11 +689,23 @@ function updateTzLabels(ds) {
   const ausDst_= date >= ausDst.startAEDT || date < ausDst.endAEDT;
 
   const set = (id, label) => { const el = document.getElementById(id); if (el) el.textContent = label; };
+  // Chile DST: CLST (UTC-3, summer) Oct→May, CLT (UTC-4, winter) May→Aug-ish
+  const getChileDst_ = (yr) => {
+    const nthSat = (y, m, n) => {
+      let d = new Date(y, m - 1, 1), count = 0;
+      while (true) { if (d.getDay() === 6 && ++count === n) return d; d.setDate(d.getDate() + 1); }
+    };
+    return { start: nthSat(yr, 8, 2), end: nthSat(yr, 5, 2) };
+  };
+  const ch_ = getChileDst_(year);
+  const chileIsSummer_ = date >= ch_.start || date < ch_.end;
+
   set('tz-btn-PT',   ptDst  ? 'PDT' : 'PST');
   set('tz-btn-CT',   ptDst  ? 'CDT' : 'CST');
   set('tz-btn-ET',   ptDst  ? 'EDT' : 'EST');
   set('tz-btn-IST',  euDst_ ? 'IST' : 'GMT');
   set('tz-btn-CET',  euDst_ ? 'CEST': 'CET');
+  set('tz-btn-CLT',  chileIsSummer_ ? 'CLST' : 'CLT');
   set('tz-btn-AEDT', ausDst_? 'AEDT': 'AEST');
 }
 let curTz = 'PT';
