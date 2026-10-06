@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-10-05",
+    "last_updated": "2026-10-06",
     "cal_start": "2026-05-15",
     "cal_end": "2026-10-31"
   },
@@ -855,6 +855,72 @@
         "6": null
       },
       "localTz": "PT"
+    },
+    {
+      "name": "Fer Vergara",
+      "role": "T1",
+      "email": "fer.vergara@front.com",
+      "tier": "T1",
+      "shift": "Chile",
+      "country": "Chile",
+      "localTz": "PT",
+      "days": {
+        "0": null,
+        "1": [
+          300,
+          840
+        ],
+        "2": [
+          300,
+          840
+        ],
+        "3": [
+          300,
+          840
+        ],
+        "4": [
+          300,
+          840
+        ],
+        "5": [
+          300,
+          840
+        ],
+        "6": null
+      }
+    },
+    {
+      "name": "Berny Amador",
+      "role": "T1",
+      "email": "berny.amador@front.com",
+      "tier": "T1",
+      "shift": "Chile",
+      "country": "Chile",
+      "localTz": "PT",
+      "days": {
+        "0": null,
+        "1": [
+          300,
+          840
+        ],
+        "2": [
+          300,
+          840
+        ],
+        "3": [
+          300,
+          840
+        ],
+        "4": [
+          300,
+          840
+        ],
+        "5": [
+          300,
+          840
+        ],
+        "6": null
+      }
     }
   ],
   "ooo": {
