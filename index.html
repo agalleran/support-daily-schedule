@@ -94,6 +94,14 @@
     gap: 6px;
     padding: .5rem 0;
     flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  .bar-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
   }
 
   .bar-label {
@@ -124,7 +132,7 @@
 
   select, input[type=date] {
     font-size: 13px;
-    padding: 0 9px;
+    padding: 0 24px 0 9px;
     border-radius: var(--radius);
     border: 0.5px solid var(--border-secondary);
     background: var(--bg);
@@ -133,7 +141,19 @@
     cursor: pointer;
     height: 28px;
     box-sizing: border-box;
-    line-height: 1.4;
+    line-height: 28px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23888' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+  }
+
+  input[type=date] {
+    padding: 0 9px;
+    background-image: none;
+    -webkit-appearance: none;
   }
 
   .sep { width: 0.5px; height: 18px; background: var(--border-secondary); margin: 0 3px; flex-shrink: 0; }
@@ -453,31 +473,31 @@
     <button id="tz-btn-PHT"  class="tz-btn" onclick="setTz('PHT')">PHT</button>
     <button id="tz-btn-AEDT" class="tz-btn" onclick="setTz('AEDT')">AEDT</button>
     <div class="sep"></div>
-    <select id="shiftSel" onchange="render()">
-      <option value="">All shifts</option>
-      <option value="EMEA">EMEA</option>
-      <option value="US">US</option>
-      <option value="Chile">Chile</option>
-      <option value="APAC">APAC</option>
-      <option value="Operations">Operations</option>
-      <option value="Managers">Managers</option>
-    </select>
-    <div class="sep"></div>
-    <select id="statusSel" onchange="render()">
-      <option value="">All statuses</option>
-      <option value="online">Online only</option>
-      <option value="partial">Partial day</option>
-      <option value="ooo">OOO only</option>
-      <option value="off">Not scheduled</option>
-    </select>
-    <div class="sep"></div>
-    <select id="tierSel" onchange="render()">
-      <option value="">All tiers</option>
-      <option value="T1">T1</option>
-      <option value="T2">T2</option>
-      <option value="OPS">Ops</option>
-      <option value="MGR">Mgr</option>
-    </select>
+    <div class="bar-group">
+      <select id="shiftSel" onchange="render()">
+        <option value="">All shifts</option>
+        <option value="EMEA">EMEA</option>
+        <option value="US">US</option>
+        <option value="Chile">Chile</option>
+        <option value="APAC">APAC</option>
+        <option value="Operations">Operations</option>
+        <option value="Managers">Managers</option>
+      </select>
+      <select id="statusSel" onchange="render()">
+        <option value="">All statuses</option>
+        <option value="online">Online only</option>
+        <option value="partial">Partial day</option>
+        <option value="ooo">OOO only</option>
+        <option value="off">Not scheduled</option>
+      </select>
+      <select id="tierSel" onchange="render()">
+        <option value="">All tiers</option>
+        <option value="T1">T1</option>
+        <option value="T2">T2</option>
+        <option value="OPS">Ops</option>
+        <option value="MGR">Mgr</option>
+      </select>
+    </div>
   </div>
 
   <div class="nav-row">
