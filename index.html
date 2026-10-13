@@ -112,20 +112,28 @@
     cursor: pointer;
     font-family: inherit;
     transition: background 0.1s;
+    line-height: 1.4;
+    height: 28px;
+    box-sizing: border-box;
   }
 
   button:hover { background: var(--bg-secondary); }
   button.active { background: var(--bg-secondary); font-weight: 500; border-color: var(--text-secondary); }
 
+  .tz-btn { min-width: 44px; padding: 5px 8px; text-align: center; }
+
   select, input[type=date] {
     font-size: 13px;
-    padding: 5px 9px;
+    padding: 0 9px;
     border-radius: var(--radius);
     border: 0.5px solid var(--border-secondary);
     background: var(--bg);
     color: var(--text);
     font-family: inherit;
     cursor: pointer;
+    height: 28px;
+    box-sizing: border-box;
+    line-height: 1.4;
   }
 
   .sep { width: 0.5px; height: 18px; background: var(--border-secondary); margin: 0 3px; flex-shrink: 0; }
