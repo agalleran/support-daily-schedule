@@ -653,40 +653,6 @@
       "localTz": "PHT"
     },
     {
-      "name": "Chae Rallos",
-      "role": "",
-      "email": "chae.rallos@front.com",
-      "tier": "T1",
-      "shift": "APAC",
-      "country": "Philippines",
-      "note": "Mon\u2013Thu: 5am\u20132pm, Fri: 4pm\u20131am PT. No DST.",
-      "days": {
-        "0": null,
-        "1": [
-          1200,
-          1740
-        ],
-        "2": [
-          1200,
-          1740
-        ],
-        "3": [
-          1200,
-          1740
-        ],
-        "4": [
-          1200,
-          1740
-        ],
-        "5": [
-          1860,
-          2400
-        ],
-        "6": null
-      },
-      "localTz": "PHT"
-    },
-    {
       "name": "Karen Nguyen",
       "role": "Senior Support Program Specialist",
       "email": "karen.nguyen@front.com",
@@ -1449,31 +1415,6 @@
       {
         "start": "2026-10-27",
         "end": "2026-10-30"
-      }
-    ],
-    "chae.rallos@front.com": [
-      {
-        "start": "2026-05-27",
-        "end": "2026-05-28",
-        "label": "Feast of the Sacrifice (working holiday)"
-      },
-      {
-        "start": "2026-06-01",
-        "end": "2026-06-02"
-      },
-      {
-        "start": "2026-06-02",
-        "end": "2026-06-03"
-      },
-      {
-        "start": "2026-07-14",
-        "end": "2026-07-15",
-        "label": "Sick"
-      },
-      {
-        "start": "2026-08-05",
-        "end": "2026-08-06",
-        "label": "Sick"
       }
     ],
     "camille.tolentino@front.com": [
