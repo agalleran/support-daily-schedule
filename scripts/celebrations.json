@@ -12,22 +12,10 @@
     "message": "\ud83c\udf82 Happy birthday Luke! Hope your day is as amazing as your CEST timezone math skills! \ud83c\udf89"
   },
   {
-    "date": "2026-06-26",
-    "type": "birthday",
-    "name": "Isaiah",
-    "message": "\ud83c\udf82 Happy birthday Isaiah! \ud83c\udf89"
-  },
-  {
     "date": "2026-07-07",
     "type": "birthday",
     "name": "Patrick V",
     "message": "\ud83c\udf82 Happy birthday Patrick V! \ud83c\udf89"
-  },
-  {
-    "date": "2026-07-10",
-    "type": "frontversary",
-    "name": "Isaiah",
-    "message": "\ud83e\udd42 Happy Frontversary Isaiah! \ud83c\udf89"
   },
   {
     "date": "2026-07-10",
@@ -112,12 +100,6 @@
     "type": "welcome",
     "name": "Fer & Berny",
     "message": "\ud83c\udf89 Please join us in welcoming two new teammates to the Support team today \u2014 *Fernanda Vergara* and *Bernardita Amador*, both joining our Chile T1 team! Welcome Fer and Berny! \ud83c\udde8\ud83c\uddf1"
-  },
-  {
-    "date": "2026-10-21",
-    "type": "farewell",
-    "name": "Isaiah",
-    "message": "\ud83d\udc4b Today is Isaiah Wilkerson's last day with Front \u2014 thank you for everything Isaiah, we'll miss you! Wishing you all the best in your next adventure! \ud83c\udf89"
   },
   {
     "date": "2026-11-07",
