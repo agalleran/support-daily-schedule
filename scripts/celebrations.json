@@ -102,6 +102,12 @@
     "message": "\ud83c\udf89 Please join us in welcoming two new teammates to the Support team today \u2014 *Fernanda Vergara* and *Bernardita Amador*, both joining our Chile T1 team! Welcome Fer and Berny! \ud83c\udde8\ud83c\uddf1"
   },
   {
+    "date": "2026-10-23",
+    "type": "reminder",
+    "name": "EU Clock Change",
+    "message": "\ud83d\udd50 *Reminder:* EU & Ireland clocks go back this Sunday Oct 25 (IST\u2192GMT, CEST\u2192CET). From Monday Oct 27, our EMEA teammates (Camille, Suzy, Alan, Aoidh, Eddie, Maxime, Luke) will appear *1 hour later* in PT and other non-EU timezones. The schedule tool will update automatically!"
+  },
+  {
     "date": "2026-11-07",
     "type": "birthday",
     "name": "Cat",
