@@ -108,6 +108,12 @@
     "message": "\ud83d\udd50 *Reminder:* EU & Ireland clocks go back this Sunday Oct 25 (IST\u2192GMT, CEST\u2192CET). From Monday Oct 27, our EMEA teammates (Camille, Suzy, Alan, Aoidh, Eddie, Maxime, Luke) will appear *1 hour later* in PT and other non-EU timezones. The schedule tool will update automatically!"
   },
   {
+    "date": "2026-10-26",
+    "type": "reminder",
+    "name": "EU Clock Change + Bank Holiday",
+    "message": "\ud83d\udd50 *EU & Ireland clocks went back yesterday* (IST\u2192GMT, CEST\u2192CET) \u2014 our EMEA teammates now appear 1 hour later in PT than last week. The schedule tool has updated automatically!\n\n\ud83c\uddee\ud83c\uddea Also a reminder that today is the *October Bank Holiday* in Ireland \u2014 Camille, Suzy, Alan, Aoidh, and Eddie are off today."
+  },
+  {
     "date": "2026-11-07",
     "type": "birthday",
     "name": "Cat",
