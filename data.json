@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-10-24",
+    "last_updated": "2026-10-27",
     "cal_start": "2026-05-15",
     "cal_end": "2026-12-31"
   },
@@ -515,74 +515,6 @@
         "6": null
       },
       "localTz": "AEDT"
-    },
-    {
-      "name": "Christopher Nunag",
-      "role": "",
-      "email": "christopher.nunag@front.com",
-      "tier": "T1",
-      "shift": "APAC",
-      "country": "Philippines",
-      "note": "Sun\u2013Thu PT = Mon\u2013Fri Manila. No DST.",
-      "days": {
-        "0": [
-          1740,
-          2280
-        ],
-        "1": [
-          1740,
-          2280
-        ],
-        "2": [
-          1740,
-          2280
-        ],
-        "3": [
-          1740,
-          2280
-        ],
-        "4": [
-          1740,
-          2280
-        ],
-        "5": null,
-        "6": null
-      },
-      "localTz": "PHT"
-    },
-    {
-      "name": "Nikolai Dominic",
-      "role": "",
-      "email": "nikolai.dominic@front.com",
-      "tier": "T1",
-      "shift": "APAC",
-      "country": "Philippines",
-      "note": "Mon\u2013Fri PT = Tue\u2013Sat Manila. No DST.",
-      "days": {
-        "0": null,
-        "1": [
-          1800,
-          2340
-        ],
-        "2": [
-          1800,
-          2340
-        ],
-        "3": [
-          1800,
-          2340
-        ],
-        "4": [
-          1800,
-          2340
-        ],
-        "5": [
-          1800,
-          2340
-        ],
-        "6": null
-      },
-      "localTz": "PHT"
     },
     {
       "name": "Edjay Rustria",
@@ -1343,58 +1275,6 @@
       {
         "start": "2026-10-28",
         "end": "2026-10-29",
-        "label": "Sick"
-      }
-    ],
-    "christopher.nunag@front.com": [
-      {
-        "start": "2026-05-27",
-        "end": "2026-05-28",
-        "label": "Feast of the Sacrifice (working holiday)"
-      },
-      {
-        "start": "2026-05-28",
-        "end": "2026-05-29"
-      },
-      {
-        "start": "2026-05-29",
-        "end": "2026-05-30"
-      },
-      {
-        "start": "2026-06-15",
-        "end": "2026-06-16",
-        "label": "Sick"
-      },
-      {
-        "start": "2026-07-15",
-        "end": "2026-07-16",
-        "label": "Sick"
-      },
-      {
-        "start": "2026-09-14",
-        "end": "2026-09-15",
-        "label": "Sick"
-      },
-      {
-        "start": "2026-10-22",
-        "end": "2026-10-23",
-        "label": "Sick"
-      }
-    ],
-    "nikolai.dominic@front.com": [
-      {
-        "start": "2026-05-26",
-        "end": "2026-05-27",
-        "label": "Feast of the Sacrifice (working holiday)"
-      },
-      {
-        "start": "2026-08-21",
-        "end": "2026-08-22",
-        "label": "Sick"
-      },
-      {
-        "start": "2026-10-19",
-        "end": "2026-10-20",
         "label": "Sick"
       }
     ],
