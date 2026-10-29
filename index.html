@@ -793,6 +793,10 @@ function dateStr(d) {
   return `${y}-${m}-${day}`;
 }
 
+function isWorkingHoliday(person, ds) {
+  return person && person.working_holidays && person.working_holidays.includes(ds);
+}
+
 function isHoliday(country, ds) {
   const list = HOLIDAYS[country];
   if (!list) return false;
@@ -806,7 +810,7 @@ function getHolidayName(country, ds) {
 function isOoo(email, ds, inRange) {
   // Always check holidays
   const person = TEAM.find(p => p.email === email);
-  if (person && isHoliday(person.country, ds)) return true;
+  if (person && isHoliday(person.country, ds) && !isWorkingHoliday(person, ds)) return true;
   // Only check calendar OOO within the known data window
   if (!inRange) return false;
   const list = OOO[email];
@@ -831,7 +835,7 @@ function getPartialLabel(email, ds) {
 
 function getOooReason(email, ds, inRange) {
   const person = TEAM.find(p => p.email === email);
-  if (person && isHoliday(person.country, ds)) {
+  if (person && isHoliday(person.country, ds) && !isWorkingHoliday(person, ds)) {
     return { type: 'holiday', label: getHolidayName(person.country, ds) };
   }
   if (!inRange) return null;
