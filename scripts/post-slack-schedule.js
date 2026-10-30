@@ -37,7 +37,7 @@ function isHoliday(country, ds, holidays) {
 }
 
 function getStatus(p, ds, dow, ooo, holidays, inRange) {
-  if (isHoliday(p.country, ds, holidays)) return { type: 'holiday' };
+  if (isHoliday(p.country, ds, holidays) && !(p.working_holidays || []).includes(ds)) return { type: 'holiday' };
   if (inRange) {
     for (const r of (ooo[p.email] || [])) {
       if (r.start <= ds && ds < r.end && !r.partial) return { type: 'ooo' };
