@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-11-06",
+    "last_updated": "2026-11-07",
     "cal_start": "2026-05-15",
     "cal_end": "2026-12-31"
   },
@@ -585,40 +585,6 @@
       "localTz": "PT"
     },
     {
-      "name": "Jason Dugdale",
-      "role": "Support Operations Developer",
-      "email": "jason@front.com",
-      "tier": "OPS",
-      "shift": "Operations",
-      "country": "US",
-      "note": "",
-      "days": {
-        "0": null,
-        "1": [
-          480,
-          1020
-        ],
-        "2": [
-          480,
-          1020
-        ],
-        "3": [
-          480,
-          1020
-        ],
-        "4": [
-          480,
-          1020
-        ],
-        "5": [
-          480,
-          1020
-        ],
-        "6": null
-      },
-      "localTz": "PT"
-    },
-    {
       "name": "Luke Atkins",
       "role": "AI Support Programs Specialist",
       "email": "luke.atkins@front.com",
@@ -1039,6 +1005,11 @@
       {
         "start": "2026-11-27",
         "end": "2026-11-28"
+      },
+      {
+        "start": "2026-11-30",
+        "end": "2026-12-01",
+        "label": "Nicole becomes an Irish Citizen \ud83c\uddee\ud83c\uddea"
       },
       {
         "start": "2026-12-21",
@@ -1564,40 +1535,6 @@
       {
         "start": "2026-11-13",
         "end": "2026-11-14"
-      }
-    ],
-    "jason@front.com": [
-      {
-        "start": "2026-06-19",
-        "end": "2026-06-29"
-      },
-      {
-        "start": "2026-07-17",
-        "end": "2026-07-18"
-      },
-      {
-        "start": "2026-07-31",
-        "end": "2026-08-04"
-      },
-      {
-        "start": "2026-08-21",
-        "end": "2026-08-22"
-      },
-      {
-        "start": "2026-09-07",
-        "end": "2026-09-12"
-      },
-      {
-        "start": "2026-10-08",
-        "end": "2026-10-10"
-      },
-      {
-        "start": "2026-10-30",
-        "end": "2026-10-31"
-      },
-      {
-        "start": "2026-12-20",
-        "end": "2027-01-04"
       }
     ],
     "carmen.mendez@front.com": [
