@@ -276,7 +276,10 @@
         ],
         "6": null
       },
-      "localTz": "PT"
+      "localTz": "PT",
+      "working_holidays": [
+        "2026-11-11"
+      ]
     },
     {
       "name": "Sadie McDaniel",
