@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-11-11",
+    "last_updated": "2026-11-16",
     "cal_start": "2026-05-15",
     "cal_end": "2026-12-31"
   },
@@ -1172,6 +1172,10 @@
         "start": "2026-11-09",
         "end": "2026-11-10",
         "label": "Makeup holiday"
+      },
+      {
+        "start": "2026-12-11",
+        "end": "2026-12-12"
       }
     ],
     "cat.burston@front.com": [
@@ -1552,6 +1556,10 @@
       {
         "start": "2026-11-13",
         "end": "2026-11-14"
+      },
+      {
+        "start": "2026-11-17",
+        "end": "2026-11-18"
       }
     ],
     "carmen.mendez@front.com": [
