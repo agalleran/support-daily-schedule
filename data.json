@@ -1,7 +1,7 @@
 {
   "_comment": "Support Team Schedule data. Edit this file to update the live page. OOO dates use YYYY-MM-DD format; 'end' is exclusive (the first day they're back). Days array uses 0=Sun through 6=Sat; values are [startMinsPT, endMinsPT] or null if not working.",
   "meta": {
-    "last_updated": "2026-11-17",
+    "last_updated": "2026-11-18",
     "cal_start": "2026-05-15",
     "cal_end": "2026-12-31"
   },
@@ -902,6 +902,10 @@
       {
         "start": "2026-11-18",
         "end": "2026-11-19"
+      },
+      {
+        "start": "2026-11-25",
+        "end": "2026-11-28"
       }
     ],
     "maxime.haudebert@front.com": [
@@ -1252,6 +1256,14 @@
       {
         "start": "2026-10-02",
         "end": "2026-10-03"
+      },
+      {
+        "start": "2026-12-09",
+        "end": "2026-12-10"
+      },
+      {
+        "start": "2026-12-22",
+        "end": "2026-12-23"
       }
     ],
     "tiamarie.dennington@front.com": [
@@ -1307,6 +1319,12 @@
         "start": "2026-10-28",
         "end": "2026-10-29",
         "label": "Sick"
+      },
+      {
+        "start": "2026-11-23",
+        "end": "2026-11-23",
+        "partial": true,
+        "label": "Half day"
       }
     ],
     "edjay.rustria@front.com": [
@@ -1470,10 +1488,14 @@
       },
       {
         "start": "2026-11-23",
-        "end": "2026-11-26"
+        "end": "2026-11-24"
       },
       {
         "start": "2026-11-24",
+        "end": "2026-11-26"
+      },
+      {
+        "start": "2026-11-25",
         "end": "2026-11-26"
       },
       {
@@ -1645,6 +1667,14 @@
       {
         "start": "2026-11-10",
         "end": "2026-11-11"
+      },
+      {
+        "start": "2026-11-23",
+        "end": "2026-11-24"
+      },
+      {
+        "start": "2026-12-16",
+        "end": "2026-12-17"
       }
     ],
     "eddie.maguire@front.com": [
@@ -1675,6 +1705,10 @@
         "start": "2026-10-09",
         "end": "2026-10-10",
         "label": "Sick"
+      },
+      {
+        "start": "2026-11-25",
+        "end": "2026-11-27"
       }
     ],
     "bernardita.amador@front.com": [
